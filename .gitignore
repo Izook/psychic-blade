@@ -1,0 +1,17 @@
+# Godot-specific ignores
+.import/
+/**/*.import
+
+# Export Ignores
+*.zip
+exports/*
+
+# Android Export Ignore
+xandroid
+
+# Mono-specific ignores
+.mono/
+
+# System/tool-specific ignores
+.directory
+*~
