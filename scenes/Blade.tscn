@@ -6,13 +6,11 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 64, 16 )
 
-[node name="Node2D" type="Node2D"]
+[node name="Center" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="Blade" type="KinematicBody2D" parent="."]
 position = Vector2( 200, 0 )
-collision_layer = 2
-collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Blade"]
 shape = SubResource( 1 )

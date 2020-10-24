@@ -23,4 +23,13 @@ func _rotate_enemy():
 func _physics_process(delta):
 	_find_player()
 	_rotate_enemy()
-	move_and_slide(velocity)
+	
+	var collision_info = move_and_slide(velocity)
+	
+	for i in get_slide_count():
+		var collision = get_slide_collision(i)
+		if collision.collider.name == "Blade":
+			queue_free()
+		if collision.collider.name == "Player":
+			players[0].queue_free()
+

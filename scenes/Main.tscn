@@ -14,5 +14,20 @@ __meta__ = {
 ] instance=ExtResource( 1 )]
 collision_layer = 16384
 
-[node name="Node2D" parent="." instance=ExtResource( 2 )]
+[node name="Enemy" parent="." instance=ExtResource( 2 )]
 position = Vector2( -382.564, -226.998 )
+
+[node name="Enemy2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 333.606, -194.998 )
+
+[node name="Enemy3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 74.6078, 204.775 )
+
+[node name="Enemy4" parent="." instance=ExtResource( 2 )]
+position = Vector2( -244.46, 204.775 )
+
+[node name="Enemy5" parent="." instance=ExtResource( 2 )]
+position = Vector2( 333.606, 131.754 )
+
+[node name="Enemy6" parent="." instance=ExtResource( 2 )]
+position = Vector2( -73.0204, -226.998 )

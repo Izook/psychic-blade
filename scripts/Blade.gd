@@ -1,7 +1,7 @@
 extends Node2D
 
 const MAX_RADIUS = 300
-const MIN_RADIUS = 100
+const MIN_RADIUS = 150
 
 var polar_vector
 var blade_angle
