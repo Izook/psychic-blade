@@ -9,11 +9,6 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Player" parent="." groups=[
-"players",
-] instance=ExtResource( 1 )]
-collision_layer = 16384
-
 [node name="Enemy" parent="." instance=ExtResource( 2 )]
 position = Vector2( -382.564, -226.998 )
 
@@ -31,3 +26,8 @@ position = Vector2( 333.606, 131.754 )
 
 [node name="Enemy6" parent="." instance=ExtResource( 2 )]
 position = Vector2( -73.0204, -226.998 )
+
+[node name="Player" parent="." groups=[
+"players",
+] instance=ExtResource( 1 )]
+collision_layer = 16384
