@@ -8,3 +8,4 @@ __meta__ = {
 }
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
+collision_layer = 16384
