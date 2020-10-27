@@ -7,13 +7,13 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
 
-[sub_resource type="Curve" id=3]
+[sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.579336, 0.770455 ), 1.09495, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=4]
-curve = SubResource( 3 )
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
 
-[sub_resource type="ParticlesMaterial" id=2]
+[sub_resource type="ParticlesMaterial" id=4]
 flag_disable_z = true
 direction = Vector3( 0, 0, 0 )
 spread = 180.0
@@ -27,7 +27,7 @@ damping = 220.0
 damping_random = 0.4
 angle = 180.0
 angle_random = 1.0
-scale_curve = SubResource( 4 )
+scale_curve = SubResource( 3 )
 
 [node name="Enemy" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -52,5 +52,5 @@ lifetime = 30.0
 one_shot = true
 speed_scale = 2.5
 explosiveness = 1.0
-process_material = SubResource( 2 )
+process_material = SubResource( 4 )
 texture = ExtResource( 3 )

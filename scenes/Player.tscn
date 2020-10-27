@@ -26,3 +26,12 @@ __meta__ = {
 }
 
 [node name="Node2D" parent="." instance=ExtResource( 3 )]
+
+[node name="PlayerCamera" type="Camera2D" parent="."]
+current = true
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+__meta__ = {
+"_edit_lock_": true
+}

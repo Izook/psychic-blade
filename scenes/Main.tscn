@@ -3,7 +3,7 @@
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=2]
 
-[node name="Node2D" type="Camera2D"]
+[node name="Node2D" type="Node2D"]
 position = Vector2( 512.78, 303.006 )
 __meta__ = {
 "_edit_lock_": true
