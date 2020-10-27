@@ -9,6 +9,56 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Map" type="Node2D" parent="."]
+visible = false
+
+[node name="OuterWall" type="StaticBody2D" parent="Map"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/OuterWall"]
+polygon = PoolVector2Array( -20.1523, -873.623, -883.177, -579.954, -1419.57, 73.3076, -784.289, 720.576, 69.7461, 1029.23, 1058.63, 669.634, 1412.23, 13.3753, 908.798, -612.917, 15.8071, -873.623, 18.8037, -1053.42, 944.758, -801.704, 1651.96, -10.5976, 1217.45, 744.549, 117.692, 1188.05, -964.086, 903.37, -1668.29, 73.3076, -1044.99, -717.799, -44.1251, -1056.42 )
+disabled = true
+
+[node name="Polygon2D" type="Polygon2D" parent="Map/OuterWall"]
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( 18.8037, -1056.42, 15.8071, -876.619, 902.805, -618.91, 1412.23, 16.3719, 1064.62, 663.641, 72.7427, 1029.23, -781.292, 726.57, -1419.57, 79.3009, -886.174, -579.954, -20.1523, -876.619, -47.1218, -1059.41, -1044.99, -723.792, -1668.29, 70.311, -961.089, 897.377, 117.692, 1185.05, 1211.46, 741.553, 1645.97, -19.5874, 947.754, -804.7 )
+
+[node name="BallastThing" type="StaticBody2D" parent="Map"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/BallastThing"]
+polygon = PoolVector2Array( -703.38, -196.388, -994.052, -31.5739, -943.109, 16.3719, -700.384, -88.5096, -628.465, 25.3618, -763.313, 208.155, -703.38, 271.084, -463.651, 46.3381 )
+disabled = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Polygon2D" type="Polygon2D" parent="Map/BallastThing"]
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( -985.062, -37.5672, -706.377, -190.394, -472.641, 43.3414, -703.38, 268.087, -760.316, 211.152, -634.458, 22.3652, -706.377, -85.513, -946.106, 16.3719 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BallastThing2" type="StaticBody2D" parent="Map"]
+position = Vector2( 671.242, -644.272 )
+rotation = -1.83259
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/BallastThing2"]
+polygon = PoolVector2Array( -703.38, -196.388, -994.052, -31.5739, -943.109, 16.3719, -700.384, -88.5096, -628.465, 25.3618, -763.313, 208.155, -703.38, 271.084, -463.651, 46.3381 )
+disabled = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Polygon2D" type="Polygon2D" parent="Map/BallastThing2"]
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( -985.062, -37.5672, -706.377, -190.394, -472.641, 43.3414, -703.38, 268.087, -760.316, 211.152, -634.458, 22.3652, -706.377, -85.513, -946.106, 16.3719 )
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="Enemy" parent="." instance=ExtResource( 2 )]
 position = Vector2( -382.564, -226.998 )
 
@@ -25,7 +75,7 @@ position = Vector2( -244.46, 204.775 )
 position = Vector2( 333.606, 131.754 )
 
 [node name="Enemy6" parent="." instance=ExtResource( 2 )]
-position = Vector2( -73.0204, -226.998 )
+position = Vector2( -32, -274.141 )
 
 [node name="Player" parent="." groups=[
 "players",
