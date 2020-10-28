@@ -10,7 +10,7 @@ var radius = 200
 var radial_speed = 10
 
 var anglular_pos = 0
-var angular_speed = PI/48
+var angular_speed = PI/36
 
 var blade_moved = false
 
@@ -44,11 +44,10 @@ func _move_blade():
 		$Blade.set_global_rotation(blade_angle + PI)
 	else:
 		$Blade.set_global_rotation(anglular_pos)
-		
-	$Blade.set_position(polar_vector)
+	
+	$Blade.move_and_slide((polar_vector - $Blade.position) * 4)
 
 
 func _physics_process(_delta):
 	_get_input()
 	_move_blade()
-
