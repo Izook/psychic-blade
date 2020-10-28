@@ -14,8 +14,9 @@ func _ready():
 
 
 func _find_player():
-	var player_position = players[0].position
-	velocity = position.direction_to(player_position)  * speed
+	if players.size() > 0:
+		var player_position = players[0].position
+		velocity = position.direction_to(player_position)  * speed
 
 
 func _rotate_enemy():
