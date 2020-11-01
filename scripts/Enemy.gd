@@ -1,42 +1,38 @@
 extends KinematicBody2D
 
-export (int) var speed = 50
+export (int) var speed := 50
 
-var velocity = Vector2()
+var velocity  := Vector2()
+var is_alive := true
 
-var players
-
-var is_alive = true
-
-
-func _ready():
-	players = get_tree().get_nodes_in_group("players")
+onready var player := get_tree().get_nodes_in_group("players")[0] as Node2D
+onready var collision_shape := $CollisionShape2D as CollisionShape2D
+onready var sprite := $Sprite as Sprite
+onready var particles := $Particles2D as Particles2D
 
 
-func _find_player():
-	if players.size() > 0:
-		var player_position = players[0].position
-		velocity = position.direction_to(player_position)  * speed
+func _find_player() -> void:
+	var player_position := player.position as Vector2
+	velocity = position.direction_to(player_position)  * speed
 
 
 func _rotate_enemy():
 	set_global_rotation(velocity.angle() + PI / 2)
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if is_alive:
 		_find_player()
 		_rotate_enemy()
 		
-		var collision_info = move_and_slide(velocity)
+		var _collision_info := move_and_slide(velocity)
 		
 		for i in get_slide_count():
-			var collision = get_slide_collision(i)
+			var collision := get_slide_collision(i) as KinematicCollision2D
 			if collision.collider.name == "Blade":
 				is_alive = false
-				$CollisionShape2D.set_disabled(true)
-				$Sprite.visible = false
-				$Particles2D.set_emitting(true)
+				collision_shape.set_disabled(true)
+				sprite.visible = false
+				particles.set_emitting(true)
 			if collision.collider.name == "Player":
-				players[0].queue_free()
-
+				player.queue_free()

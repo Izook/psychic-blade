@@ -20,6 +20,13 @@ run/main_scene="res://scenes/Main.tscn"
 boot_splash/bg_color=Color( 0.690196, 0.690196, 0.690196, 1 )
 config/icon="res://assets/icon.png"
 
+[debug]
+
+gdscript/warnings/unused_class_variable=true
+gdscript/warnings/unsafe_method_access=true
+gdscript/warnings/unsafe_cast=true
+gdscript/warnings/unsafe_call_argument=true
+
 [input]
 
 move_right={
@@ -62,6 +69,11 @@ pull_in={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
  ]
 }
+
+[logging]
+
+file_logging/enable_file_logging=true
+file_logging/log_path="res://logs/log.txt"
 
 [rendering]
 
