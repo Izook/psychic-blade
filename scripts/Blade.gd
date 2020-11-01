@@ -46,20 +46,18 @@ func _move_blade() -> void:
 	if (polar_pos - blade_node.position).length() > 15:
 		blade_angle = polar_pos.angle_to_point(blade_node.position)
 	else:
-		var curr_blade_angle: float = fposmod(
-				blade_node.get_global_rotation(), 2 * PI)
-		var angle_diff: float = fposmod(
-				int(angular_pos - curr_blade_angle), 2 * PI)
+		var angle_diff := Utils.get_angle_diff(angular_pos, blade_angle)
 		
-		if abs(angle_diff) < PI / 24 || (angle_diff / PI) == float(2):
+		if abs(angle_diff) < PI / 24:
 			blade_angle = angular_pos
-		elif (angular_pos - curr_blade_angle) > 0:
-			blade_angle = fposmod(curr_blade_angle - PI/16, 2 * PI)
-		else:
-			blade_angle = fposmod(curr_blade_angle + PI/16, 2 * PI)
+		elif angle_diff > 0:
+			blade_angle -= PI/12
+		elif angle_diff < 0:
+			blade_angle += PI/12
 	
-	# Keep angular_pos within [0, 2*PI]
+	# Keep angles within [0, 2*PI]
 	angular_pos = fposmod(angular_pos, 2 * PI)
+	blade_angle = fposmod(blade_angle, 2 * PI)
 	
 	blade_node.set_global_rotation(blade_angle)
 	blade_node.move_and_slide((polar_pos - blade_node.position) * 4)

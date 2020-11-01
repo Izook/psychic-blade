@@ -2,8 +2,8 @@ extends KinematicBody2D
 
 export (int) var speed := 50
 
-var velocity  := Vector2()
-var is_alive := true
+var velocity := Vector2()
+var is_alive := not true
 
 onready var player := get_tree().get_nodes_in_group("players")[0] as Node2D
 onready var collision_shape := $CollisionShape2D as CollisionShape2D

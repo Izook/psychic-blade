@@ -16,9 +16,13 @@ _global_script_class_icons={
 [application]
 
 config/name="psychic-blade"
-run/main_scene="res://scenes/Main.tscn"
+run/main_scene="res://scenes/main.tscn"
 boot_splash/bg_color=Color( 0.690196, 0.690196, 0.690196, 1 )
 config/icon="res://assets/icon.png"
+
+[autoload]
+
+Utils="*res://scripts/utilities.gd"
 
 [debug]
 
