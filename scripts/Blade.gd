@@ -9,7 +9,7 @@ export (int) var radial_speed := 10
 export (float) var angular_pos := 0.0
 export (float) var angular_speed := PI/36
 
-var polar_pos := polar2cartesian(radius, angular_pos) as Vector2
+var target_pos := polar2cartesian(radius, angular_pos) as Vector2
 var blade_angle := 0.0
 
 
@@ -28,6 +28,7 @@ func _get_input() -> void:
 
 func _physics_process(_delta) -> void:
 	_get_input()
+	_move_blade_target()
 	_move_blade()
 
 
@@ -41,10 +42,10 @@ func _limit_radius(r: int) -> int:
 
 func _move_blade() -> void:
 	var blade_node = $Blade as Node2D
-	polar_pos = polar2cartesian(radius, angular_pos)
+	target_pos = polar2cartesian(radius, angular_pos)
 	
-	if (polar_pos - blade_node.position).length() > 15:
-		blade_angle = polar_pos.angle_to_point(blade_node.position)
+	if (target_pos - blade_node.position).length() > 15:
+		blade_angle = target_pos.angle_to_point(blade_node.position)
 	else:
 		var angle_diff := Utils.get_angle_diff(angular_pos, blade_angle)
 		
@@ -60,4 +61,9 @@ func _move_blade() -> void:
 	blade_angle = fposmod(blade_angle, 2 * PI)
 	
 	blade_node.set_global_rotation(blade_angle)
-	blade_node.move_and_slide((polar_pos - blade_node.position) * 4)
+	blade_node.move_and_slide((target_pos - blade_node.position) * 4)
+
+
+func _move_blade_target() -> void:
+	var blade_target := $BladeTarget as Node2D
+	blade_target.set_position(target_pos)
