@@ -35,7 +35,9 @@ func _physics_process(_delta) -> void:
 
 
 func _draw() -> void:
+	draw_arc(Vector2(0,0), MIN_RADIUS, 0, 2 * PI, 100, Color(1,1,1,0.5), 1, false)
 	draw_arc(Vector2(0,0), radius, 0, 2 * PI, 100, Color(1,1,1), 3, false)
+	draw_arc(Vector2(0,0), MAX_RADIUS, 0, 2 * PI, 100, Color(1,1,1,0.5), 1, false)
 
 
 func _limit_radius(r: int) -> int:
