@@ -28,8 +28,13 @@ func _get_input() -> void:
 
 func _physics_process(_delta) -> void:
 	_get_input()
-	_move_blade_target()
 	_move_blade()
+	_update_blade_target()
+	update()
+
+
+func _draw() -> void:
+	draw_arc(Vector2(0,0), radius, 0, 2 * PI, 100, Color(1,1,1), 3, false)
 
 
 func _limit_radius(r: int) -> int:
@@ -64,6 +69,6 @@ func _move_blade() -> void:
 	blade_node.move_and_slide((target_pos - blade_node.position) * 4)
 
 
-func _move_blade_target() -> void:
+func _update_blade_target() -> void:
 	var blade_target := $BladeTarget as Node2D
 	blade_target.set_position(target_pos)
