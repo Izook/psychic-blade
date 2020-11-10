@@ -2,6 +2,7 @@ extends Node2D
 
 const MAX_RADIUS := 300
 const MIN_RADIUS := 150
+const BLADE_SPEED_FACTOR := 20 
 
 export (int) var radius := 200
 export (int) var radial_speed := 10
@@ -66,7 +67,7 @@ func _move_blade() -> void:
 	blade_angle = fposmod(blade_angle, 2 * PI)
 	
 	blade_node.set_global_rotation(blade_angle)
-	blade_node.move_and_slide((target_pos - blade_node.position) * 4)
+	blade_node.move_and_slide((target_pos - blade_node.position) * BLADE_SPEED_FACTOR)
 
 
 func _update_blade_target() -> void:
