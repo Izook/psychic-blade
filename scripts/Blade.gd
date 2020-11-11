@@ -10,9 +10,11 @@ export (int) var radial_speed := 10
 export (float) var angular_pos := 0.0
 export (float) var angular_speed := PI/36
 
+onready var blade_target := $BladeTarget as Sprite
+onready var blade_node := $Blade as KinematicBody2D
+
 var target_pos := polar2cartesian(radius, angular_pos) as Vector2
 var blade_angle := 0.0
-
 
 func _get_input() -> void:
 	if Input.is_action_pressed('rotate_left'):
@@ -29,8 +31,9 @@ func _get_input() -> void:
 
 func _physics_process(_delta) -> void:
 	_get_input()
-	_move_blade()
 	_update_blade_target()
+	_move_blade()
+	_rotate_blade()
 	update()
 
 
@@ -49,9 +52,10 @@ func _limit_radius(r: int) -> int:
 
 
 func _move_blade() -> void:
-	var blade_node = $Blade as Node2D
-	target_pos = polar2cartesian(radius, angular_pos)
-	
+	blade_node.move_and_slide((target_pos - blade_node.position) * BLADE_SPEED_FACTOR)
+
+
+func _rotate_blade() -> void:
 	if (target_pos - blade_node.position).length() > 15:
 		blade_angle = target_pos.angle_to_point(blade_node.position)
 	else:
@@ -69,9 +73,8 @@ func _move_blade() -> void:
 	blade_angle = fposmod(blade_angle, 2 * PI)
 	
 	blade_node.set_global_rotation(blade_angle)
-	blade_node.move_and_slide((target_pos - blade_node.position) * BLADE_SPEED_FACTOR)
 
 
 func _update_blade_target() -> void:
-	var blade_target := $BladeTarget as Node2D
+	target_pos = polar2cartesian(radius, angular_pos)
 	blade_target.set_position(target_pos)
