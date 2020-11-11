@@ -36,3 +36,11 @@ smoothing_enabled = true
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="DashTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="DashResetTimer" type="Timer" parent="."]
+one_shot = true
+[connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]
+[connection signal="timeout" from="DashResetTimer" to="." method="_on_DashResetTimer_timeout"]

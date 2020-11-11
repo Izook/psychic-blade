@@ -3,16 +3,27 @@ extends KinematicBody2D
 const MIN_ZOOM := 0.75
 const MAX_ZOOM := 2.0
 
+const DASH_DURATION := 0.075
+const DASH_RESET_TIME := 1.0
+
 export (int) var speed := 200
+export (int) var dash_factor := 5
 export (float) var zoom_speed := 0.005
 
 onready var camera := $PlayerCamera as Camera2D
+onready var dash_timer := $DashTimer as Timer
+onready var dash_reset_timer := $DashResetTimer as Timer
 
 var velocity := Vector2()
 var zoom_factor := 1.0
 
+var dash_ready := true
+var player_dashing := false
+
 func _get_input() -> void:
 	velocity = Vector2()
+	var dash_requested := false
+	
 	if Input.is_action_pressed('move_right'):
 		velocity.x += 1
 	if Input.is_action_pressed('move_left'):
@@ -21,12 +32,25 @@ func _get_input() -> void:
 		velocity.y += 1
 	if Input.is_action_pressed('move_up'):
 		velocity.y -= 1
+	
 	if Input.is_action_pressed('zoom_out'):
 		zoom_factor += zoom_speed
 	if Input.is_action_pressed('zoom_in'):
 		zoom_factor -= zoom_speed
 	
+	if Input.is_action_pressed('dash'):
+		dash_requested = true
+	
 	velocity = velocity.normalized() * speed
+	
+	if dash_requested && !player_dashing && dash_ready:
+		player_dashing = true
+		dash_ready = false
+		dash_timer.start(DASH_DURATION)
+	
+	if player_dashing:
+		velocity *= dash_factor
+		
 	zoom_factor = _limit_zoom(zoom_factor)
 
 
@@ -43,5 +67,13 @@ func _limit_zoom(z: float) -> float:
 		z = MAX_ZOOM
 	if z < MIN_ZOOM:
 		z = MIN_ZOOM
-	print(z)
 	return z
+
+
+func _on_DashTimer_timeout() -> void:
+	player_dashing = false
+	dash_reset_timer.start(DASH_RESET_TIME)
+
+
+func _on_DashResetTimer_timeout() -> void:
+	dash_ready = true
