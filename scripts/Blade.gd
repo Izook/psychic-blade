@@ -5,7 +5,7 @@ const MIN_RADIUS := 150
 
 const MAX_ANGULAR_SPEED := PI/12
 
-const BLADE_SPEED_FACTOR := 20 
+const BLADE_SPEED_FACTOR := 40 
 
 export (int) var radius := 200
 export (int) var radial_speed := 10
@@ -34,7 +34,9 @@ func _get_input() -> void:
 		else:
 			angular_speed_index -= angular_speed_index_turning_speed
 	else:
-		if angular_speed_index > 0:
+		if abs(angular_speed_index) < 0.001:
+			angular_speed_index = 0.0
+		elif angular_speed_index > 0:
 			angular_speed_index -= angular_speed_index_damp
 		else:
 			angular_speed_index += angular_speed_index_damp
@@ -86,7 +88,7 @@ func _move_blade() -> void:
 
 
 func _rotate_blade() -> void:
-	if (target_pos - blade_node.position).length() > 15:
+	if (target_pos - blade_node.position).length() > 5:
 		blade_angle = target_pos.angle_to_point(blade_node.position)
 	else:
 		var angle_diff := Utils.get_angle_diff(angular_pos, blade_angle)
