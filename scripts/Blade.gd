@@ -88,17 +88,20 @@ func _move_blade() -> void:
 
 
 func _rotate_blade() -> void:
-	if (target_pos - blade_node.position).length() > 5:
-		blade_angle = target_pos.angle_to_point(blade_node.position)
+	var target_angle: float
+	if (target_pos - blade_node.position).length() > 2:
+		target_angle = target_pos.angle_to_point(blade_node.position)
 	else:
-		var angle_diff := Utils.get_angle_diff(angular_pos, blade_angle)
-		
-		if abs(angle_diff) < PI / 24:
-			blade_angle = angular_pos
-		elif angle_diff > 0:
-			blade_angle -= PI/12
-		elif angle_diff < 0:
-			blade_angle += PI/12
+		target_angle = angular_pos
+	
+	var angle_diff := Utils.get_angle_diff(target_angle, blade_angle)
+	
+	if abs(angle_diff) < PI / 24:
+		blade_angle = target_angle
+	elif angle_diff > 0:
+		blade_angle -= PI/12
+	elif angle_diff < 0:
+		blade_angle += PI/12
 	
 	# Keep angles within [0, 2*PI]
 	angular_pos = fposmod(angular_pos, 2 * PI)
