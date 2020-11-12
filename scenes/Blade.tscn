@@ -46,18 +46,18 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Sprite" type="Sprite" parent="Blade"]
-texture = ExtResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
-
 [node name="Particles2D" type="Particles2D" parent="Blade"]
 scale = Vector2( 0.25, 0.25 )
 amount = 500
 lifetime = 3.0
 local_coords = false
 process_material = SubResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="Blade"]
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="BladeTarget" type="Sprite" parent="."]
 position = Vector2( 200, 0 )
