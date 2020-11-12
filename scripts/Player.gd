@@ -11,6 +11,7 @@ export (int) var dash_factor := 5
 export (float) var zoom_speed := 0.005
 
 onready var camera := $PlayerCamera as Camera2D
+onready var dash_particles := $DashParticles as Particles2D
 onready var dash_timer := $DashTimer as Timer
 onready var dash_reset_timer := $DashResetTimer as Timer
 
@@ -44,6 +45,7 @@ func _get_input() -> void:
 	velocity = velocity.normalized() * speed
 	
 	if dash_requested && !player_dashing && dash_ready:
+		dash_particles.set_emitting(true)
 		player_dashing = true
 		dash_ready = false
 		dash_timer.start(DASH_DURATION)

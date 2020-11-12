@@ -9,9 +9,9 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Map" parent="." instance=ExtResource( 1 )]
+
 [node name="Player" parent="." groups=[
 "players",
 ] instance=ExtResource( 3 )]
 collision_layer = 16384
-
-[node name="Map" parent="." instance=ExtResource( 1 )]
