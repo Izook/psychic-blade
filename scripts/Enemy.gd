@@ -25,7 +25,7 @@ func _physics_process(_delta):
 		_find_player()
 		_rotate_enemy()
 		
-		var _collision_info := move_and_slide(velocity)
+		var _collision_vector := move_and_slide(velocity)
 		
 		for i in get_slide_count():
 			var collision := get_slide_collision(i) as KinematicCollision2D
