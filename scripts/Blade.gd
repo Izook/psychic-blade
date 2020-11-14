@@ -7,6 +7,7 @@ const MAX_ANGULAR_SPEED := 3 * PI / 36
 const ANGULAR_SPEED_COEF := PI/24
 
 const BLADE_SPEED_FACTOR := 40 
+const BLADE_ROTATIONAL_SPEED := PI/10
 
 export (int) var radius := 200
 export (int) var radial_speed := 10
@@ -100,12 +101,12 @@ func _rotate_blade() -> void:
 	
 	var angle_diff := Utils.get_angle_diff(target_angle, blade_angle)
 	
-	if abs(angle_diff) < PI / 24:
+	if abs(angle_diff) < BLADE_ROTATIONAL_SPEED / 2:
 		blade_angle = target_angle
 	elif angle_diff > 0:
-		blade_angle -= PI/12
+		blade_angle -= BLADE_ROTATIONAL_SPEED
 	elif angle_diff < 0:
-		blade_angle += PI/12
+		blade_angle += BLADE_ROTATIONAL_SPEED
 	
 	# Keep angles within [0, 2*PI]
 	angular_pos = fposmod(angular_pos, 2 * PI)
