@@ -1,14 +1,14 @@
 extends KinematicBody2D
 
-const MIN_ZOOM := 0.75
-const MAX_ZOOM := 2.0
+const MIN_ZOOM := 1.0
+const MAX_ZOOM := 3.5
 
 const DASH_DURATION := 0.075
 const DASH_RESET_TIME := 1.0
 
-export (int) var speed := 200
+export (int) var speed := 400
 export (int) var dash_factor := 5
-export (float) var zoom_speed := 0.005
+export (float) var zoom_speed := 0.01
 
 onready var camera := $PlayerCamera as Camera2D
 onready var dash_particles := $DashParticles as Particles2D
