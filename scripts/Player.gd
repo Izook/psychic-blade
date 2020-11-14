@@ -45,6 +45,7 @@ func _get_input() -> void:
 	velocity = velocity.normalized() * speed
 	
 	if dash_requested && !player_dashing && dash_ready:
+		dash_particles.restart()
 		dash_particles.set_emitting(true)
 		player_dashing = true
 		dash_ready = false

@@ -7,13 +7,13 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
 
-[sub_resource type="Curve" id=5]
+[sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=6]
-curve = SubResource( 5 )
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
 
-[sub_resource type="ParticlesMaterial" id=2]
+[sub_resource type="ParticlesMaterial" id=4]
 flag_disable_z = true
 direction = Vector3( 0, 0, 0 )
 spread = 180.0
@@ -24,7 +24,7 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 damping = 25.0
 scale = 15.0
-scale_curve = SubResource( 6 )
+scale_curve = SubResource( 3 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -47,7 +47,7 @@ lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
 local_coords = false
-process_material = SubResource( 2 )
+process_material = SubResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
