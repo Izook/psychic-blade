@@ -3,7 +3,8 @@ extends Node2D
 const MAX_RADIUS := 300
 const MIN_RADIUS := 150
 
-const MAX_ANGULAR_SPEED := PI/12
+const MAX_ANGULAR_SPEED := 3 * PI / 36
+const ANGULAR_SPEED_COEF := PI/24
 
 const BLADE_SPEED_FACTOR := 40 
 
@@ -21,6 +22,7 @@ onready var blade_node := $Blade as KinematicBody2D
 
 var target_pos := polar2cartesian(radius, angular_pos) as Vector2
 var blade_angle := 0.0
+
 
 func _get_input() -> void:
 	if Input.is_action_pressed('rotate_left'):
@@ -41,16 +43,16 @@ func _get_input() -> void:
 		else:
 			angular_speed_index += angular_speed_index_damp
 	
-	if Input.is_action_pressed('push_out'):
-		radius += radial_speed
-	if Input.is_action_pressed('pull_in'):
-		radius -= radial_speed
-	
 	angular_speed_index = _limit_speed_index(angular_speed_index)
 	var angular_speed := _get_angular_speed(abs(angular_speed_index))
 	if angular_speed_index < 0.0:
 		angular_speed *= -1
 	angular_pos += angular_speed
+	
+	if Input.is_action_pressed('push_out'):
+		radius += radial_speed
+	if Input.is_action_pressed('pull_in'):
+		radius -= radial_speed
 	
 	radius = _limit_radius(radius)
 
@@ -80,7 +82,9 @@ func _limit_speed_index(i : float) -> float:
 # Returns the angular speed of the blade based on a position on the easeOutQuart
 # curve. Curve gotten from https://easings.net/#easeOutQuart
 func _get_angular_speed(i: float) -> float:
-	return (1 - pow(1 - i, 4)) * MAX_ANGULAR_SPEED
+	return min(
+			(1 - pow(1 - i, 4)) * ANGULAR_SPEED_COEF * pow(float(MAX_RADIUS) / radius, 1),
+			 MAX_ANGULAR_SPEED)
 
 
 func _move_blade() -> void:
