@@ -57,7 +57,7 @@ __meta__ = {
 scale = Vector2( 0.25, 0.25 )
 amount = 500
 lifetime = 3.0
-visibility_rect = Rect2( -500, -500, 1000, 1000 )
+visibility_rect = Rect2( -5000, -5000, 10000, 10000 )
 local_coords = false
 process_material = SubResource( 4 )
 

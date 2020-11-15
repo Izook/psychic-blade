@@ -80,12 +80,12 @@ func _get_input() -> void:
 	if Input.is_action_pressed('toggle_blade_release'):
 		if blade_state != BladeState.RELEASED and blade_state != BladeState.RETURNING:
 			print("BLADE RELEASED")
-			blade_state = BladeState.RELEASED
+			set_blade_state(BladeState.RELEASED)
 			is_blade_retrievable = false
 			blade_realease_timer.start(BLADE_RETRIEVAL_COOLDOWN)
 		elif is_blade_retrievable:
 			print("BLADE RETRIEVED")
-			blade_state = BladeState.RETURNING
+			set_blade_state(BladeState.RETURNING)
 
 
 func _physics_process(_delta) -> void:
@@ -93,28 +93,9 @@ func _physics_process(_delta) -> void:
 	_update_blade_target()
 	_update_blade_appearance()
 	
-	var new_blade_angle: float
-	
-	print(blade_veclocity)
-	
-	match blade_state:
-		BladeState.HELD:
-			blade_node.set_as_toplevel(false)
-			if (target_pos - blade_node.position).length() > 2:
-				new_blade_angle = target_pos.angle_to_point(blade_node.position)
-			else:
-				new_blade_angle = angular_pos
-			_move_held_blade()
-		BladeState.RELEASED:
-			blade_node.set_position(blade_node.get_global_position())
-			blade_node.set_as_toplevel(true)
-			new_blade_angle = blade_veclocity.angle()
-			_move_released_blade()
-		BladeState.RETURNING:
-			new_blade_angle = (get_global_position() + target_pos).angle_to_point(blade_node.get_global_position())
-			_move_returning_blade()
-			
+	var new_blade_angle := _move_blade()
 	_rotate_blade(new_blade_angle)
+	
 	update()
 
 
@@ -140,6 +121,34 @@ func _get_angular_speed(i: float) -> float:
 			 MAX_ANGULAR_SPEED)
 
 
+func _move_blade() -> float:
+	var new_blade_angle: float
+	
+	var global_blade_pos := blade_node.get_global_position()
+	var global_target_pos := (get_global_position() + target_pos)
+	
+	match blade_state:
+		BladeState.HELD:
+			if (target_pos - blade_node.position).length() > 2:
+				new_blade_angle = target_pos.angle_to_point(blade_node.position)
+			else:
+				new_blade_angle = angular_pos
+				
+			_move_held_blade()
+		
+		BladeState.RELEASED:			
+			new_blade_angle = blade_veclocity.angle()
+			
+			_move_released_blade()
+		
+		BladeState.RETURNING:
+			new_blade_angle = global_target_pos.angle_to_point(global_blade_pos)
+			
+			_move_returning_blade()
+	
+	return new_blade_angle
+
+
 func _move_held_blade() -> void:
 	blade_veclocity = blade_node.move_and_slide((target_pos - blade_node.position) * BLADE_SPEED_FACTOR)
 
@@ -153,10 +162,11 @@ func _move_returning_blade() -> void:
 	var global_target_pos := (get_global_position() + target_pos)
 	var angle_to_target := global_target_pos.angle_to_point(blade_node.get_global_position())
 	var new_blade_velocity := Vector2(cos(angle_to_target), sin(angle_to_target)) * 1000
+	
 	blade_veclocity = blade_node.move_and_slide(new_blade_velocity)
 	
 	if ((blade_node.position - global_target_pos).length() < 15):
-		blade_state = BladeState.HELD
+		set_blade_state(BladeState.HELD)
 
 
 func _rotate_blade(new_angle: float) -> void:
@@ -183,6 +193,22 @@ func _update_blade_target() -> void:
 
 func _update_blade_appearance() -> void:
 	blade_particles_material.set_color(BLADE_STATE_COLORS[blade_state])
+
+
+func set_blade_state(new_state: int) -> void:
+	match new_state:
+		BladeState.HELD:
+			blade_node.set_position(target_pos)
+			blade_node.set_as_toplevel(false)
+		
+		BladeState.RELEASED:
+			blade_node.set_position(blade_node.get_global_position())
+			blade_node.set_as_toplevel(true)
+		
+		BladeState.RETURNING:
+			pass
+	
+	blade_state = new_state
 
 
 func _on_BladeReleaseTimer_timeout() -> void:
