@@ -79,12 +79,10 @@ func _get_input() -> void:
 	
 	if Input.is_action_pressed('toggle_blade_release'):
 		if blade_state != BladeState.RELEASED and blade_state != BladeState.RETURNING:
-			print("BLADE RELEASED")
 			set_blade_state(BladeState.RELEASED)
 			is_blade_retrievable = false
 			blade_realease_timer.start(BLADE_RETRIEVAL_COOLDOWN)
 		elif is_blade_retrievable:
-			print("BLADE RETRIEVED")
 			set_blade_state(BladeState.RETURNING)
 
 
@@ -212,5 +210,4 @@ func set_blade_state(new_state: int) -> void:
 
 
 func _on_BladeReleaseTimer_timeout() -> void:
-	print("BLADE READY TO RETRIEVE")
 	is_blade_retrievable = true
