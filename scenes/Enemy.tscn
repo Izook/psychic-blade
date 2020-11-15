@@ -5,7 +5,7 @@
 [ext_resource path="res://assets/enemy_blood.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 32, 32 )
+extents = Vector2( 33.362, 33.3586 )
 
 [sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.579336, 0.770455 ), 1.09495, 0.0, 0, 0 ]

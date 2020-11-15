@@ -9,6 +9,19 @@ const ANGULAR_SPEED_COEF := PI/24
 const BLADE_SPEED_FACTOR := 40 
 const BLADE_ROTATIONAL_SPEED := PI/10
 
+const BLADE_RETRIEVAL_COOLDOWN := 0.5
+
+enum BladeState {HELD, RELEASED, RETURNING}
+
+const RETURNING_BLADE_COLOR := Color(1, 0, 0)
+const RELEASED_BLADE_COLOR := Color(0, 1, 0)
+const HELD_BLADE_COLOR := Color(1, 0, 1)
+const BLADE_STATE_COLORS := {
+	BladeState.HELD: HELD_BLADE_COLOR,
+	BladeState.RELEASED: RELEASED_BLADE_COLOR,
+	BladeState.RETURNING: RETURNING_BLADE_COLOR
+}
+
 export (int) var radius := 200
 export (int) var radial_speed := 10
 
@@ -20,9 +33,16 @@ export (float) var angular_speed_index_damp := 0.001
 
 onready var blade_target := $BladeTarget as Sprite
 onready var blade_node := $Blade as KinematicBody2D
+onready var blade_particles := $Blade/Particles2D as Particles2D
+onready var blade_particles_material := blade_particles.get_process_material() as ParticlesMaterial
+onready var blade_realease_timer = $BladeReleaseTimer as Timer
 
 var target_pos := polar2cartesian(radius, angular_pos) as Vector2
 var blade_angle := 0.0
+
+var blade_state = BladeState.HELD
+var is_blade_retrievable := false
+var blade_veclocity := Vector2(0,0)
 
 
 func _get_input() -> void:
@@ -56,19 +76,51 @@ func _get_input() -> void:
 		radius -= radial_speed
 	
 	radius = _limit_radius(radius)
+	
+	if Input.is_action_pressed('toggle_blade_release'):
+		if blade_state != BladeState.RELEASED and blade_state != BladeState.RETURNING:
+			print("BLADE RELEASED")
+			blade_state = BladeState.RELEASED
+			is_blade_retrievable = false
+			blade_realease_timer.start(BLADE_RETRIEVAL_COOLDOWN)
+		elif is_blade_retrievable:
+			print("BLADE RETRIEVED")
+			blade_state = BladeState.RETURNING
 
 
 func _physics_process(_delta) -> void:
 	_get_input()
 	_update_blade_target()
-	_move_blade()
-	_rotate_blade()
+	_update_blade_appearance()
+	
+	var new_blade_angle: float
+	
+	print(blade_veclocity)
+	
+	match blade_state:
+		BladeState.HELD:
+			blade_node.set_as_toplevel(false)
+			if (target_pos - blade_node.position).length() > 2:
+				new_blade_angle = target_pos.angle_to_point(blade_node.position)
+			else:
+				new_blade_angle = angular_pos
+			_move_held_blade()
+		BladeState.RELEASED:
+			blade_node.set_position(blade_node.get_global_position())
+			blade_node.set_as_toplevel(true)
+			new_blade_angle = blade_veclocity.angle()
+			_move_released_blade()
+		BladeState.RETURNING:
+			new_blade_angle = (get_global_position() + target_pos).angle_to_point(blade_node.get_global_position())
+			_move_returning_blade()
+			
+	_rotate_blade(new_blade_angle)
 	update()
 
 
 func _draw() -> void:
 	draw_arc(Vector2(0,0), MIN_RADIUS, 0, 2 * PI, 100, Color(1,1,1,0.5), 1, false)
-	draw_arc(Vector2(0,0), radius, 0, 2 * PI, 100, Color(1,1,1), 3, false)
+	draw_arc(Vector2(0,0), radius, 0, 2 * PI, 100, Color(1,1,1), 2, false)
 	draw_arc(Vector2(0,0), MAX_RADIUS, 0, 2 * PI, 100, Color(1,1,1,0.5), 1, false)
 
 
@@ -88,21 +140,30 @@ func _get_angular_speed(i: float) -> float:
 			 MAX_ANGULAR_SPEED)
 
 
-func _move_blade() -> void:
-	blade_node.move_and_slide((target_pos - blade_node.position) * BLADE_SPEED_FACTOR)
+func _move_held_blade() -> void:
+	blade_veclocity = blade_node.move_and_slide((target_pos - blade_node.position) * BLADE_SPEED_FACTOR)
 
 
-func _rotate_blade() -> void:
-	var target_angle: float
-	if (target_pos - blade_node.position).length() > 2:
-		target_angle = target_pos.angle_to_point(blade_node.position)
-	else:
-		target_angle = angular_pos
+func _move_released_blade() -> void:
+	var new_blade_pos := blade_node.position + blade_veclocity
+	blade_veclocity = blade_node.move_and_slide(new_blade_pos - blade_node.position)
+
+
+func _move_returning_blade() -> void:
+	var global_target_pos := (get_global_position() + target_pos)
+	var angle_to_target := global_target_pos.angle_to_point(blade_node.get_global_position())
+	var new_blade_velocity := Vector2(cos(angle_to_target), sin(angle_to_target)) * 1000
+	blade_veclocity = blade_node.move_and_slide(new_blade_velocity)
 	
-	var angle_diff := Utils.get_angle_diff(target_angle, blade_angle)
+	if ((blade_node.position - global_target_pos).length() < 15):
+		blade_state = BladeState.HELD
+
+
+func _rotate_blade(new_angle: float) -> void:
+	var angle_diff := Utils.get_angle_diff(new_angle, blade_angle)
 	
 	if abs(angle_diff) < BLADE_ROTATIONAL_SPEED / 2:
-		blade_angle = target_angle
+		blade_angle = new_angle
 	elif angle_diff > 0:
 		blade_angle -= BLADE_ROTATIONAL_SPEED
 	elif angle_diff < 0:
@@ -118,3 +179,12 @@ func _rotate_blade() -> void:
 func _update_blade_target() -> void:
 	target_pos = polar2cartesian(radius, angular_pos)
 	blade_target.set_position(target_pos)
+
+
+func _update_blade_appearance() -> void:
+	blade_particles_material.set_color(BLADE_STATE_COLORS[blade_state])
+
+
+func _on_BladeReleaseTimer_timeout() -> void:
+	print("BLADE READY TO RETRIEVE")
+	is_blade_retrievable = true
