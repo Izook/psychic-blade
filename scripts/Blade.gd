@@ -114,9 +114,13 @@ func _limit_speed_index(i : float) -> float:
 # Returns the angular speed of the blade based on a position on the easeOutQuart
 # curve. Curve gotten from https://easings.net/#easeOutQuart
 func _get_angular_speed(i: float) -> float:
-	return min(
+	var angular_speed = min(
 			(1 - pow(1 - i, 4)) * ANGULAR_SPEED_COEF * pow(float(MAX_RADIUS) / radius, 1),
 			 MAX_ANGULAR_SPEED)
+	if blade_state != BladeState.RETURNING:
+		return angular_speed
+	else:
+		return angular_speed / 3
 
 
 func _move_blade() -> float:
