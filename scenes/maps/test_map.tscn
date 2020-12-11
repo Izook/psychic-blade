@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://scenes/enemy.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/wall.png" type="Texture" id=2]
+[ext_resource path="res://scenes/enemies/enemy/enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/maps/wall.png" type="Texture" id=2]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 31.9914, 32, 0, 32, 0, 0.0133438, 31.9914, 0.0133438 )

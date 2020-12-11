@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://assets/player_sprite.png" type="Texture" id=1]
-[ext_resource path="res://scripts/player.gd" type="Script" id=2]
-[ext_resource path="res://scenes/blade.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/player/player_sprite.png" type="Texture" id=1]
+[ext_resource path="res://scenes/player/player.gd" type="Script" id=2]
+[ext_resource path="res://scenes/blade/blade.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
