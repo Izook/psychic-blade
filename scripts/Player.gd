@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
-const MIN_ZOOM := 1.0
-const MAX_ZOOM := 3.5
+const MIN_ZOOM := 1.5
+const MAX_ZOOM := 4.0
 
 const DASH_DURATION := 0.075
 const DASH_RESET_TIME := 1.0
@@ -16,7 +16,7 @@ onready var dash_timer := $DashTimer as Timer
 onready var dash_reset_timer := $DashResetTimer as Timer
 
 var velocity := Vector2()
-var zoom_factor := 1.0
+var zoom_factor := 2.0
 
 var dash_ready := true
 var player_dashing := false
