@@ -9,6 +9,8 @@ const ANGULAR_SPEED_COEF := PI/24
 const BLADE_SPEED_FACTOR := 40 
 const BLADE_ROTATIONAL_SPEED := PI/10
 
+const RELEASED_BLADE_DAMP := 0.99
+
 const BLADE_RETRIEVAL_COOLDOWN := 0.5
 
 enum BladeState {HELD, RELEASED, RETURNING}
@@ -156,8 +158,15 @@ func _move_held_blade() -> void:
 
 
 func _move_released_blade() -> void:
-	var new_blade_pos := blade_node.position + blade_veclocity
-	blade_veclocity = blade_node.move_and_slide(new_blade_pos - blade_node.position)
+	var new_blade_velocity := blade_node.move_and_slide(blade_veclocity)
+	
+	for i in blade_node.get_slide_count():
+		var collision := blade_node.get_slide_collision(i)
+		if collision.collider.name == "TileMap":
+			new_blade_velocity = blade_veclocity.bounce(collision.normal)
+			print(blade_veclocity, new_blade_velocity)
+	
+	blade_veclocity = new_blade_velocity * RELEASED_BLADE_DAMP
 
 
 func _move_returning_blade() -> void:
