@@ -23,6 +23,7 @@ config/icon="res://shared_assets/icon.png"
 [autoload]
 
 Utils="*res://shared_scripts/utilities.gd"
+UIUtils="*res://shared_scripts/ui_utilities.gd"
 
 [debug]
 

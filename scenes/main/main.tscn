@@ -20,4 +20,4 @@ collision_layer = 16384
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 
-[node name="Control" parent="UILayer" instance=ExtResource( 2 )]
+[node name="HUD" parent="UILayer" instance=ExtResource( 2 )]
