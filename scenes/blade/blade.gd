@@ -3,8 +3,8 @@ extends Node2D
 const MAX_RADIUS := 300
 const MIN_RADIUS := 150
 
-const MAX_ANGULAR_SPEED := 3 * PI / 36
-const ANGULAR_SPEED_COEF := PI/24
+const MAX_ANGULAR_SPEED := PI/8
+const ANGULAR_SPEED_COEF := PI/18
 
 const BLADE_SPEED_FACTOR := 40 
 const BLADE_ROTATIONAL_SPEED := PI/10
@@ -117,12 +117,12 @@ func _limit_speed_index(i : float) -> float:
 # curve. Curve gotten from https://easings.net/#easeOutQuart
 func _get_angular_speed(i: float) -> float:
 	var angular_speed = min(
-			(1 - pow(1 - i, 4)) * ANGULAR_SPEED_COEF * pow(float(MAX_RADIUS) / radius, 1),
+			(1 - pow(1 - i, 4)) * ANGULAR_SPEED_COEF,
 			 MAX_ANGULAR_SPEED)
 	if blade_state != BladeState.RETURNING:
 		return angular_speed
 	else:
-		return angular_speed / 3
+		return angular_speed / 4
 
 
 func _move_blade() -> float:
