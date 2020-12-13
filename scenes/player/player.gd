@@ -80,3 +80,7 @@ func _on_DashTimer_timeout() -> void:
 
 func _on_DashResetTimer_timeout() -> void:
 	dash_ready = true
+
+
+func get_blade_node() -> Node2D:
+	return $Blade as Node2D

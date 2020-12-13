@@ -10,7 +10,7 @@
 follow_viewport_enable = true
 
 [node name="Map" parent="GameLayer" instance=ExtResource( 1 )]
-position = Vector2( 544, 840 )
+position = Vector2( 544, 968 )
 
 [node name="Player" parent="GameLayer" groups=[
 "players",

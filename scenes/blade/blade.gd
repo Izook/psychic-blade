@@ -3,8 +3,7 @@ extends Node2D
 const MAX_RADIUS := 300
 const MIN_RADIUS := 150
 
-const MAX_ANGULAR_SPEED := PI/8
-const ANGULAR_SPEED_COEF := PI/18
+const MAX_ANGULAR_SPEED := PI/16
 
 const BLADE_SPEED_FACTOR := 40 
 const BLADE_ROTATIONAL_SPEED := PI/10
@@ -12,6 +11,8 @@ const BLADE_ROTATIONAL_SPEED := PI/10
 const RELEASED_BLADE_DAMP := 0.99
 
 const BLADE_RETRIEVAL_COOLDOWN := 0.5
+
+const FRAMES_PER_SECOND := 60.0
 
 enum BladeState {HELD, RELEASED, RETURNING}
 
@@ -116,9 +117,7 @@ func _limit_speed_index(i : float) -> float:
 # Returns the angular speed of the blade based on a position on the easeOutQuart
 # curve. Curve gotten from https://easings.net/#easeOutQuart
 func _get_angular_speed(i: float) -> float:
-	var angular_speed = min(
-			(1 - pow(1 - i, 4)) * ANGULAR_SPEED_COEF,
-			 MAX_ANGULAR_SPEED)
+	var angular_speed = (1 - pow(1 - i, 4)) * MAX_ANGULAR_SPEED
 	if blade_state != BladeState.RETURNING:
 		return angular_speed
 	else:
@@ -223,3 +222,11 @@ func set_blade_state(new_state: int) -> void:
 
 func _on_BladeReleaseTimer_timeout() -> void:
 	is_blade_retrievable = true
+
+
+func get_max_speed() -> float: 
+	return (MAX_ANGULAR_SPEED / (1 / FRAMES_PER_SECOND)) * MAX_RADIUS
+
+
+func get_current_speed() -> float:
+	return blade_veclocity.length()
