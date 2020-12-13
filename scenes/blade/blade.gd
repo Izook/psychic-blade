@@ -164,7 +164,6 @@ func _move_released_blade() -> void:
 		var collision := blade_node.get_slide_collision(i)
 		if collision.collider.name == "TileMap":
 			new_blade_velocity = blade_veclocity.bounce(collision.normal)
-			print(blade_veclocity, new_blade_velocity)
 	
 	blade_veclocity = new_blade_velocity * RELEASED_BLADE_DAMP
 
