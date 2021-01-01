@@ -3,7 +3,7 @@ extends Node2D
 const MAX_RADIUS := 300
 const MIN_RADIUS := 150
 
-const MAX_ANGULAR_SPEED := PI/16
+const MAX_ANGULAR_SPEED := 4 * PI
 
 const BLADE_SPEED_FACTOR := 40 
 const BLADE_ROTATIONAL_SPEED := PI/10
@@ -12,7 +12,7 @@ const RELEASED_BLADE_DAMP := 0.99
 
 const BLADE_RETRIEVAL_COOLDOWN := 0.5
 
-const FRAMES_PER_SECOND := 60.0
+const MAX_FRAMES_PER_SECOND := 60.0
 
 enum BladeState {HELD, RELEASED, RETURNING}
 
@@ -26,7 +26,7 @@ const BLADE_STATE_COLORS := {
 }
 
 export (int) var radius := 200
-export (int) var radial_speed := 10
+export (int) var radial_speed := 600.0
 
 export (float) var angular_pos := 0.0
 export (float) var angular_speed_index := 0.0
@@ -48,7 +48,7 @@ var is_blade_retrievable := false
 var blade_veclocity := Vector2(0,0)
 
 
-func _get_input() -> void:
+func _get_input(delta: float) -> void:
 	if Input.is_action_pressed('rotate_left'):
 		if angular_speed_index > 0:
 			angular_speed_index += angular_speed_index_speed
@@ -71,12 +71,12 @@ func _get_input() -> void:
 	var angular_speed := _get_angular_speed(abs(angular_speed_index))
 	if angular_speed_index < 0.0:
 		angular_speed *= -1
-	angular_pos += angular_speed
+	angular_pos += angular_speed * delta
 	
 	if Input.is_action_pressed('push_out'):
-		radius += radial_speed
+		radius += radial_speed * delta
 	if Input.is_action_pressed('pull_in'):
-		radius -= radial_speed
+		radius -= radial_speed * delta
 	
 	radius = _limit_radius(radius)
 	
@@ -89,8 +89,8 @@ func _get_input() -> void:
 			set_blade_state(BladeState.RETURNING)
 
 
-func _physics_process(_delta) -> void:
-	_get_input()
+func _physics_process(delta: float) -> void:
+	_get_input(delta)
 	_update_blade_target()
 	_update_blade_appearance()
 	
@@ -117,6 +117,8 @@ func _limit_speed_index(i : float) -> float:
 # Returns the angular speed of the blade based on a position on the easeOutQuart
 # curve. Curve gotten from https://easings.net/#easeOutQuart
 func _get_angular_speed(i: float) -> float:
+	if (1.0 - i < 0.1):
+		print("SPEED: " + str(blade_veclocity.length()))
 	var angular_speed = (1 - pow(1 - i, 4)) * MAX_ANGULAR_SPEED
 	if blade_state != BladeState.RETURNING:
 		return angular_speed
@@ -225,7 +227,7 @@ func _on_BladeReleaseTimer_timeout() -> void:
 
 
 func get_max_speed() -> float: 
-	return (MAX_ANGULAR_SPEED / (1 / FRAMES_PER_SECOND)) * MAX_RADIUS
+	return (MAX_ANGULAR_SPEED) * MAX_RADIUS
 
 
 func get_current_speed() -> float:
