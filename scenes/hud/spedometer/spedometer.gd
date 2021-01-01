@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name Spedometer
+
 onready var needle_node := $Dial/Needle as Sprite
 
 var current_speed := 0.0

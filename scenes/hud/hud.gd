@@ -1,9 +1,11 @@
 extends Control
 
-onready var spedometer_node := $HBoxContainer/Spedometer as Node2D
+class_name Hud
 
-var player_node : Node2D
-var blade_node : Node2D
+onready var spedometer_node := $HBoxContainer/Spedometer as Spedometer
+
+var player_node : Player
+var blade_node : Blade
 
 func _ready() -> void:
 	yield(get_node("/root/Main"), "ready")

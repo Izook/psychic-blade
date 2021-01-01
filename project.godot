@@ -8,9 +8,38 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "Blade",
+"language": "GDScript",
+"path": "res://scenes/blade/blade.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://scenes/enemies/enemy/enemy.gd"
+}, {
+"base": "Control",
+"class": "Hud",
+"language": "GDScript",
+"path": "res://scenes/hud/hud.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://scenes/player/player.gd"
+}, {
+"base": "Node2D",
+"class": "Spedometer",
+"language": "GDScript",
+"path": "res://scenes/hud/spedometer/spedometer.gd"
+} ]
 _global_script_class_icons={
-
+"Blade": "",
+"Enemy": "",
+"Hud": "",
+"Player": "",
+"Spedometer": ""
 }
 
 [application]

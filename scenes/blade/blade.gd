@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name Blade
+
 const MAX_RADIUS := 300
 const MIN_RADIUS := 150
 

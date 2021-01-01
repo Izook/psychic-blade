@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+class_name Enemy
+
 export (int) var speed := 6000
 
 var velocity := Vector2()

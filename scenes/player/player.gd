@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+class_name Player
+
 const MIN_ZOOM := 1.5
 const MAX_ZOOM := 4.0
 
