@@ -6,9 +6,9 @@ const MAX_ZOOM := 4.0
 const DASH_DURATION := 0.075
 const DASH_RESET_TIME := 1.0
 
-export (int) var speed := 400
+export (int) var speed := 24000
 export (int) var dash_factor := 5
-export (float) var zoom_speed := 0.01
+export (float) var zoom_speed := 0.6
 
 onready var camera := $PlayerCamera as Camera2D
 onready var dash_particles := $DashParticles as Particles2D
@@ -21,7 +21,7 @@ var zoom_factor := 2.0
 var dash_ready := true
 var player_dashing := false
 
-func _get_input() -> void:
+func _get_input(delta: float) -> void:
 	velocity = Vector2()
 	var dash_requested := false
 	
@@ -35,14 +35,14 @@ func _get_input() -> void:
 		velocity.y -= 1
 	
 	if Input.is_action_pressed('zoom_out'):
-		zoom_factor += zoom_speed
+		zoom_factor += zoom_speed * delta
 	if Input.is_action_pressed('zoom_in'):
-		zoom_factor -= zoom_speed
+		zoom_factor -= zoom_speed * delta
 	
 	if Input.is_action_pressed('dash'):
 		dash_requested = true
 	
-	velocity = velocity.normalized() * speed
+	velocity = velocity.normalized() * speed * delta
 	
 	if dash_requested && !player_dashing && dash_ready:
 		dash_particles.restart()
@@ -57,8 +57,8 @@ func _get_input() -> void:
 	zoom_factor = _limit_zoom(zoom_factor)
 
 
-func _physics_process(_delta) -> void:
-	_get_input()
+func _physics_process(delta: float) -> void:
+	_get_input(delta)
 	var _collision_info := move_and_slide(velocity)
 
 	camera.set_zoom(Vector2(zoom_factor, zoom_factor))
