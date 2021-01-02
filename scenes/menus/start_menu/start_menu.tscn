@@ -125,12 +125,12 @@ __meta__ = {
 [node name="Version" type="Label" parent="."]
 margin_left = 10.0
 margin_top = 558.0
-margin_right = 45.0
+margin_right = 55.0
 margin_bottom = 590.0
 size_flags_horizontal = 0
 size_flags_vertical = 8
 custom_fonts/font = SubResource( 4 )
-text = "beta"
+text = "alpha"
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
