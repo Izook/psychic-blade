@@ -33,19 +33,25 @@ _global_script_classes=[ {
 "class": "Spedometer",
 "language": "GDScript",
 "path": "res://scenes/hud/spedometer/spedometer.gd"
+}, {
+"base": "MarginContainer",
+"class": "StartMenu",
+"language": "GDScript",
+"path": "res://scenes/start_menu/start_menu.gd"
 } ]
 _global_script_class_icons={
 "Blade": "",
 "Enemy": "",
 "Hud": "",
 "Player": "",
-"Spedometer": ""
+"Spedometer": "",
+"StartMenu": ""
 }
 
 [application]
 
 config/name="psychic-blade"
-run/main_scene="res://scenes/main/main.tscn"
+run/main_scene="res://scenes/start_menu/start_menu.tscn"
 boot_splash/bg_color=Color( 0.690196, 0.690196, 0.690196, 1 )
 config/icon="res://shared_assets/icon.png"
 
