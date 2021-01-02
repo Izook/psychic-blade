@@ -35,7 +35,6 @@ points = PoolVector2Array( 31.9914, 32, 0, 32, 0, 0.0133438, 31.9914, 0.0133438 
 
 [node name="Enemy" parent="Node2D" instance=ExtResource( 1 )]
 position = Vector2( 0, -600 )
-speed = 0
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 2 )
