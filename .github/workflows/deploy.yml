@@ -59,7 +59,7 @@ jobs:
           path: exports
   CreateNewGithubRelease:
     needs: BuildAndPublish
-    if: ${{ env.IS_MAIN }}
+    if: ${{ contains(github.ref, 'main') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Source Code
@@ -106,7 +106,7 @@ jobs:
       #     asset_content_type: application/zip
   PushExportsToItch:
     needs: BuildAndPublish
-    if: ${{ env.IS_MAIN }}
+    if: ${{ contains(github.ref, 'main') }}
     runs-on: ubuntu-latest
     steps:
       - name: Download Exports
