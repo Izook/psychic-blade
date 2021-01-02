@@ -36,5 +36,3 @@ func _physics_process(delta: float):
 				collision_shape.set_disabled(true)
 				sprite.visible = false
 				particles.set_emitting(true)
-			if collision.collider.name == "Player":
-				player.queue_free()

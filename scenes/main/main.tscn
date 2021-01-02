@@ -34,3 +34,4 @@ visible = false
 
 [node name="PauseMenu" parent="UILayer" instance=ExtResource( 4 )]
 visible = false
+[connection signal="player_died" from="GameLayer/Player" to="." method="_on_Player_player_died"]

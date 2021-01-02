@@ -2,6 +2,8 @@ extends KinematicBody2D
 
 class_name Player
 
+signal player_died
+
 const MIN_ZOOM := 1.5
 const MAX_ZOOM := 4.0
 
@@ -16,6 +18,7 @@ onready var camera := $PlayerCamera as Camera2D
 onready var dash_particles := $DashParticles as Particles2D
 onready var dash_timer := $DashTimer as Timer
 onready var dash_reset_timer := $DashResetTimer as Timer
+onready var player_sprite := $Sprite as Sprite
 
 var velocity := Vector2()
 var zoom_factor := 2.0
@@ -62,6 +65,12 @@ func _get_input(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	_get_input(delta)
 	var _collision_info := move_and_slide(velocity)
+	
+	for i in get_slide_count():
+			var collision := get_slide_collision(i) as KinematicCollision2D
+			if collision.collider.name == "Enemy":
+				player_sprite.visible = false
+				emit_signal("player_died")
 
 	camera.set_zoom(Vector2(zoom_factor, zoom_factor))
 	camera.make_current()
