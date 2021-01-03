@@ -14,6 +14,7 @@ env:
   DISCORD_WEBHOOK: ${{secrets.DISCORD_WEBHOOK}}
   PROJECT_NAME: "PsychicBlade"
   ITCH_PROJECT_NAME: "psychic-blade"
+  ITCH_USERNAME: "izook"
 
 jobs:
   BuildAndPublish:
@@ -128,11 +129,11 @@ jobs:
       - name: Login To Butler
         run: ./butler login
       - name: Push Windows Export To Itch
-        run: ./butler push ./exports/windows/$PROJECT_NAME.exe izook/$ITCH_PROJECT_NAME:win --userversion-file ./exports/VERSION
+        run: ./butler push ./exports/windows/$PROJECT_NAME.exe $ITCH_USERNAME/$ITCH_PROJECT_NAME:win --userversion-file ./exports/VERSION
       - name: Push Mac Export To Itch
-        run: ./butler push ./exports/mac/$PROJECT_NAME.zip izook/$ITCH_PROJECT_NAME:mac --userversion-file ./exports/VERSION
+        run: ./butler push ./exports/mac/$PROJECT_NAME.zip $ITCH_USERNAME/$ITCH_PROJECT_NAME:mac --userversion-file ./exports/VERSION
       - name: Push Linux Export To Itch
-        run: ./butler push ./exports/linux/$PROJECT_NAME.x86_64 izook/$ITCH_PROJECT_NAME:linux --userversion-file ./exports/VERSION
+        run: ./butler push ./exports/linux/$PROJECT_NAME.x86_64 $ITCH_USERNAME/$ITCH_PROJECT_NAME:linux --userversion-file ./exports/VERSION
   AlertPipelineResult:
     needs: [BuildAndPublish, CreateNewGithubRelease, PushExportsToItch]
     if: ${{ always() }}
