@@ -4,9 +4,7 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
+
 env:
   BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
