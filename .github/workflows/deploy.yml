@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pr:
+    branches:
+      - main
 
 env:
   BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
@@ -126,7 +129,7 @@ jobs:
         run: ./butler push ./exports/linux/$PROJECT_NAME.x86_64 $ITCH_USERNAME/$ITCH_PROJECT_NAME:linux --userversion-file ./exports/VERSION
   AlertPipelineResult:
     needs: [BuildAndPublish, CreateNewGithubRelease, PushExportsToItch]
-    if: ${{ always() }}
+    if: ${{ contains(github.ref, 'main') }}
     env:
       DID_PREV_JOBS_SUCCEED: ${{ contains(needs.BuildAndPublish.result, 'success' ) && contains(needs.CreateNewGithubRelease.result, 'success' ) && contains(needs.PushExportsToItch.result, 'success' ) }}
     runs-on: ubuntu-latest
