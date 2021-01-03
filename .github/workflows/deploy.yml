@@ -52,6 +52,9 @@ jobs:
         run: |
           mkdir ./exports/linux
           ./godot --path ./project.godot --export "Linux" ./exports/linux/$PROJECT_NAME.x86_64
+      - name: Add Version Number to Exports
+        run: |
+          cp ./VERSION ./exports/VERSION
       - name: Publish Export Artifact
         uses: actions/upload-artifact@v2
         with:
@@ -124,11 +127,11 @@ jobs:
       - name: Login To Butler
         run: ./butler login
       - name: Push Windows Export To Itch
-        run: ./butler push ./exports/windows/$PROJECT_NAME.exe izook/knotris:win --userversion-file ./VERSION.txt
+        run: ./butler push ./exports/windows/$PROJECT_NAME.exe izook/knotris:win --userversion-file ./exports/VERSION
       - name: Push Mac Export To Itch
-        run: ./butler push ./exports/mac/$PROJECT_NAME.zip izook/knotris:mac --userversion-file ./VERSION.txt
+        run: ./butler push ./exports/mac/$PROJECT_NAME.zip izook/knotris:mac --userversion-file ./exports/VERSION
       - name: Push Linux Export To Itch
-        run: ./butler push ./exports/linux/$PROJECT_NAME.x86_64 izook/knotris:linux --userversion-file ./VERSION.txt
+        run: ./butler push ./exports/linux/$PROJECT_NAME.x86_64 izook/knotris:linux --userversion-file ./exports/VERSION
   AlertPipelineResult:
     needs: [BuildAndPublish, CreateNewGithubRelease, PushExportsToItch]
     if: ${{ always() }}
