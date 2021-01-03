@@ -7,6 +7,7 @@ on:
   pull_request:
     branches:
       - main
+
 env:
   BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -83,33 +84,25 @@ jobs:
         uses: juliangruber/read-file-action@v1
         with:
           path: ./VERSION
-      - name: Test Release Variables
-        run: |
-          echo "Version Number $VERSION_NUMBER"
-          echo "Commit Message $COMMIT_MESSAGE"
-          echo "Project Name $PROJECT_NAME"
+      - name: Create New Release
+        uses: actions/create-release@v1
+        id: create_release
+        with:
+          tag_name: ${{ steps.version_number.outputs.content }}
+          release_name: Release ${{ steps.version_number.outputs.content }}
+          body: ${{ github.event.head_commit.message }}
+          draft: false
+          prerelease: false
+      - name: Upload Exports
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
         env:
-          VERSION_NUMBER: ${{ steps.version_number.outputs.content }}
-          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
-      # - name: Create New Release
-      #   uses: actions/create-release@v1
-      #   id: create_release
-      #   with:
-      #     tag_name: ${{ steps.version_number.outputs.content }}
-      #     release_name: Release ${{ steps.version_number.outputs.content }}
-      #     body: ${{ github.event.head_commit.message }}
-      #     draft: false
-      #     prerelease: false
-      # - name: Upload Exports
-      #   id: upload-release-asset
-      #   uses: actions/upload-release-asset@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
-      #     asset_path: ./exports.zip
-      #     asset_name: exports.zip
-      #     asset_content_type: application/zip
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./exports.zip
+          asset_name: exports.zip
+          asset_content_type: application/zip
   PushExportsToItch:
     needs: BuildAndPublish
     if: ${{ contains(github.ref, 'main') }}
@@ -136,7 +129,7 @@ jobs:
         run: ./butler push ./exports/linux/$PROJECT_NAME.x86_64 $ITCH_USERNAME/$ITCH_PROJECT_NAME:linux --userversion-file ./exports/VERSION
   AlertPipelineResult:
     needs: [BuildAndPublish, CreateNewGithubRelease, PushExportsToItch]
-    if: ${{ always() }}
+    if: ${{ contains(github.ref, 'main') }}
     env:
       DID_PREV_JOBS_SUCCEED: ${{ contains(needs.BuildAndPublish.result, 'success' ) && contains(needs.CreateNewGithubRelease.result, 'success' ) && contains(needs.PushExportsToItch.result, 'success' ) }}
     runs-on: ubuntu-latest
