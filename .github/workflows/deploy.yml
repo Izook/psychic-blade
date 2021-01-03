@@ -82,6 +82,7 @@ jobs:
         run: |
           echo "Version Number $VERSION_NUMBER"
           echo "Commit Message $COMMIT_MESSAGE"
+          echo "Project Name $PROJECT_NAME"
         env:
           VERSION_NUMBER: ${{ steps.version_number.outputs.content }}
           COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
