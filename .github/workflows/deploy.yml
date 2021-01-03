@@ -124,11 +124,11 @@ jobs:
       - name: Login To Butler
         run: ./butler login
       - name: Push Windows Export To Itch
-        run: ./butler push ./exports/windows/$PROJECT_NAME.exe izook/knotris:win --userversion-file ./VERSION
+        run: ./butler push ./exports/windows/$PROJECT_NAME.exe izook/knotris:win --userversion-file ./VERSION.txt
       - name: Push Mac Export To Itch
-        run: ./butler push ./exports/mac/$PROJECT_NAME.zip izook/knotris:mac --userversion-file ./VERSION
+        run: ./butler push ./exports/mac/$PROJECT_NAME.zip izook/knotris:mac --userversion-file ./VERSION.txt
       - name: Push Linux Export To Itch
-        run: ./butler push ./exports/linux/$PROJECT_NAME.x86_64 izook/knotris:linux --userversion-file ./VERSION
+        run: ./butler push ./exports/linux/$PROJECT_NAME.x86_64 izook/knotris:linux --userversion-file ./VERSION.txt
   AlertPipelineResult:
     needs: [BuildAndPublish, CreateNewGithubRelease, PushExportsToItch]
     if: ${{ always() }}
