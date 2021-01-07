@@ -18,7 +18,7 @@ onready var camera := $PlayerCamera as Camera2D
 onready var dash_particles := $DashParticles as Particles2D
 onready var dash_timer := $DashTimer as Timer
 onready var dash_reset_timer := $DashResetTimer as Timer
-onready var player_sprite := $Sprite as Sprite
+onready var player_sprite := $PlayerSprite as PlayerSprite
 
 var velocity := Vector2()
 var zoom_factor := 2.0
@@ -26,18 +26,26 @@ var zoom_factor := 2.0
 var dash_ready := true
 var player_dashing := false
 
+
 func _get_input(delta: float) -> void:
 	velocity = Vector2()
 	var dash_requested := false
 	
 	if Input.is_action_pressed('move_right'):
 		velocity.x += 1
+		player_sprite.move_right()
 	if Input.is_action_pressed('move_left'):
 		velocity.x -= 1
+		player_sprite.move_left()
 	if Input.is_action_pressed('move_down'):
 		velocity.y += 1
+		player_sprite.move_down()
 	if Input.is_action_pressed('move_up'):
 		velocity.y -= 1
+		player_sprite.move_up()
+	
+	if velocity == Vector2(0,0):
+		player_sprite.stop_moving()
 	
 	if Input.is_action_pressed('zoom_out'):
 		zoom_factor += zoom_speed * delta
