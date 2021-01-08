@@ -18,13 +18,14 @@ onready var camera := $PlayerCamera as Camera2D
 onready var dash_particles := $DashParticles as Particles2D
 onready var dash_timer := $DashTimer as Timer
 onready var dash_reset_timer := $DashResetTimer as Timer
-onready var player_sprite := $Sprite as Sprite
+onready var player_sprite := $PlayerSprite as PlayerSprite
 
 var velocity := Vector2()
 var zoom_factor := 2.0
 
 var dash_ready := true
 var player_dashing := false
+
 
 func _get_input(delta: float) -> void:
 	velocity = Vector2()
@@ -64,6 +65,7 @@ func _get_input(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	_get_input(delta)
+	player_sprite.move_towards(velocity)
 	var _collision_info := move_and_slide(velocity)
 	
 	for i in get_slide_count():

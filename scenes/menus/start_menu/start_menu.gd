@@ -6,6 +6,7 @@ onready var version_label := $Version as Label
 onready var controls_container := $ControlsContainer as MarginContainer
 
 func _ready() -> void:
+	get_tree().paused = false
 	_load_version()
 
 
