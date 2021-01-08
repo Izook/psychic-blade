@@ -33,19 +33,12 @@ func _get_input(delta: float) -> void:
 	
 	if Input.is_action_pressed('move_right'):
 		velocity.x += 1
-		player_sprite.move_right()
 	if Input.is_action_pressed('move_left'):
 		velocity.x -= 1
-		player_sprite.move_left()
 	if Input.is_action_pressed('move_down'):
 		velocity.y += 1
-		player_sprite.move_down()
 	if Input.is_action_pressed('move_up'):
 		velocity.y -= 1
-		player_sprite.move_up()
-	
-	if velocity == Vector2(0,0):
-		player_sprite.stop_moving()
 	
 	if Input.is_action_pressed('zoom_out'):
 		zoom_factor += zoom_speed * delta
@@ -72,6 +65,7 @@ func _get_input(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	_get_input(delta)
+	player_sprite.move_towards(velocity)
 	var _collision_info := move_and_slide(velocity)
 	
 	for i in get_slide_count():

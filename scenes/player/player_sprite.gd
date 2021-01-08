@@ -12,6 +12,20 @@ enum Directions {
 var is_moving := false
 var direction_facing = Directions.DOWN
 
+
+func move_towards(velocity: Vector2):
+	if velocity.y > 0:
+		move_down()
+	elif velocity.y < 0:
+		move_up()
+	elif velocity.x > 0:
+		move_right()
+	elif velocity.x < 0:
+		move_left()
+	elif velocity.length() == 0:
+		stop_moving()
+
+
 func stop_moving():
 	is_moving = false
 	match direction_facing:
