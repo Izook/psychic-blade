@@ -44,6 +44,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/player/player_sprite.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "Slime",
+"language": "GDScript",
+"path": "res://scenes/enemies/slimes/slime/slime.gd"
+}, {
 "base": "Node2D",
 "class": "Spedometer",
 "language": "GDScript",
@@ -62,6 +67,7 @@ _global_script_class_icons={
 "Main": "",
 "Player": "",
 "PlayerSprite": "",
+"Slime": "",
 "Spedometer": "",
 "StartMenu": ""
 }
