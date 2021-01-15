@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://scenes/blade/blade.gd"
 }, {
 "base": "KinematicBody2D",
+"class": "BladeHitbox",
+"language": "GDScript",
+"path": "res://scenes/blade/blade_hitbox.gd"
+}, {
+"base": "KinematicBody2D",
 "class": "Enemy",
 "language": "GDScript",
 "path": "res://scenes/enemies/enemy/enemy.gd"
@@ -61,6 +66,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Blade": "",
+"BladeHitbox": "",
 "Enemy": "",
 "GameOverMenu": "",
 "Hud": "",

@@ -8,17 +8,18 @@ const MAX_SPEED := 100
 const CAST_LENGTH := 500
 const IDLE_ANIMATION_FINISH := 1.5
 
-onready var player := get_node("root/Main/GameLayer/Player") as Player
-onready var collision_shape := $CollisionPolygon2D as CollisionPolygon2D
+onready var player := get_node("/root/Main/GameLayer/Player") as Player
+onready var hitbox := $CollisionPolygon as CollisionPolygon2D
+onready var detection_area := $DetectionArea as Area2D
 onready var sprite := $Sprite as Sprite
 onready var animation_player := $AnimationPlayer as AnimationPlayer
 onready var raycast := $RayCast2D as RayCast2D
 
 onready var wander_direction := Vector2(rand_range(-1, 1), rand_range(-1, 1))
 
-
 var slime_state = SlimeState.WANDERING
 var speed_time := 0.0
+
 
 func _physics_process(delta: float) -> void:
 	
@@ -28,20 +29,32 @@ func _physics_process(delta: float) -> void:
 		SlimeState.ATTACKING:
 			attack(delta)
 		SlimeState.DEAD:
-			die()
+			pass
 
 
 func wander(delta: float) -> void:
 	var velocity = wander_direction * get_slime_speed(delta)
-	var _collision_vector := move_and_slide(velocity)
+	move_slime(velocity, delta)
 
 
 func attack(delta: float) -> void:
-	pass
+	var player_direction = global_position.direction_to(player.global_position)
+	var velocity = player_direction * get_slime_speed(delta)
+	move_slime(velocity, delta)
 
 
 func die() -> void:
-	pass
+	slime_state = SlimeState.DEAD
+	hitbox.set_disabled(true)
+	animation_player.play("death")
+
+
+func move_slime(velocity: Vector2, delta: float) -> void:
+	var collision_info := move_and_collide(velocity * delta)
+	if collision_info:
+		var blade := collision_info.collider as BladeHitbox
+		if blade:
+			die()
 
 
 func get_slime_speed(delta: float) -> float:
@@ -54,10 +67,20 @@ func renew_wander_direction() -> void:
 	wander_direction = Vector2(rand_range(-1, 1), rand_range(-1, 1))
 	raycast.set_cast_to(wander_direction * CAST_LENGTH)
 	
-	while raycast.get_collider() != null:
+	while not raycast.is_colliding():
 		wander_direction = Vector2(rand_range(-1, 1), rand_range(-1, 1))
 		raycast.set_cast_to(wander_direction * CAST_LENGTH)
+		raycast.force_raycast_update()
 
 
 func _on_WanderingTimer_timeout() -> void:
-	renew_wander_direction()
+	if slime_state == SlimeState.WANDERING:
+		renew_wander_direction()
+
+
+func _on_DetectionArea_body_entered(body: PhysicsBody2D) -> void:
+	var player := body as Player
+	if player:
+		print("EN GUARDE!")
+		slime_state = SlimeState.ATTACKING
+
