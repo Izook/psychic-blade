@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends Enemy
 
 class_name Slime
 
@@ -36,7 +36,7 @@ func wander(delta: float) -> void:
 
 
 func attack(delta: float) -> void:
-	var player_direction = global_position.direction_to(player.global_position)
+	var player_direction = global_position.direction_to(player.global_position) as Vector2
 	var velocity := (player_direction * get_slime_speed(delta)) as Vector2
 	move_slime(velocity, delta)
 
