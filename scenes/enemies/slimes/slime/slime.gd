@@ -6,7 +6,6 @@ enum SlimeState {WANDERING, ATTACKING, DEAD}
 
 const MAX_SPEED := 100
 const CAST_LENGTH := 500
-const IDLE_ANIMATION_FINISH := 1.5
 
 onready var player := get_node("/root/Main/GameLayer/Player") as Player
 onready var hitbox := $CollisionPolygon as CollisionPolygon2D
@@ -14,9 +13,9 @@ onready var animation_player := $AnimationPlayer as AnimationPlayer
 onready var raycast := $RayCast2D as RayCast2D
 
 onready var wander_direction := Vector2(rand_range(-1, 1), rand_range(-1, 1))
+onready var idle_animation_length := animation_player.get_animation("idle").length
 
 var slime_state = SlimeState.WANDERING
-var speed_time := 0.0
 
 
 func _physics_process(delta: float) -> void:
@@ -52,12 +51,12 @@ func _move_slime(velocity: Vector2, delta: float) -> void:
 	if collision_info:
 		var blade := collision_info.collider as BladeHitbox
 		if blade:
-			die()
+			_die()
 
 
 func _get_slime_speed(delta: float) -> float:
 	speed_time += delta
-	speed_time = fmod(speed_time, IDLE_ANIMATION_FINISH)
+	speed_time = fmod(speed_time, idle_animation_length)
 	return sin((2 * PI / 3) * speed_time) * MAX_SPEED
 
 

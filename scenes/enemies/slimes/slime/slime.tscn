@@ -149,11 +149,10 @@ texture = ExtResource( 7 )
 texture = ExtResource( 2 )
 vframes = 5
 hframes = 7
-frame = 9
 region_rect = Rect2( 0, 0, 64, 64 )
 
 [node name="CollisionPolygon" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( -28.2812, 5.63694, -26.9554, 15.0061, -19.2737, 19.4818, -6.20825, 21.1129, 5.684, 21.129, 18.645, 21.0406, 25.5473, 13.8571, 26.9615, 6.96276, 22.0117, -0.99219, 8.75349, -8.59359, -9.27774, -8.5052, -20.8566, -2.22962 )
+polygon = PoolVector2Array( -24.9225, -0.0199165, -24.0386, 9.7028, -20.3263, 15.0061, -12.1945, 19.072, 0.501232, 21.3058, 11.8471, 20.3094, 20.8627, 14.8293, 24.3982, 8.99569, 24.3982, -3.02512, 12.9077, -17.1673, -0.173737, -23.0009, -13.9623, -14.8692 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 enabled = true
