@@ -15,6 +15,7 @@ onready var raycast := $RayCast2D as RayCast2D
 onready var wander_direction := Vector2(rand_range(-1, 1), rand_range(-1, 1))
 onready var idle_animation_length := animation_player.get_animation("idle").length
 
+var speed_time := 0.0 
 var slime_state = SlimeState.WANDERING
 
 
