@@ -1,3 +1,3 @@
 extends KinematicBody2D
 
-class_name Enemy
+class_name BladeHitbox

@@ -70,9 +70,12 @@ func _physics_process(delta: float) -> void:
 	
 	for i in get_slide_count():
 			var collision := get_slide_collision(i) as KinematicCollision2D
-			if collision.collider.name == "Enemy":
-				player_sprite.visible = false
-				emit_signal("player_died")
+			if collision:
+				var enemy := collision.collider as Enemy
+				if enemy:
+					player_sprite.visible = false
+					emit_signal("player_died")
+
 
 	camera.set_zoom(Vector2(zoom_factor, zoom_factor))
 	camera.make_current()

@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/blade/blade.png" type="Texture" id=1]
 [ext_resource path="res://scenes/blade/blade.gd" type="Script" id=2]
 [ext_resource path="res://scenes/blade/blade_target.png" type="Texture" id=3]
+[ext_resource path="res://scenes/blade/blade_hitbox.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 64, 16 )
@@ -43,6 +44,7 @@ __meta__ = {
 
 [node name="Blade" type="KinematicBody2D" parent="."]
 position = Vector2( 200, 0 )
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
