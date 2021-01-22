@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://scenes/maps/test_map.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/maps/slimes_map/slimes_map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/hud/hud.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/menus/pause_menu/pause_menu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/menus/gameover_menu/gameover_menu.tscn" type="PackedScene" id=5]
