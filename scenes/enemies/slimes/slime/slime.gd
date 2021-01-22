@@ -7,7 +7,7 @@ enum SlimeState {WANDERING, ATTACKING, DEAD}
 const MAX_SPEED := 100
 const CAST_LENGTH := 500
 
-onready var player := get_node("/root/Main/GameLayer/Player") as Player
+onready var player := get_node(Utils.PLAYER_PATH) as Player
 onready var hitbox := $CollisionPolygon as CollisionPolygon2D
 onready var animation_player := $AnimationPlayer as AnimationPlayer
 onready var raycast := $RayCast2D as RayCast2D

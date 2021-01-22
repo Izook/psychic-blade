@@ -4,6 +4,10 @@
 
 extends Node
 
+# Player node's path in the node tree
+const MAIN_PATH := "/root/Main"
+const PLAYER_PATH := "/root/Main/GameLayer/Map/Player"
+
 # Returns the shortest angle difference to get from b to a in 
 # radians. 
 # Code based on: https://stackoverflow.com/a/28037434
