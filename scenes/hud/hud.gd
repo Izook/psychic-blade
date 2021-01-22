@@ -13,7 +13,6 @@ func _ready() -> void:
 
 
 func _main_ready() -> void:
-	print(Utils.PLAYER_PATH)
 	player_node = get_node(Utils.PLAYER_PATH)
 	blade_node = player_node.get_blade_node()
 	

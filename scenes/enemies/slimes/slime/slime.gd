@@ -65,10 +65,15 @@ func _renew_wander_direction() -> void:
 	wander_direction = Vector2(rand_range(-1, 1), rand_range(-1, 1))
 	raycast.set_cast_to(wander_direction * CAST_LENGTH)
 	
-	while not raycast.is_colliding():
+	var attempts := 1
+	while raycast.is_colliding() && attempts <= 5:
+		attempts += 1
 		wander_direction = Vector2(rand_range(-1, 1), rand_range(-1, 1))
 		raycast.set_cast_to(wander_direction * CAST_LENGTH)
 		raycast.force_raycast_update()
+	
+	if attempts > 5:
+		wander_direction = Vector2(0,0)
 
 
 func _on_WanderingTimer_timeout() -> void:
