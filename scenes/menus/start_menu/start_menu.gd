@@ -53,4 +53,5 @@ func _on_LevelButton_clicked(level: String) -> void:
 	var level_path := Utils.LEVELS_DIR_PATH + ("%s/%s.tscn" % [level_file, level_file]) as String
 	main.load_level(level_path)
 	get_tree().get_root().add_child(main)
+	get_tree().set_current_scene(main)
 	queue_free()

@@ -1,12 +1,10 @@
 extends MarginContainer
 
-class_name GameOverMenu
+class_name PauseMenu
 
 
 func _on_MainMenuButton_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		var mouse_event = event as InputEventMouseButton
 		if mouse_event.is_pressed() and mouse_event.button_index == 1:
-			print(get_tree().get_current_scene().get_name())
 			var _error = get_tree().change_scene(Utils.START_SCENE_PATH)
-			print(get_tree().get_current_scene().get_name())
