@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://shared_assets/pirata_one.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/menus/start_menu/start_menu.gd" type="Script" id=2]
 [ext_resource path="res://scenes/menus/start_menu/escape.png" type="Texture" id=3]
+[ext_resource path="res://scenes/menus/start_menu/level_button.gd" type="Script" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 128
@@ -78,6 +79,7 @@ margin_left = 194.0
 margin_right = 809.0
 margin_bottom = 165.0
 custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Psychic Blade"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -101,6 +103,7 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Start"
 align = 1
 valign = 1
@@ -117,6 +120,7 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 custom_fonts/font = SubResource( 3 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Controls"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -293,6 +297,129 @@ texture_normal = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="LevelsContainer" type="MarginContainer" parent="."]
+visible = false
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 1014.0
+margin_bottom = 590.0
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Panel" type="PanelContainer" parent="LevelsContainer"]
+margin_right = 1004.0
+margin_bottom = 580.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="LevelsContainer/Panel"]
+margin_right = 1004.0
+margin_bottom = 580.0
+mouse_filter = 2
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelsContainer/Panel/MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 994.0
+margin_bottom = 570.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer4" type="CenterContainer" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer"]
+margin_top = 158.0
+margin_right = 984.0
+margin_bottom = 267.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Title" type="Label" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer4"]
+margin_left = 316.0
+margin_right = 667.0
+margin_bottom = 109.0
+custom_fonts/font = SubResource( 6 )
+text = "Select Level"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer2" type="CenterContainer" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer"]
+margin_top = 271.0
+margin_right = 984.0
+margin_bottom = 401.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2"]
+margin_left = 394.0
+margin_right = 589.0
+margin_bottom = 130.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SlimesLevel" type="Label" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
+margin_right = 195.0
+margin_bottom = 63.0
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color_shadow = Color( 0.678431, 0, 1, 1 )
+text = "The Slimes"
+align = 1
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Playground" type="Label" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
+margin_top = 67.0
+margin_right = 195.0
+margin_bottom = 130.0
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color_shadow = Color( 0.678431, 0, 1, 1 )
+text = "Playground"
+align = 1
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ExitLevelsButton" type="TextureButton" parent="LevelsContainer/Panel/MarginContainer"]
+margin_left = 962.0
+margin_top = 10.0
+margin_right = 994.0
+margin_bottom = 42.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture_normal = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
 [connection signal="gui_input" from="MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer/StartButton" to="." method="_on_StartButton_gui_input"]
 [connection signal="gui_input" from="MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer/ControlsButton" to="." method="_on_ControlsButton_gui_input"]
 [connection signal="pressed" from="ControlsContainer/Panel/MarginContainer/ExitControlsButton" to="." method="_on_ExitControlsButton_pressed"]
+[connection signal="pressed" from="LevelsContainer/Panel/MarginContainer/ExitLevelsButton" to="." method="_on_ExitLevelsButton_pressed"]

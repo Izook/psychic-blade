@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/maps/tile_sets/walls_tileset.tres" type="TileSet" id=2]
+[ext_resource path="res://scenes/levels/tile_sets/walls_tileset.tres" type="TileSet" id=2]
 
-[node name="slimes_map" type="Node2D"]
+[node name="Playground" type="Node2D"]
 __meta__ = {
 "_edit_lock_": true
 }
