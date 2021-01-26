@@ -4,7 +4,8 @@ class_name StartMenu
 
 const LEVELS_MAP = {
 	"The Slimes" : "three_slimes",
-	"Playground" : "playground"
+	"Playground" : "playground",
+	"Slime Spawners": "slime_spawners"
 }
 
 onready var version_label := $Version as Label

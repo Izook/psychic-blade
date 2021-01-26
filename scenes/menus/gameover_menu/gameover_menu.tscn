@@ -80,5 +80,6 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 custom_fonts/font = SubResource( 3 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "main menu"
 [connection signal="gui_input" from="PanelContainer/MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_MainMenuButton_gui_input"]

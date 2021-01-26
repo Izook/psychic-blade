@@ -64,6 +64,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/enemies/slimes/slime/slime.gd"
 }, {
+"base": "Spawner",
+"class": "SlimeSpawner",
+"language": "GDScript",
+"path": "res://scenes/enemies/slimes/spawner/slime_spawner.gd"
+}, {
+"base": "Node2D",
+"class": "Spawner",
+"language": "GDScript",
+"path": "res://scenes/enemies/spawner/spawner.gd"
+}, {
 "base": "Node2D",
 "class": "Spedometer",
 "language": "GDScript",
@@ -86,6 +96,8 @@ _global_script_class_icons={
 "Player": "",
 "PlayerSprite": "",
 "Slime": "",
+"SlimeSpawner": "",
+"Spawner": "",
 "Spedometer": "",
 "StartMenu": ""
 }

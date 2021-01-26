@@ -344,9 +344,9 @@ __meta__ = {
 }
 
 [node name="CenterContainer4" type="CenterContainer" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer"]
-margin_top = 158.0
+margin_top = 125.0
 margin_right = 984.0
-margin_bottom = 267.0
+margin_bottom = 234.0
 __meta__ = {
 "_edit_lock_": true
 }
@@ -363,23 +363,23 @@ __meta__ = {
 }
 
 [node name="CenterContainer2" type="CenterContainer" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer"]
-margin_top = 271.0
+margin_top = 238.0
 margin_right = 984.0
-margin_bottom = 401.0
+margin_bottom = 435.0
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2"]
-margin_left = 394.0
-margin_right = 589.0
-margin_bottom = 130.0
+margin_left = 356.0
+margin_right = 628.0
+margin_bottom = 197.0
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="SlimesLevel" type="Label" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
-margin_right = 195.0
+margin_right = 272.0
 margin_bottom = 63.0
 mouse_filter = 0
 mouse_default_cursor_shape = 2
@@ -394,13 +394,28 @@ __meta__ = {
 
 [node name="Playground" type="Label" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
 margin_top = 67.0
-margin_right = 195.0
+margin_right = 272.0
 margin_bottom = 130.0
 mouse_filter = 0
 mouse_default_cursor_shape = 2
 custom_fonts/font = SubResource( 7 )
 custom_colors/font_color_shadow = Color( 0.678431, 0, 1, 1 )
 text = "Playground"
+align = 1
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SlimeSpawners" type="Label" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
+margin_top = 134.0
+margin_right = 272.0
+margin_bottom = 197.0
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color_shadow = Color( 0.678431, 0, 1, 1 )
+text = "Slime Spawners"
 align = 1
 script = ExtResource( 4 )
 __meta__ = {
