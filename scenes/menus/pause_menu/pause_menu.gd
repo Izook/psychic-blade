@@ -1,6 +1,6 @@
 extends MarginContainer
 
-class_name GameOverMenu
+class_name PauseMenu
 
 
 func _on_MainMenuButton_gui_input(event: InputEvent) -> void:

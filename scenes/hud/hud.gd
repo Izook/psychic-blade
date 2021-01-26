@@ -13,7 +13,7 @@ func _ready() -> void:
 
 
 func _main_ready() -> void:
-	player_node = get_node("/root/Main/GameLayer/Player")
+	player_node = get_node(Utils.PLAYER_PATH)
 	blade_node = player_node.get_blade_node()
 	
 	spedometer_node.set_max_speed(blade_node.get_max_speed())

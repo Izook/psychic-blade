@@ -27,6 +27,10 @@ var dash_ready := true
 var player_dashing := false
 
 
+func _ready() -> void:
+	var _error := connect("player_died", get_node(Utils.MAIN_PATH), "_on_Player_player_died")
+
+
 func _get_input(delta: float) -> void:
 	velocity = Vector2()
 	var dash_requested := false

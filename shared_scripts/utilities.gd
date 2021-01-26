@@ -4,6 +4,16 @@
 
 extends Node
 
+# Constant File/Directory Paths
+const VERSION_PATH := "res://VERSION"
+const LEVELS_DIR_PATH := "res://scenes/levels/"
+const START_SCENE_PATH := "res://scenes/menus/start_menu/start_menu.tscn"
+
+# Constant Scene Paths
+const MAIN_PATH := "/root/Main"
+const START_PATH := "/root/StartMenu"
+const PLAYER_PATH := "/root/Main/GameLayer/Level/Player"
+
 # Returns the shortest angle difference to get from b to a in 
 # radians. 
 # Code based on: https://stackoverflow.com/a/28037434

@@ -119,8 +119,6 @@ func _limit_speed_index(i : float) -> float:
 # Returns the angular speed of the blade based on a position on the easeOutQuart
 # curve. Curve gotten from https://easings.net/#easeOutQuart
 func _get_angular_speed(i: float) -> float:
-	if (1.0 - i < 0.1):
-		print("SPEED: " + str(blade_veclocity.length()))
 	var angular_speed = (1 - pow(1 - i, 4)) * MAX_ANGULAR_SPEED
 	if blade_state != BladeState.RETURNING:
 		return angular_speed
@@ -166,7 +164,8 @@ func _move_released_blade() -> void:
 	for i in blade_node.get_slide_count():
 		var collision := blade_node.get_slide_collision(i)
 		
-		if collision.collider.name == "TileMap":
+		var tile_map := collision.collider as TileMap
+		if tile_map:
 			new_blade_velocity = blade_veclocity.bounce(collision.normal)
 		
 		var enemy := collision.collider as Enemy
