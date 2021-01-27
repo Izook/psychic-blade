@@ -40,7 +40,7 @@ func _input(event: InputEvent) -> void:
 
 func _load_version() -> void:
 	var version_file := File.new()
-	version_file.open(Utils.VERSION_PATH, File.READ)
+	var _error := version_file.open(Utils.VERSION_PATH, File.READ)
 	var version_number := version_file.get_as_text()
 	version_label.set_text(version_number)
 

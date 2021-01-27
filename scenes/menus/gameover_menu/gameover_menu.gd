@@ -2,9 +2,12 @@ extends MarginContainer
 
 class_name GameOverMenu
 
+onready var main_menu_button := $PanelContainer/MarginContainer/VBoxContainer/MainMenuButton as Button
 
-func _on_MainMenuButton_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		var mouse_event = event as InputEventMouseButton
-		if mouse_event.is_pressed() and mouse_event.button_index == 1:
-			var _error = get_tree().change_scene(Utils.START_SCENE_PATH)
+
+func focus() -> void:
+	main_menu_button.grab_focus()
+
+
+func _on_MainMenuButton_pressed() -> void:
+	var _error = get_tree().change_scene(Utils.START_SCENE_PATH)
