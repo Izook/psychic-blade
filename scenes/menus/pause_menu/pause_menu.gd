@@ -9,7 +9,6 @@ onready var main_menu_button := $PanelContainer/MarginContainer/VBoxContainer/Ma
 
 func _ready() -> void:
 	var _menu_conn_error = connect("unpaused", get_node(Utils.MAIN_PATH), "_on_PauseMenu_unpaused")
-	print(_menu_conn_error)
 
 
 func focus() -> void:
@@ -28,5 +27,4 @@ func _on_MainMenuButton_pressed() -> void:
 
 
 func _on_UnPauseButton_pressed() -> void:
-	print("Unpaused pressed")
 	emit_signal("unpaused")

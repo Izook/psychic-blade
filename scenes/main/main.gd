@@ -34,7 +34,6 @@ func _on_Player_player_died() -> void:
 
 
 func _on_PauseMenu_unpaused() -> void:
-	print("Unpaused signal recieved")
 	paused = false
 	get_tree().paused = false
 	pause_menu.visible = false
