@@ -36,13 +36,13 @@ func _get_input(delta: float) -> void:
 	var dash_requested := false
 	
 	if Input.is_action_pressed('move_right'):
-		velocity.x += 1
+		velocity.x += 1 * Input.get_action_strength("move_right")
 	if Input.is_action_pressed('move_left'):
-		velocity.x -= 1
+		velocity.x -= 1 * Input.get_action_strength("move_left")
 	if Input.is_action_pressed('move_down'):
-		velocity.y += 1
+		velocity.y += 1 * Input.get_action_strength("move_down")
 	if Input.is_action_pressed('move_up'):
-		velocity.y -= 1
+		velocity.y -= 1 * Input.get_action_strength("move_up")
 	
 	if Input.is_action_pressed('zoom_out'):
 		zoom_factor += zoom_speed * delta
