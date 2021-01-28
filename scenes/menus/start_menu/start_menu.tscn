@@ -123,8 +123,8 @@ margin_bottom = 130.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath("../StartButton")
 focus_neighbour_right = NodePath(".")
-focus_neighbour_bottom = NodePath(".")
-focus_next = NodePath(".")
+focus_neighbour_bottom = NodePath("../QuitPlayingButton")
+focus_next = NodePath("../QuitPlayingButton")
 focus_previous = NodePath("../StartButton")
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
@@ -132,6 +132,23 @@ size_flags_vertical = 0
 theme = ExtResource( 5 )
 custom_fonts/font = SubResource( 4 )
 text = "Controls"
+
+[node name="QuitPlayingButton" type="Button" parent="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
+margin_top = 134.0
+margin_right = 198.0
+margin_bottom = 197.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../ControlsButton")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath("../ControlsButton")
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme = ExtResource( 5 )
+custom_fonts/font = SubResource( 4 )
+text = "Quit Playing"
 
 [node name="Version" type="Label" parent="."]
 margin_left = 10.0
@@ -493,6 +510,7 @@ __meta__ = {
 }
 [connection signal="pressed" from="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer/ControlsButton" to="." method="_on_ControlsButton_pressed"]
+[connection signal="pressed" from="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer/QuitPlayingButton" to="." method="_on_QuitPlayingButton_pressed"]
 [connection signal="pressed" from="ControlsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/OKButton" to="." method="_on_ExitControlsButton_pressed"]
 [connection signal="pressed" from="ControlsContainer/Panel/MarginContainer/ExitControlsButton" to="." method="_on_ExitControlsButton_pressed"]
 [connection signal="pressed" from="LevelsContainer/Panel/MarginContainer/ExitLevelsButton" to="." method="_on_ExitLevelsButton_pressed"]

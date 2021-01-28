@@ -76,3 +76,7 @@ func _on_StartButton_pressed() -> void:
 	menu_open = true
 	levels_container.visible = true
 	first_level_button.grab_focus()
+
+
+func _on_QuitPlayingButton_pressed() -> void:
+	get_tree().quit()
