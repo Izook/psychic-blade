@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://shared_assets/pirata_one.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/menus/start_menu/start_menu.gd" type="Script" id=2]
 [ext_resource path="res://scenes/menus/start_menu/escape.png" type="Texture" id=3]
 [ext_resource path="res://scenes/menus/start_menu/level_button.gd" type="Script" id=4]
+[ext_resource path="res://scenes/menus/menu_theme.tres" type="Theme" id=5]
+[ext_resource path="res://scenes/menus/start_menu/escape_hover.png" type="Texture" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 128
@@ -13,27 +15,29 @@ font_data = ExtResource( 1 )
 size = 48
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="ButtonGroup" id=3]
+
+[sub_resource type="DynamicFont" id=4]
 size = 48
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=5]
 size = 24
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.117647, 0.109804, 0.109804, 1 )
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=7]
 size = 84
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=7]
-size = 48
+[sub_resource type="DynamicFont" id=8]
+size = 36
 font_data = ExtResource( 1 )
 
 [node name="StartMenu" type="MarginContainer"]
@@ -49,7 +53,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="TitleContainer" type="MarginContainer" parent="."]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 1014.0
@@ -59,7 +63,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TitleContainer"]
 margin_right = 1004.0
 margin_bottom = 580.0
 size_flags_horizontal = 3
@@ -69,62 +73,82 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="TitleContainer/VBoxContainer"]
 margin_top = 140.0
 margin_right = 1004.0
 margin_bottom = 305.0
 
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer"]
+[node name="Title" type="Label" parent="TitleContainer/VBoxContainer/CenterContainer"]
 margin_left = 194.0
 margin_right = 809.0
 margin_bottom = 165.0
 custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color = Color( 0, 0.32549, 1, 1 )
 text = "Psychic Blade"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterContainer2" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+[node name="CenterContainer2" type="CenterContainer" parent="TitleContainer/VBoxContainer"]
 margin_top = 309.0
 margin_right = 1004.0
 margin_bottom = 439.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TitleContainer/VBoxContainer/CenterContainer2"]
 margin_left = 431.0
 margin_right = 572.0
 margin_bottom = 130.0
 
-[node name="StartButton" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
+[node name="StartButton" type="Button" parent="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
 margin_right = 141.0
 margin_bottom = 63.0
-mouse_filter = 0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../ControlsButton")
+focus_next = NodePath("../ControlsButton")
+focus_previous = NodePath(".")
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+theme = ExtResource( 5 )
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+group = SubResource( 3 )
 text = "Start"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="ControlsButton" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
+[node name="ControlsButton" type="Button" parent="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
 margin_top = 67.0
 margin_right = 141.0
 margin_bottom = 130.0
-mouse_filter = 0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../StartButton")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../QuitPlayingButton")
+focus_next = NodePath("../QuitPlayingButton")
+focus_previous = NodePath("../StartButton")
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-custom_fonts/font = SubResource( 3 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+theme = ExtResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "Controls"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="QuitPlayingButton" type="Button" parent="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
+margin_top = 134.0
+margin_right = 198.0
+margin_bottom = 197.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../ControlsButton")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath("../ControlsButton")
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme = ExtResource( 5 )
+custom_fonts/font = SubResource( 4 )
+text = "Quit Playing"
 
 [node name="Version" type="Label" parent="."]
 margin_left = 10.0
@@ -133,7 +157,7 @@ margin_right = 55.0
 margin_bottom = 590.0
 size_flags_horizontal = 0
 size_flags_vertical = 8
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 text = "alpha"
 __meta__ = {
 "_edit_lock_": true,
@@ -155,7 +179,7 @@ __meta__ = {
 margin_right = 1004.0
 margin_bottom = 580.0
 mouse_filter = 2
-custom_styles/panel = SubResource( 5 )
+custom_styles/panel = SubResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -186,9 +210,9 @@ __meta__ = {
 }
 
 [node name="CenterContainer3" type="CenterContainer" parent="ControlsContainer/Panel/MarginContainer/VBoxContainer"]
-margin_top = 24.0
+margin_top = 43.0
 margin_right = 984.0
-margin_bottom = 133.0
+margin_bottom = 152.0
 __meta__ = {
 "_edit_lock_": true
 }
@@ -197,7 +221,8 @@ __meta__ = {
 margin_left = 370.0
 margin_right = 614.0
 margin_bottom = 109.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 0.0784314, 1, 0.588235, 1 )
 text = "Controls"
 __meta__ = {
 "_edit_lock_": true,
@@ -205,25 +230,25 @@ __meta__ = {
 }
 
 [node name="CenterContainer" type="CenterContainer" parent="ControlsContainer/Panel/MarginContainer/VBoxContainer"]
-margin_top = 137.0
+margin_top = 156.0
 margin_right = 984.0
-margin_bottom = 535.0
+margin_bottom = 516.0
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ControlsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer"]
-margin_left = 211.0
-margin_right = 772.0
-margin_bottom = 398.0
+margin_left = 285.0
+margin_right = 699.0
+margin_bottom = 360.0
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="Move" type="Label" parent="ControlsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer"]
-margin_right = 561.0
-margin_bottom = 63.0
-custom_fonts/font = SubResource( 7 )
+margin_right = 414.0
+margin_bottom = 48.0
+custom_fonts/font = SubResource( 8 )
 text = "Move : WASD"
 align = 1
 __meta__ = {
@@ -231,10 +256,10 @@ __meta__ = {
 }
 
 [node name="SpinBlade" type="Label" parent="ControlsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer"]
-margin_top = 67.0
-margin_right = 561.0
-margin_bottom = 130.0
-custom_fonts/font = SubResource( 7 )
+margin_top = 52.0
+margin_right = 414.0
+margin_bottom = 100.0
+custom_fonts/font = SubResource( 8 )
 text = "Spin Blade: Left and Right"
 align = 1
 __meta__ = {
@@ -242,10 +267,10 @@ __meta__ = {
 }
 
 [node name="PushBlade" type="Label" parent="ControlsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer"]
-margin_top = 134.0
-margin_right = 561.0
-margin_bottom = 197.0
-custom_fonts/font = SubResource( 7 )
+margin_top = 104.0
+margin_right = 414.0
+margin_bottom = 152.0
+custom_fonts/font = SubResource( 8 )
 text = "Push and Pull Blade: Up and Down"
 align = 1
 __meta__ = {
@@ -253,10 +278,10 @@ __meta__ = {
 }
 
 [node name="ReleaseBlade" type="Label" parent="ControlsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer"]
-margin_top = 201.0
-margin_right = 561.0
-margin_bottom = 264.0
-custom_fonts/font = SubResource( 7 )
+margin_top = 156.0
+margin_right = 414.0
+margin_bottom = 204.0
+custom_fonts/font = SubResource( 8 )
 text = "Release and Return Blade: Shift"
 align = 1
 __meta__ = {
@@ -264,10 +289,10 @@ __meta__ = {
 }
 
 [node name="Zoom" type="Label" parent="ControlsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer"]
-margin_top = 268.0
-margin_right = 561.0
-margin_bottom = 331.0
-custom_fonts/font = SubResource( 7 )
+margin_top = 208.0
+margin_right = 414.0
+margin_bottom = 256.0
+custom_fonts/font = SubResource( 8 )
 text = "Zoom: Q and E"
 align = 1
 __meta__ = {
@@ -275,12 +300,32 @@ __meta__ = {
 }
 
 [node name="Pause" type="Label" parent="ControlsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer"]
-margin_top = 335.0
-margin_right = 561.0
-margin_bottom = 398.0
-custom_fonts/font = SubResource( 7 )
+margin_top = 260.0
+margin_right = 414.0
+margin_bottom = 308.0
+custom_fonts/font = SubResource( 8 )
 text = "Pause: P"
 align = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="OKButton" type="Button" parent="ControlsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer"]
+margin_left = 191.0
+margin_top = 312.0
+margin_right = 222.0
+margin_bottom = 360.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../../../../ExitControlsButton")
+focus_neighbour_right = NodePath("../../../../ExitControlsButton")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath("../../../../ExitControlsButton")
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+theme = ExtResource( 5 )
+custom_fonts/font = SubResource( 8 )
+text = "OK"
 __meta__ = {
 "_edit_lock_": true
 }
@@ -290,10 +335,19 @@ margin_left = 962.0
 margin_top = 10.0
 margin_right = 994.0
 margin_bottom = 42.0
+focus_neighbour_left = NodePath("../VBoxContainer/CenterContainer/VBoxContainer/OKButton")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../VBoxContainer/CenterContainer/VBoxContainer/OKButton")
+focus_next = NodePath("../VBoxContainer/CenterContainer/VBoxContainer/OKButton")
+focus_previous = NodePath(".")
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
+theme = ExtResource( 5 )
+shortcut_in_tooltip = false
 texture_normal = ExtResource( 3 )
+texture_hover = ExtResource( 7 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -313,7 +367,7 @@ __meta__ = {
 margin_right = 1004.0
 margin_bottom = 580.0
 mouse_filter = 2
-custom_styles/panel = SubResource( 5 )
+custom_styles/panel = SubResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -344,9 +398,9 @@ __meta__ = {
 }
 
 [node name="CenterContainer4" type="CenterContainer" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer"]
-margin_top = 125.0
+margin_top = 147.0
 margin_right = 984.0
-margin_bottom = 234.0
+margin_bottom = 256.0
 __meta__ = {
 "_edit_lock_": true
 }
@@ -355,7 +409,8 @@ __meta__ = {
 margin_left = 316.0
 margin_right = 667.0
 margin_bottom = 109.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 0, 1, 0.552941, 1 )
 text = "Select Level"
 __meta__ = {
 "_edit_lock_": true,
@@ -363,60 +418,72 @@ __meta__ = {
 }
 
 [node name="CenterContainer2" type="CenterContainer" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer"]
-margin_top = 238.0
+margin_top = 260.0
 margin_right = 984.0
-margin_bottom = 435.0
+margin_bottom = 412.0
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2"]
-margin_left = 356.0
-margin_right = 628.0
-margin_bottom = 197.0
+margin_left = 390.0
+margin_right = 593.0
+margin_bottom = 152.0
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="SlimesLevel" type="Label" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
-margin_right = 272.0
-margin_bottom = 63.0
-mouse_filter = 0
+[node name="SlimesLevel" type="Button" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
+margin_right = 203.0
+margin_bottom = 48.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../../../../ExitLevelsButton")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../Playground")
+focus_next = NodePath("../Playground")
+focus_previous = NodePath("../../../../ExitLevelsButton")
 mouse_default_cursor_shape = 2
-custom_fonts/font = SubResource( 7 )
-custom_colors/font_color_shadow = Color( 0.678431, 0, 1, 1 )
+theme = ExtResource( 5 )
+custom_fonts/font = SubResource( 8 )
 text = "The Slimes"
-align = 1
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Playground" type="Label" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
-margin_top = 67.0
-margin_right = 272.0
-margin_bottom = 130.0
-mouse_filter = 0
+[node name="Playground" type="Button" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
+margin_top = 52.0
+margin_right = 203.0
+margin_bottom = 100.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../SlimesLevel")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../SlimeSpawners")
+focus_next = NodePath("../SlimeSpawners")
+focus_previous = NodePath("../SlimesLevel")
 mouse_default_cursor_shape = 2
-custom_fonts/font = SubResource( 7 )
-custom_colors/font_color_shadow = Color( 0.678431, 0, 1, 1 )
+theme = ExtResource( 5 )
+custom_fonts/font = SubResource( 8 )
 text = "Playground"
-align = 1
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="SlimeSpawners" type="Label" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
-margin_top = 134.0
-margin_right = 272.0
-margin_bottom = 197.0
-mouse_filter = 0
+[node name="SlimeSpawners" type="Button" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
+margin_top = 104.0
+margin_right = 203.0
+margin_bottom = 152.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../Playground")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath("../Playground")
 mouse_default_cursor_shape = 2
-custom_fonts/font = SubResource( 7 )
-custom_colors/font_color_shadow = Color( 0.678431, 0, 1, 1 )
+theme = ExtResource( 5 )
+custom_fonts/font = SubResource( 8 )
 text = "Slime Spawners"
-align = 1
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
@@ -427,14 +494,23 @@ margin_left = 962.0
 margin_top = 10.0
 margin_right = 994.0
 margin_bottom = 42.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../VBoxContainer/CenterContainer2/VBoxContainer/SlimesLevel")
+focus_next = NodePath("../VBoxContainer/CenterContainer2/VBoxContainer/SlimesLevel")
+focus_previous = NodePath(".")
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 texture_normal = ExtResource( 3 )
+texture_hover = ExtResource( 7 )
 __meta__ = {
 "_edit_lock_": true
 }
-[connection signal="gui_input" from="MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer/StartButton" to="." method="_on_StartButton_gui_input"]
-[connection signal="gui_input" from="MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer/ControlsButton" to="." method="_on_ControlsButton_gui_input"]
+[connection signal="pressed" from="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer/ControlsButton" to="." method="_on_ControlsButton_pressed"]
+[connection signal="pressed" from="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer/QuitPlayingButton" to="." method="_on_QuitPlayingButton_pressed"]
+[connection signal="pressed" from="ControlsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/OKButton" to="." method="_on_ExitControlsButton_pressed"]
 [connection signal="pressed" from="ControlsContainer/Panel/MarginContainer/ExitControlsButton" to="." method="_on_ExitControlsButton_pressed"]
 [connection signal="pressed" from="LevelsContainer/Panel/MarginContainer/ExitLevelsButton" to="." method="_on_ExitLevelsButton_pressed"]

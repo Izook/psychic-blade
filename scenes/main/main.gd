@@ -2,8 +2,8 @@ extends Node
 
 class_name Main
 
-onready var pause_menu := $UILayer/PauseMenu as MarginContainer
-onready var gameover_menu := $UILayer/GameOverMenu as MarginContainer
+onready var pause_menu := $UILayer/PauseMenu as PauseMenu
+onready var gameover_menu := $UILayer/GameOverMenu as GameOverMenu
 
 var paused := false
 
@@ -24,8 +24,16 @@ func _input(event: InputEvent) -> void:
 		paused = not paused
 		get_tree().paused = paused
 		pause_menu.visible = paused
+		pause_menu.focus()
 
 
 func _on_Player_player_died() -> void:
 	get_tree().paused = true
 	gameover_menu.visible = true
+	gameover_menu.focus()
+
+
+func _on_PauseMenu_unpaused() -> void:
+	paused = false
+	get_tree().paused = false
+	pause_menu.visible = false

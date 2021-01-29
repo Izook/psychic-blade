@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://shared_assets/pirata_one.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/menus/pause_menu/pause_menu.gd" type="Script" id=2]
+[ext_resource path="res://scenes/menus/menu_theme.tres" type="Theme" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 1, 0.478431 )
@@ -47,38 +48,50 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
 margin_left = 5.0
-margin_top = 5.0
+margin_top = 201.0
 margin_right = 1019.0
-margin_bottom = 595.0
+margin_bottom = 399.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 4
 
 [node name="CenterContainer" type="CenterContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 margin_right = 1014.0
-margin_bottom = 293.0
+margin_bottom = 94.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer"]
 margin_left = 415.0
-margin_top = 99.0
 margin_right = 598.0
-margin_bottom = 193.0
+margin_bottom = 94.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 custom_fonts/font = SubResource( 2 )
 text = "paused"
 
-[node name="MainMenuButton" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="MainMenuButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 margin_left = 439.0
-margin_top = 419.0
+margin_top = 98.0
 margin_right = 575.0
-margin_bottom = 467.0
-mouse_filter = 0
+margin_bottom = 146.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
+theme = ExtResource( 3 )
 custom_fonts/font = SubResource( 3 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "main menu"
+
+[node name="UnPauseButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+margin_left = 454.0
+margin_top = 150.0
+margin_right = 559.0
+margin_bottom = 198.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource( 3 )
+custom_fonts/font = SubResource( 3 )
+text = "unpause"
 [connection signal="gui_input" from="PanelContainer/MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_MainMenuButton_gui_input"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/UnPauseButton" to="." method="_on_UnPauseButton_pressed"]
