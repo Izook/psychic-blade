@@ -10,7 +10,7 @@ const MAX_ZOOM := 1.25
 const DASH_DURATION := 0.075
 const DASH_RESET_TIME := 1.0
 
-export (int) var speed := 75
+export (int) var speed := 150
 export (int) var dash_factor := 5
 export (float) var zoom_speed := 0.6
 
