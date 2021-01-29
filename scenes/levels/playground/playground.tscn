@@ -22,7 +22,6 @@ __meta__ = {
 }
 
 [node name="LevelOne" type="TileMap" parent="."]
-visible = false
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 8
@@ -33,7 +32,6 @@ __meta__ = {
 }
 
 [node name="LevelTwo" type="TileMap" parent="."]
-visible = false
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 8
@@ -44,6 +42,7 @@ __meta__ = {
 }
 
 [node name="Boundaries" type="TileMap" parent="."]
+visible = false
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 32

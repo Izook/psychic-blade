@@ -2,9 +2,8 @@
 
 [ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/enemies/slimes/slime/slime.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/levels/tile_sets/walls_tileset.tres" type="TileSet" id=3]
+[ext_resource path="res://scenes/levels/tile_sets/boundaries.tres" type="TileSet" id=3]
 [ext_resource path="res://scenes/levels/tile_sets/magic_dungeon.tres" type="TileSet" id=4]
-
 
 [node name="SlimesLevel" type="Node2D"]
 __meta__ = {
