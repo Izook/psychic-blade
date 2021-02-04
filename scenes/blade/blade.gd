@@ -21,10 +21,10 @@ enum BladeState {HELD, RELEASED, RETURNING}
 const RETURNING_BLADE_COLOR := Color(1, 0, 0)
 const RELEASED_BLADE_COLOR := Color(0, 1, 0)
 const HELD_BLADE_COLOR := Color(1, 0, 1)
-const BLADE_STATE_COLORS := {
-	BladeState.HELD: HELD_BLADE_COLOR,
-	BladeState.RELEASED: RELEASED_BLADE_COLOR,
-	BladeState.RETURNING: RETURNING_BLADE_COLOR
+const PARTICLE_COLOR_GRADIENT_PATHS := {
+	BladeState.HELD: "res://scenes/blade/particle_gradients/held_particles.tres",
+	BladeState.RELEASED: "res://scenes/blade/particle_gradients/released_particles.tres",
+	BladeState.RETURNING: "res://scenes/blade/particle_gradients/returning_particles.tres"
 }
 
 export (int) var radius := 200
@@ -209,7 +209,7 @@ func _update_blade_target() -> void:
 
 
 func _update_blade_appearance() -> void:
-	blade_particles_material.set_color(BLADE_STATE_COLORS[blade_state])
+	blade_particles_material.set_color_ramp(load(PARTICLE_COLOR_GRADIENT_PATHS[blade_state]))
 
 
 func set_blade_state(new_state: int) -> void:
