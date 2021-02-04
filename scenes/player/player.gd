@@ -4,13 +4,13 @@ class_name Player
 
 signal player_died
 
-const MIN_ZOOM := 1.5
-const MAX_ZOOM := 4.0
+const MIN_ZOOM := 0.5
+const MAX_ZOOM := 1.25
 
 const DASH_DURATION := 0.075
 const DASH_RESET_TIME := 1.0
 
-export (int) var speed := 24000
+export (int) var speed := 150
 export (int) var dash_factor := 5
 export (float) var zoom_speed := 0.6
 
@@ -21,7 +21,7 @@ onready var dash_reset_timer := $DashResetTimer as Timer
 onready var player_sprite := $PlayerSprite as PlayerSprite
 
 var velocity := Vector2()
-var zoom_factor := 2.0
+var zoom_factor := 0.9
 
 var dash_ready := true
 var player_dashing := false
@@ -52,7 +52,7 @@ func _get_input(delta: float) -> void:
 	if Input.is_action_pressed('dash'):
 		dash_requested = true
 	
-	velocity = velocity.normalized() * speed * delta
+	velocity = velocity.normalized() * speed
 	
 	if dash_requested && !player_dashing && dash_ready:
 		dash_particles.restart()

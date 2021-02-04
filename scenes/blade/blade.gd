@@ -2,10 +2,10 @@ extends Node2D
 
 class_name Blade
 
-const MAX_RADIUS := 300
-const MIN_RADIUS := 150
+const MAX_RADIUS := 200
+const MIN_RADIUS := 125
 
-const MAX_ANGULAR_SPEED := 4 * PI
+const MAX_ANGULAR_SPEED := 3.5 * PI
 
 const BLADE_SPEED_FACTOR := 40 
 const BLADE_ROTATIONAL_SPEED := PI/10
