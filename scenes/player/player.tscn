@@ -1,31 +1,13 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/player/player_spriteframes.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=2]
 [ext_resource path="res://scenes/blade/blade.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/player/player_sprite.gd" type="Script" id=4]
+[ext_resource path="res://scenes/player/player_dash_particles.tres" type="Material" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 40, 40 )
-
-[sub_resource type="Curve" id=2]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=3]
-curve = SubResource( 2 )
-
-[sub_resource type="ParticlesMaterial" id=4]
-flag_disable_z = true
-direction = Vector3( 0, 0, 0 )
-spread = 180.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 125.0
-initial_velocity_random = 1.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-damping = 25.0
-scale = 15.0
-scale_curve = SubResource( 3 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -44,16 +26,17 @@ __meta__ = {
 [node name="DashParticles" type="Particles2D" parent="."]
 emitting = false
 amount = 50
-lifetime = 0.5
+lifetime = 0.25
 one_shot = true
-explosiveness = 1.0
+explosiveness = 0.75
+visibility_rect = Rect2( -25, -25, 50, 50 )
 local_coords = false
-process_material = SubResource( 4 )
+process_material = ExtResource( 5 )
 
 [node name="PlayerSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "up_walk"
-frame = 2
+frame = 5
 playing = true
 script = ExtResource( 4 )
 
