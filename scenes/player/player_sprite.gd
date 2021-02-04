@@ -31,65 +31,37 @@ func stop_moving():
 	match direction_facing:
 		Directions.UP:
 			set_flip_h(false)
-			play("idle_up")
+			play("up_idle")
 		Directions.RIGHT:
-			set_flip_h(false)
-			play("idle_right")
+			set_flip_h(true)
+			play("side_idle")
 		Directions.DOWN:
 			set_flip_h(false)
-			play("idle_down")
+			play("down_idle")
 		Directions.LEFT:
-			set_flip_h(true)
-			play("idle_right")
+			set_flip_h(false)
+			play("side_idle")
 
 
 func move_up():
 	direction_facing = Directions.UP
 	set_flip_h(false)
-	if not is_moving:
-		play("move_up_start")
-		yield(self, "animation_finished")
-		if get_animation() == "move_up_start":
-			is_moving = true
-			play("move_up")
-	else:
-		play("move_up")
+	play("up_walk")
 
 
 func move_right():
 	direction_facing = Directions.RIGHT
-	set_flip_h(false)
-	if not is_moving:
-		play("move_right_start")
-		yield(self, "animation_finished")
-		if get_animation() == "move_right_start":
-			is_moving = true
-			play("move_right")
-	else:
-		play("move_right")
+	set_flip_h(true)
+	play("side_walk")
 
 
 func move_left():
 	direction_facing = Directions.LEFT
-	set_flip_h(true)
-	if not is_moving:
-		play("move_right_start")
-		yield(self, "animation_finished")
-		if get_animation() == "move_right_start":
-			is_moving = true
-			play("move_right")
-	else:
-		play("move_right")
+	set_flip_h(false)
+	play("side_walk")
 
 
 func move_down():
 	direction_facing = Directions.DOWN
-	set_flip_h(true)
-	if not is_moving:
-		play("move_down_start")
-		yield(self, "animation_finished")
-		if get_animation() == "move_down_start":
-			is_moving = true
-			play("move_down")
-	else:
-		play("move_down")
+	set_flip_h(false)
+	play("down_walk")
