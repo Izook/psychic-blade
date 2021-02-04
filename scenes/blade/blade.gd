@@ -208,6 +208,10 @@ func _rotate_blade(new_angle: float) -> void:
 func _update_blade_target() -> void:
 	target_pos = polar2cartesian(radius, angular_pos)
 	blade_target.set_position(target_pos)
+	
+	blade_target.visible = true
+	if (blade_target.global_position - blade_node.global_position).length() < 20:
+		blade_target.visible = false 
 
 
 func _update_blade_appearance() -> void:
