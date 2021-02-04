@@ -4,8 +4,12 @@ class_name Blade
 
 const MAX_RADIUS := 200
 const MIN_RADIUS := 125
+const RADIAL_SPEED := 600.0
 
 const MAX_ANGULAR_SPEED := 3.5 * PI
+const ANGULAR_SPEED_INDEX_POS_DELTA := 0.001
+const ANGULAR_SPEED_INDEX_NEG_DELTA := 0.008
+const ANGULAR_SPEED_INDEX_DAMP := 0.001
 
 const BLADE_SPEED_FACTOR := 40 
 const BLADE_ROTATIONAL_SPEED := PI/10
@@ -27,21 +31,15 @@ const PARTICLE_COLOR_GRADIENT_PATHS := {
 	BladeState.RETURNING: "res://scenes/blade/particle_gradients/returning_particles.tres"
 }
 
-export (int) var radius := 200
-export (int) var radial_speed := 600.0
-
-export (float) var angular_pos := 0.0
-export (float) var angular_speed_index := 0.0
-export (float) var angular_speed_index_speed := 0.001
-export (float) var angular_speed_index_turning_speed := 0.008
-export (float) var angular_speed_index_damp := 0.001
-
 onready var blade_target := $BladeTarget as Sprite
 onready var blade_node := $Blade as KinematicBody2D
 onready var blade_particles := $Blade/Particles2D as Particles2D
 onready var blade_particles_material := blade_particles.get_process_material() as ParticlesMaterial
 onready var blade_realease_timer = $BladeReleaseTimer as Timer
 
+var angular_pos := 0.0
+var angular_speed_index := 0.0
+var radius := 200.0
 var target_pos := polar2cartesian(radius, angular_pos) as Vector2
 var blade_angle := 0.0
 
@@ -53,21 +51,21 @@ var blade_veclocity := Vector2(0,0)
 func _get_input(delta: float) -> void:
 	if Input.is_action_pressed('rotate_left'):
 		if angular_speed_index > 0:
-			angular_speed_index += angular_speed_index_speed
+			angular_speed_index += ANGULAR_SPEED_INDEX_POS_DELTA
 		else:
-			angular_speed_index += angular_speed_index_turning_speed
+			angular_speed_index += ANGULAR_SPEED_INDEX_NEG_DELTA
 	elif Input.is_action_pressed('rotate_right'):
 		if angular_speed_index < 0:
-			angular_speed_index -= angular_speed_index_speed
+			angular_speed_index -= ANGULAR_SPEED_INDEX_POS_DELTA
 		else:
-			angular_speed_index -= angular_speed_index_turning_speed
+			angular_speed_index -= ANGULAR_SPEED_INDEX_NEG_DELTA
 	else:
 		if abs(angular_speed_index) < 0.001:
 			angular_speed_index = 0.0
 		elif angular_speed_index > 0:
-			angular_speed_index -= angular_speed_index_damp
+			angular_speed_index -= ANGULAR_SPEED_INDEX_DAMP
 		else:
-			angular_speed_index += angular_speed_index_damp
+			angular_speed_index += ANGULAR_SPEED_INDEX_DAMP
 	
 	angular_speed_index = _limit_speed_index(angular_speed_index)
 	var angular_speed := _get_angular_speed(abs(angular_speed_index))
@@ -76,9 +74,9 @@ func _get_input(delta: float) -> void:
 	angular_pos += angular_speed * delta
 	
 	if Input.is_action_pressed('push_out'):
-		radius += radial_speed * delta
+		radius += RADIAL_SPEED * delta
 	if Input.is_action_pressed('pull_in'):
-		radius -= radial_speed * delta
+		radius -= RADIAL_SPEED * delta
 	
 	radius = _limit_radius(radius)
 	
@@ -110,8 +108,8 @@ func _draw() -> void:
 	
 
 
-func _limit_radius(r: int) -> int:
-	return max(min(MAX_RADIUS, r), MIN_RADIUS) as int
+func _limit_radius(r: float) -> float:
+	return max(min(MAX_RADIUS, r), MIN_RADIUS)
 
 
 func _limit_speed_index(i : float) -> float:
