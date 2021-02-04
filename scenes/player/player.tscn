@@ -69,83 +69,83 @@ region = Rect2( 128, 384, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 192, 64, 64 )
+region = Rect2( 320, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 1 )
-region = Rect2( 64, 192, 64, 64 )
+region = Rect2( 384, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 1 )
-region = Rect2( 128, 192, 64, 64 )
+region = Rect2( 0, 64, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=18]
 atlas = ExtResource( 1 )
-region = Rect2( 192, 192, 64, 64 )
+region = Rect2( 64, 64, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 1 )
-region = Rect2( 256, 192, 64, 64 )
+region = Rect2( 128, 64, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=20]
 atlas = ExtResource( 1 )
-region = Rect2( 320, 192, 64, 64 )
+region = Rect2( 192, 64, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=21]
 atlas = ExtResource( 1 )
-region = Rect2( 384, 192, 64, 64 )
+region = Rect2( 256, 64, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=22]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 256, 64, 64 )
+region = Rect2( 320, 64, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=23]
 atlas = ExtResource( 1 )
-region = Rect2( 64, 256, 64, 64 )
+region = Rect2( 384, 64, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=24]
 atlas = ExtResource( 1 )
-region = Rect2( 320, 0, 64, 64 )
+region = Rect2( 0, 128, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=25]
 atlas = ExtResource( 1 )
-region = Rect2( 384, 0, 64, 64 )
+region = Rect2( 64, 128, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=26]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 64, 64, 64 )
+region = Rect2( 0, 192, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=27]
 atlas = ExtResource( 1 )
-region = Rect2( 64, 64, 64, 64 )
+region = Rect2( 64, 192, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=28]
 atlas = ExtResource( 1 )
-region = Rect2( 128, 64, 64, 64 )
+region = Rect2( 128, 192, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=29]
 atlas = ExtResource( 1 )
-region = Rect2( 192, 64, 64, 64 )
+region = Rect2( 192, 192, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=30]
 atlas = ExtResource( 1 )
-region = Rect2( 256, 64, 64, 64 )
+region = Rect2( 256, 192, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=31]
 atlas = ExtResource( 1 )
-region = Rect2( 320, 64, 64, 64 )
+region = Rect2( 320, 192, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=32]
 atlas = ExtResource( 1 )
-region = Rect2( 384, 64, 64, 64 )
+region = Rect2( 384, 192, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=33]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 128, 64, 64 )
+region = Rect2( 0, 256, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=34]
 atlas = ExtResource( 1 )
-region = Rect2( 64, 128, 64, 64 )
+region = Rect2( 64, 256, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=35]
 atlas = ExtResource( 1 )
@@ -214,14 +214,14 @@ animations = [ {
 "name": "move_up",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ) ],
-"loop": true,
-"name": "move_right",
-"speed": 10.0
-}, {
-"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ) ],
+"frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ) ],
 "loop": true,
 "name": "move_down",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ) ],
+"loop": true,
+"name": "move_right",
 "speed": 10.0
 }, {
 "frames": [ SubResource( 35 ) ],
