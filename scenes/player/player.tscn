@@ -36,7 +36,7 @@ process_material = ExtResource( 5 )
 [node name="PlayerSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "down_idle"
-frame = 4
+frame = 1
 playing = true
 script = ExtResource( 4 )
 
