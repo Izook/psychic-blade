@@ -7,7 +7,7 @@
 [ext_resource path="res://scenes/player/player_dash_particles.tres" type="Material" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 40, 40 )
+extents = Vector2( 8, 16 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -35,8 +35,8 @@ process_material = ExtResource( 5 )
 
 [node name="PlayerSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
-animation = "up_walk"
-frame = 5
+animation = "down_idle"
+frame = 3
 playing = true
 script = ExtResource( 4 )
 
