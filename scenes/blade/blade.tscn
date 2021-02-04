@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://scenes/blade/blade.png" type="Texture" id=1]
+[ext_resource path="res://scenes/blade/blades.png" type="Texture" id=1]
 [ext_resource path="res://scenes/blade/blade.gd" type="Script" id=2]
 [ext_resource path="res://scenes/blade/blade_target.png" type="Texture" id=3]
 [ext_resource path="res://scenes/blade/blade_hitbox.gd" type="Script" id=4]
@@ -65,6 +65,8 @@ process_material = SubResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="Blade"]
 texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 96, 32, 32 )
 __meta__ = {
 "_edit_lock_": true
 }

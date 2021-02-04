@@ -141,7 +141,7 @@ func _move_blade() -> float:
 				
 			_move_held_blade()
 		
-		BladeState.RELEASED:			
+		BladeState.RELEASED:
 			new_blade_angle = blade_veclocity.angle()
 			
 			_move_released_blade()
@@ -200,7 +200,7 @@ func _rotate_blade(new_angle: float) -> void:
 	angular_pos = fposmod(angular_pos, 2 * PI)
 	blade_angle = fposmod(blade_angle, 2 * PI)
 	
-	blade_node.set_global_rotation(blade_angle)
+	blade_node.set_global_rotation(blade_angle + ((3 * PI) / 4))
 
 
 func _update_blade_target() -> void:
