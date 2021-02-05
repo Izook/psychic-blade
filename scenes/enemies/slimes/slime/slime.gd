@@ -5,7 +5,7 @@ class_name Slime
 enum SlimeState {WANDERING, ATTACKING, DEAD}
 
 const MAX_SPEED := 75
-const CAST_LENGTH := 200
+const CAST_LENGTH := 150
 
 onready var player := get_node(Utils.PLAYER_PATH) as Player
 onready var sprite := $Sprite as AnimatedSprite

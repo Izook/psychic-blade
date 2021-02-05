@@ -333,9 +333,7 @@ texture = ExtResource( 7 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 8 )
-animation = "death"
-frame = 6
-playing = true
+animation = "idle"
 
 [node name="CollisionPolygon" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 5 )
