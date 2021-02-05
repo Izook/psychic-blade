@@ -6,7 +6,7 @@ onready var pause_menu := $UILayer/PauseMenu as PauseMenu
 onready var gameover_menu := $UILayer/GameOverMenu as GameOverMenu
 
 var paused := false
-
+var level : Node2D
 
 func _ready() -> void:
 	paused = false
@@ -14,9 +14,13 @@ func _ready() -> void:
 
 func load_level(level_path: String) -> void:
 	var level_scene := load(level_path) as PackedScene
-	var level = level_scene.instance() as Node2D
+	level = level_scene.instance() as Node2D
 	level.set_name("Level")
 	$GameLayer.add_child(level)
+
+
+func get_active_level() -> Node2D:
+	return level
 
 
 func _input(event: InputEvent) -> void:
