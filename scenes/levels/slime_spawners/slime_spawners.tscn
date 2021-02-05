@@ -55,15 +55,27 @@ __meta__ = {
 }
 
 [node name="SlimeSpawner" parent="Enemies" instance=ExtResource( 2 )]
-position = Vector2( -831.558, 896.612 )
+position = Vector2( -848, 880 )
 
 [node name="SlimeSpawner2" parent="Enemies" instance=ExtResource( 2 )]
-position = Vector2( -834.386, -828.729 )
+position = Vector2( -848, -848 )
 
 [node name="SlimeSpawner3" parent="Enemies" instance=ExtResource( 2 )]
-position = Vector2( 896.611, -831.558 )
+position = Vector2( 880, -848 )
 
 [node name="SlimeSpawner4" parent="Enemies" instance=ExtResource( 2 )]
-position = Vector2( 895.683, 901.806 )
+position = Vector2( 880, 880 )
+
+[node name="SlimeSpawner5" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( 304, -304 )
+
+[node name="SlimeSpawner6" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( -304, 304 )
+
+[node name="SlimeSpawner7" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( 304, 304 )
+
+[node name="SlimeSpawner8" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( -304, -304 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
