@@ -4,11 +4,12 @@ class_name Slime
 
 enum SlimeState {WANDERING, ATTACKING, DEAD}
 
-const MAX_SPEED := 100
-const CAST_LENGTH := 500
+const MAX_SPEED := 75
+const CAST_LENGTH := 200
 
 onready var player := get_node(Utils.PLAYER_PATH) as Player
-onready var hitbox := $CollisionPolygon as CollisionPolygon2D
+onready var sprite := $Sprite as AnimatedSprite
+onready var hitbox := $CollisionPolygon as CollisionShape2D
 onready var animation_player := $AnimationPlayer as AnimationPlayer
 onready var raycast := $RayCast2D as RayCast2D
 
@@ -49,6 +50,12 @@ func _die() -> void:
 
 func _move_slime(velocity: Vector2, delta: float) -> void:
 	var collision_info := move_and_collide(velocity * delta)
+	
+	animation_player.play("slide")
+	sprite.set_flip_h(false)
+	if velocity.x > 0:
+		sprite.set_flip_h(true)
+	
 	if collision_info:
 		var blade := collision_info.collider as BladeHitbox
 		if blade:
@@ -58,7 +65,7 @@ func _move_slime(velocity: Vector2, delta: float) -> void:
 func _get_slime_speed(delta: float) -> float:
 	speed_time += delta
 	speed_time = fmod(speed_time, idle_animation_length)
-	return sin((2 * PI / 3) * speed_time) * MAX_SPEED
+	return abs(sin((5 * PI / 2) * speed_time)) * MAX_SPEED
 
 
 func _renew_wander_direction() -> void:
@@ -74,6 +81,7 @@ func _renew_wander_direction() -> void:
 	
 	if attempts > 5:
 		wander_direction = Vector2(0,0)
+		animation_player.play("idle")
 
 
 func _on_WanderingTimer_timeout() -> void:
