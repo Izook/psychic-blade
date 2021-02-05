@@ -54,7 +54,7 @@ func die() -> void:
 
 
 func _move_slime(velocity: Vector2, delta: float) -> void:
-	var collision_info := move_and_collide(velocity * delta)
+	var _collision_info := move_and_collide(velocity * delta)
 	
 	animation_player.play("slide")
 	sprite.set_flip_h(false)
