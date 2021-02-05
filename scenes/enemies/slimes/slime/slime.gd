@@ -43,7 +43,7 @@ func _attack(delta: float) -> void:
 	_move_slime(velocity, delta)
 
 
-func _die() -> void:
+func die() -> void:
 	slime_state = SlimeState.DEAD
 	hitbox.set_disabled(true)
 	animation_player.play("death")
@@ -60,11 +60,6 @@ func _move_slime(velocity: Vector2, delta: float) -> void:
 	sprite.set_flip_h(false)
 	if velocity.x > 0:
 		sprite.set_flip_h(true)
-	
-	if collision_info:
-		var blade := collision_info.collider as BladeHitbox
-		if blade:
-			_die()
 
 
 func _get_slime_speed(delta: float) -> float:
