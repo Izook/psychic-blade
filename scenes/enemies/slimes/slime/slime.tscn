@@ -118,6 +118,9 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=27]
 radius = 6.23036
 
+[sub_resource type="CircleShape2D" id=3]
+radius = 259.055
+
 [sub_resource type="Animation" id=1]
 resource_name = "death"
 length = 1.7
@@ -287,9 +290,6 @@ tracks/2/keys = {
 "values": [ "slide" ]
 }
 
-[sub_resource type="CircleShape2D" id=3]
-radius = 259.055
-
 [node name="Slime" type="KinematicBody2D"]
 script = ExtResource( 1 )
 
@@ -340,6 +340,13 @@ position = Vector2( 0, 5 )
 scale = Vector2( 1.04953, 1 )
 shape = SubResource( 27 )
 
+[node name="DetectionArea" type="Area2D" parent="."]
+gravity_vec = Vector2( 0, 0 )
+gravity = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource( 3 )
+
 [node name="RayCast2D" type="RayCast2D" parent="."]
 enabled = true
 cast_to = Vector2( 0, 200 )
@@ -354,11 +361,9 @@ anims/slide = SubResource( 26 )
 wait_time = 5.0
 autostart = true
 
-[node name="DetectionArea" type="Area2D" parent="."]
-gravity_vec = Vector2( 0, 0 )
-gravity = 0.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
-shape = SubResource( 3 )
-[connection signal="timeout" from="WanderingTimer" to="." method="_on_WanderingTimer_timeout"]
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_DetectionArea_body_entered"]
+[connection signal="timeout" from="WanderingTimer" to="." method="_on_WanderingTimer_timeout"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]

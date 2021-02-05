@@ -12,6 +12,7 @@ onready var sprite := $Sprite as AnimatedSprite
 onready var hitbox := $CollisionPolygon as CollisionShape2D
 onready var animation_player := $AnimationPlayer as AnimationPlayer
 onready var raycast := $RayCast2D as RayCast2D
+onready var death_timer := $DeathTimer as Timer
 
 onready var wander_direction := Vector2(rand_range(-1, 1), rand_range(-1, 1))
 onready var idle_animation_length := animation_player.get_animation("idle").length
@@ -46,6 +47,10 @@ func _die() -> void:
 	slime_state = SlimeState.DEAD
 	hitbox.set_disabled(true)
 	animation_player.play("death")
+	
+	remove_from_group("enemies")
+	hitbox.set_disabled(true)
+	death_timer.start()
 
 
 func _move_slime(velocity: Vector2, delta: float) -> void:
@@ -95,3 +100,7 @@ func _on_DetectionArea_body_entered(body: PhysicsBody2D) -> void:
 		if player:
 			slime_state = SlimeState.ATTACKING
 
+
+
+func _on_DeathTimer_timeout() -> void:
+	queue_free()
