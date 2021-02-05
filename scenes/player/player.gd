@@ -4,15 +4,15 @@ class_name Player
 
 signal player_died
 
-const MIN_ZOOM := 0.5
+const MIN_ZOOM := 0.25
 const MAX_ZOOM := 1.25
+const ZOOM_SPEED := 0.6
+
+const SPEED := 150
 
 const DASH_DURATION := 0.075
 const DASH_RESET_TIME := 1.0
-
-export (int) var speed := 150
-export (int) var dash_factor := 5
-export (float) var zoom_speed := 0.6
+const DASH_SPEED_FACTOR := 5
 
 onready var camera := $PlayerCamera as Camera2D
 onready var dash_particles := $DashParticles as Particles2D
@@ -21,7 +21,7 @@ onready var dash_reset_timer := $DashResetTimer as Timer
 onready var player_sprite := $PlayerSprite as PlayerSprite
 
 var velocity := Vector2()
-var zoom_factor := 0.9
+var camera_zoom := 0.5
 
 var dash_ready := true
 var player_dashing := false
@@ -45,14 +45,14 @@ func _get_input(delta: float) -> void:
 		velocity.y -= 1 * Input.get_action_strength("move_up")
 	
 	if Input.is_action_pressed('zoom_out'):
-		zoom_factor += zoom_speed * delta
+		camera_zoom += ZOOM_SPEED * delta
 	if Input.is_action_pressed('zoom_in'):
-		zoom_factor -= zoom_speed * delta
+		camera_zoom -= ZOOM_SPEED * delta
 	
 	if Input.is_action_pressed('dash'):
 		dash_requested = true
 	
-	velocity = velocity.normalized() * speed
+	velocity = velocity.normalized() * SPEED
 	
 	if dash_requested && !player_dashing && dash_ready:
 		dash_particles.restart()
@@ -62,9 +62,9 @@ func _get_input(delta: float) -> void:
 		dash_timer.start(DASH_DURATION)
 	
 	if player_dashing:
-		velocity *= dash_factor
+		velocity *= DASH_SPEED_FACTOR
 		
-	zoom_factor = _limit_zoom(zoom_factor)
+	camera_zoom = _limit_zoom(camera_zoom)
 
 
 func _physics_process(delta: float) -> void:
@@ -81,7 +81,7 @@ func _physics_process(delta: float) -> void:
 					emit_signal("player_died")
 
 
-	camera.set_zoom(Vector2(zoom_factor, zoom_factor))
+	camera.set_zoom(Vector2(camera_zoom, camera_zoom))
 	camera.make_current()
 
 
