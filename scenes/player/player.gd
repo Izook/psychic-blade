@@ -4,7 +4,7 @@ class_name Player
 
 signal player_died
 
-const MIN_ZOOM := 0.5
+const MIN_ZOOM := 0.25
 const MAX_ZOOM := 1.25
 const ZOOM_SPEED := 0.6
 
@@ -21,7 +21,7 @@ onready var dash_reset_timer := $DashResetTimer as Timer
 onready var player_sprite := $PlayerSprite as PlayerSprite
 
 var velocity := Vector2()
-var camera_zoom := 0.9
+var camera_zoom := 0.5
 
 var dash_ready := true
 var player_dashing := false

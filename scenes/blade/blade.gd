@@ -2,11 +2,11 @@ extends Node2D
 
 class_name Blade
 
-const MAX_RADIUS := 200
-const MIN_RADIUS := 125
+const MAX_RADIUS := 175
+const MIN_RADIUS := 50
 const RADIAL_SPEED := 600.0
 
-const MAX_ANGULAR_SPEED := 3.5 * PI
+const MAX_ANGULAR_SPEED := 2.5 * PI
 const ANGULAR_SPEED_INDEX_POS_DELTA := 0.001
 const ANGULAR_SPEED_INDEX_NEG_DELTA := 0.008
 const ANGULAR_SPEED_INDEX_DAMP := 0.001
@@ -39,7 +39,7 @@ onready var blade_realease_timer = $BladeReleaseTimer as Timer
 
 var angular_pos := 0.0
 var angular_speed_index := 0.0
-var radius := 200.0
+var radius := 100.0
 var target_pos := polar2cartesian(radius, angular_pos) as Vector2
 var blade_angle := 0.0
 
@@ -105,7 +105,6 @@ func _draw() -> void:
 	if radius == MIN_RADIUS or radius == MAX_RADIUS:
 		line_width = 3
 	draw_arc(Vector2(0,0), radius, 0, 2 * PI, 100, Color(1,1,1, 0.5), line_width, false)
-	
 
 
 func _limit_radius(r: float) -> float:
@@ -178,7 +177,8 @@ func _move_released_blade() -> void:
 func _move_returning_blade() -> void:
 	var global_target_pos := (get_global_position() + target_pos)
 	var angle_to_target := global_target_pos.angle_to_point(blade_node.get_global_position())
-	var new_blade_velocity := Vector2(cos(angle_to_target), sin(angle_to_target)) * 1000
+	var new_blade_velocity := Vector2(cos(angle_to_target), sin(angle_to_target))
+	new_blade_velocity = new_blade_velocity * get_max_speed() / 2
 	
 	blade_veclocity = blade_node.move_and_slide(new_blade_velocity)
 	
