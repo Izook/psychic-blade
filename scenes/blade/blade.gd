@@ -95,6 +95,8 @@ func _physics_process(delta: float) -> void:
 	_update_blade_appearance()
 	
 	var new_blade_angle := _move_blade()
+	_handle_enemy_collisions()
+	
 	_rotate_blade(new_blade_angle)
 	
 	update()
@@ -166,10 +168,6 @@ func _move_released_blade() -> void:
 		var tile_map := collision.collider as TileMap
 		if tile_map:
 			new_blade_velocity = blade_veclocity.bounce(collision.normal)
-		
-		var enemy := collision.collider as Enemy
-		if enemy:
-			new_blade_velocity = blade_veclocity
 	
 	blade_veclocity = new_blade_velocity * RELEASED_BLADE_DAMP
 
@@ -184,6 +182,15 @@ func _move_returning_blade() -> void:
 	
 	if ((blade_node.position - global_target_pos).length() < 15):
 		set_blade_state(BladeState.HELD)
+
+
+func _handle_enemy_collisions() -> void:
+	for i in blade_node.get_slide_count():
+		var collision := blade_node.get_slide_collision(i)
+		
+		var enemy := collision.collider as Enemy
+		if enemy:
+			enemy.die()
 
 
 func _rotate_blade(new_angle: float) -> void:
