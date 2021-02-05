@@ -21,6 +21,7 @@ __meta__ = {
 
 [node name="Blade" type="KinematicBody2D" parent="."]
 position = Vector2( 200, 0 )
+collision/safe_margin = 5.0
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
