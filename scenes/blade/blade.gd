@@ -170,6 +170,10 @@ func _move_released_blade() -> void:
 		var tile_map := collision.collider as TileMap
 		if tile_map:
 			new_blade_velocity = blade_veclocity.bounce(collision.normal)
+			
+		var enemy := collision.collider as Enemy
+		if enemy:
+			new_blade_velocity = blade_veclocity
 	
 	blade_veclocity = new_blade_velocity * RELEASED_BLADE_DAMP
 
