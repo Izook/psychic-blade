@@ -31,11 +31,15 @@ const PARTICLE_COLOR_GRADIENT_PATHS := {
 	BladeState.RETURNING: "res://scenes/blade/particle_gradients/returning_particles.tres"
 }
 
+const impact_effect_scene = preload("res://scenes/blade/impact_effect/impact_effect.tscn")
+
 onready var blade_target := $BladeTarget as Sprite
 onready var blade_node := $Blade as KinematicBody2D
 onready var blade_particles := $Blade/Particles2D as Particles2D
 onready var blade_particles_material := blade_particles.get_process_material() as ParticlesMaterial
-onready var blade_realease_timer = $BladeReleaseTimer as Timer
+onready var blade_realease_timer := $BladeReleaseTimer as Timer
+
+onready var current_level := get_node(Utils.ACTIVE_LEVEL_PATH)
 
 var angular_pos := 0.0
 var angular_speed_index := 0.0
@@ -95,6 +99,8 @@ func _physics_process(delta: float) -> void:
 	_update_blade_appearance()
 	
 	var new_blade_angle := _move_blade()
+	_handle_enemy_collisions()
+	
 	_rotate_blade(new_blade_angle)
 	
 	update()
@@ -166,7 +172,7 @@ func _move_released_blade() -> void:
 		var tile_map := collision.collider as TileMap
 		if tile_map:
 			new_blade_velocity = blade_veclocity.bounce(collision.normal)
-		
+			
 		var enemy := collision.collider as Enemy
 		if enemy:
 			new_blade_velocity = blade_veclocity
@@ -184,6 +190,18 @@ func _move_returning_blade() -> void:
 	
 	if ((blade_node.position - global_target_pos).length() < 15):
 		set_blade_state(BladeState.HELD)
+
+
+func _handle_enemy_collisions() -> void:
+	for i in blade_node.get_slide_count():
+		var collision := blade_node.get_slide_collision(i)
+		
+		var enemy := collision.collider as Enemy
+		if enemy:
+			var impact_effect := impact_effect_scene.instance() as Node2D
+			impact_effect.global_position = enemy.global_position
+			current_level.add_child(impact_effect)
+			enemy.die()
 
 
 func _rotate_blade(new_angle: float) -> void:
