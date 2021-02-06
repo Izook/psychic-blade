@@ -37,7 +37,9 @@ onready var blade_target := $BladeTarget as Sprite
 onready var blade_node := $Blade as KinematicBody2D
 onready var blade_particles := $Blade/Particles2D as Particles2D
 onready var blade_particles_material := blade_particles.get_process_material() as ParticlesMaterial
-onready var blade_realease_timer = $BladeReleaseTimer as Timer
+onready var blade_realease_timer := $BladeReleaseTimer as Timer
+
+onready var current_level := get_node(Utils.ACTIVE_LEVEL_PATH)
 
 var angular_pos := 0.0
 var angular_speed_index := 0.0
@@ -198,7 +200,7 @@ func _handle_enemy_collisions() -> void:
 		if enemy:
 			var impact_effect := impact_effect_scene.instance() as Node2D
 			impact_effect.global_position = enemy.global_position
-			get_node(Utils.ACTIVE_LEVEL_PATH).add_child(impact_effect)
+			current_level.add_child(impact_effect)
 			enemy.die()
 
 
