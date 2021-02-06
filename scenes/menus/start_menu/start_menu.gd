@@ -18,6 +18,8 @@ onready var exit_controls_button := $ControlsContainer/Panel/MarginContainer/Exi
 onready var controls_container := $ControlsContainer as MarginContainer
 onready var levels_container := $LevelsContainer as MarginContainer
 
+onready var music_player := $MusicPlayer as AudioStreamPlayer
+
 onready var main := preload("res://scenes/main/main.tscn").instance() as Main
 
 var menu_open := false
@@ -80,3 +82,7 @@ func _on_StartButton_pressed() -> void:
 
 func _on_QuitPlayingButton_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_MusicPlayer_finished() -> void:
+	music_player.play()
