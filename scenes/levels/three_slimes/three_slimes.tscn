@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/levels/tile_sets/boundaries.tres" type="TileSet" id=3]
 [ext_resource path="res://scenes/levels/tile_sets/magic_dungeon.tres" type="TileSet" id=4]
 [ext_resource path="res://scenes/levels/three_slimes/three_slimes.gd" type="Script" id=5]
-[ext_resource path="res://scenes/levels/level_music_tracks/kingdom_of_sands__invadable_harmony.wav" type="AudioStream" id=6]
+[ext_resource path="res://scenes/levels/level_music_tracks/extreme_love___snabisch.wav" type="AudioStream" id=6]
 
 [node name="SlimesLevel" type="Node2D"]
 script = ExtResource( 5 )
