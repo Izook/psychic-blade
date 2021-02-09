@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/hud/hud.gd"
 }, {
+"base": "Node",
+"class": "Level",
+"language": "GDScript",
+"path": "res://scenes/levels/level.gd"
+}, {
 "base": "Button",
 "class": "LevelButton",
 "language": "GDScript",
@@ -58,11 +63,6 @@ _global_script_classes=[ {
 "class": "PlayerSprite",
 "language": "GDScript",
 "path": "res://scenes/player/player_sprite.gd"
-}, {
-"base": "Node2D",
-"class": "Playground",
-"language": "GDScript",
-"path": "res://scenes/levels/playground/playground.gd"
 }, {
 "base": "Enemy",
 "class": "Slime",
@@ -95,12 +95,12 @@ _global_script_class_icons={
 "Enemy": "",
 "GameOverMenu": "",
 "Hud": "",
+"Level": "",
 "LevelButton": "",
 "Main": "",
 "PauseMenu": "",
 "Player": "",
 "PlayerSprite": "",
-"Playground": "",
 "Slime": "",
 "SlimeSpawner": "",
 "Spawner": "",

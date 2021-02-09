@@ -1,3 +1,1 @@
-extends Node2D
-
-class_name Playground
+extends Level
