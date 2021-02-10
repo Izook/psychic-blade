@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://shared_assets/pirata_one.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/menus/start_menu/start_menu.gd" type="Script" id=2]
@@ -7,6 +7,10 @@
 [ext_resource path="res://scenes/menus/menu_theme.tres" type="Theme" id=5]
 [ext_resource path="res://scenes/menus/start_menu/to_them___snabisch.wav" type="AudioStream" id=6]
 [ext_resource path="res://scenes/menus/start_menu/escape_hover.png" type="Texture" id=7]
+[ext_resource path="res://scenes/menus/ui_sound_effects/menu_select___souptonic.wav" type="AudioStream" id=8]
+[ext_resource path="res://scenes/menus/ui_sound_effects/menu_confirm___souptonic.wav" type="AudioStream" id=9]
+[ext_resource path="res://scenes/menus/ui_sound_effects/menu_cancel___souptonic.wav" type="AudioStream" id=10]
+[ext_resource path="res://scenes/menus/ui_sound_effects/game_exit___souptonic.wav" type="AudioStream" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 128
@@ -510,14 +514,41 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+[node name="Audio" type="Node" parent="."]
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 6 )
 autoplay = true
 bus = "Music"
+
+[node name="SelectSoundPlayer" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 8 )
+bus = "UI Sounds"
+
+[node name="ConfirmSoundPlayer" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 9 )
+bus = "UI Sounds"
+
+[node name="CancelSoundPlayer" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 10 )
+bus = "UI Sounds"
+
+[node name="QuitSoundPlayer" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 11 )
+bus = "UI Sounds"
+[connection signal="focus_entered" from="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer/StartButton" to="." method="_on_Button_focus_entered"]
 [connection signal="pressed" from="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="focus_entered" from="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer/ControlsButton" to="." method="_on_Button_focus_entered"]
 [connection signal="pressed" from="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer/ControlsButton" to="." method="_on_ControlsButton_pressed"]
+[connection signal="focus_entered" from="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer/QuitPlayingButton" to="." method="_on_Button_focus_entered"]
 [connection signal="pressed" from="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer/QuitPlayingButton" to="." method="_on_QuitPlayingButton_pressed"]
+[connection signal="focus_entered" from="ControlsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/OKButton" to="." method="_on_Button_focus_entered"]
 [connection signal="pressed" from="ControlsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/OKButton" to="." method="_on_ExitControlsButton_pressed"]
+[connection signal="focus_entered" from="ControlsContainer/Panel/MarginContainer/ExitControlsButton" to="." method="_on_Button_focus_entered"]
 [connection signal="pressed" from="ControlsContainer/Panel/MarginContainer/ExitControlsButton" to="." method="_on_ExitControlsButton_pressed"]
+[connection signal="focus_entered" from="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer/SlimesLevel" to="." method="_on_Button_focus_entered"]
+[connection signal="focus_entered" from="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer/Playground" to="." method="_on_Button_focus_entered"]
+[connection signal="focus_entered" from="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer/SlimeSpawners" to="." method="_on_Button_focus_entered"]
+[connection signal="focus_entered" from="LevelsContainer/Panel/MarginContainer/ExitLevelsButton" to="." method="_on_Button_focus_entered"]
 [connection signal="pressed" from="LevelsContainer/Panel/MarginContainer/ExitLevelsButton" to="." method="_on_ExitLevelsButton_pressed"]
-[connection signal="finished" from="MusicPlayer" to="." method="_on_MusicPlayer_finished"]
+[connection signal="finished" from="Audio/MusicPlayer" to="." method="_on_MusicPlayer_finished"]
