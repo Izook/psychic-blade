@@ -19,6 +19,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/blade/blade_hitbox.gd"
 }, {
+"base": "Button",
+"class": "CustomButton",
+"language": "GDScript",
+"path": "res://scenes/menus/custom_button.gd"
+}, {
+"base": "BaseButton",
+"class": "CustomTextureButton",
+"language": "GDScript",
+"path": "res://scenes/menus/custom_texture_button.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Enemy",
 "language": "GDScript",
@@ -39,7 +49,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/levels/level.gd"
 }, {
-"base": "Button",
+"base": "CustomButton",
 "class": "LevelButton",
 "language": "GDScript",
 "path": "res://scenes/menus/start_menu/level_button.gd"
@@ -92,6 +102,8 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Blade": "",
 "BladeHitbox": "",
+"CustomButton": "",
+"CustomTextureButton": "",
 "Enemy": "",
 "GameOverMenu": "",
 "Hud": "",
