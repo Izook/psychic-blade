@@ -130,6 +130,7 @@ config/icon="res://shared_assets/icon.png"
 [autoload]
 
 Utils="*res://shared_scripts/utilities.gd"
+AudioUtilities="*res://shared_scripts/audio_utilities.gd"
 
 [debug]
 

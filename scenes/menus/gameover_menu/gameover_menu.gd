@@ -18,6 +18,7 @@ func _input(event: InputEvent) -> void:
 
 
 func set_active(active: bool) -> void:
+	AudioUtilities.set_distort_music(active)
 	visible = active
 	grabbed_focus = false
 

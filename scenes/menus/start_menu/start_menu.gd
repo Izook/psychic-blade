@@ -33,6 +33,7 @@ var grabbed_focus = false
 func _ready() -> void:
 	get_tree().get_root().set_disable_input(false)
 	get_tree().paused = false
+	AudioUtilities.set_distort_music(false)
 	_load_version()
 
 
