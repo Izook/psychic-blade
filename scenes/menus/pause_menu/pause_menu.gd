@@ -35,9 +35,9 @@ func set_active(active: bool) -> void:
 
 
 func _on_MainMenuButton_pressed() -> void:
+	get_tree().get_root().set_disable_input(true)
 	confirm_sound_player.play()
 	yield(confirm_sound_player, "finished")
-	get_tree().get_root().set_disable_input(true)
 	var _error = get_tree().change_scene(Utils.START_SCENE_PATH)
 
 
