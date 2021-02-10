@@ -20,6 +20,7 @@ texture = ExtResource( 2 )
 stream = ExtResource( 4 )
 autoplay = true
 attenuation = 0.2
+bus = "Gameplay Sounds"
 
 [node name="DeathTimer" type="Timer" parent="."]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]

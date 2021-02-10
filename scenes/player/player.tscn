@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/player/player_spriteframes.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=2]
 [ext_resource path="res://scenes/blade/blade.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/player/player_sprite.gd" type="Script" id=4]
 [ext_resource path="res://scenes/player/player_dash_particles.tres" type="Material" id=5]
+[ext_resource path="res://scenes/player/audio/player_dash.wav" type="AudioStream" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 16 )
@@ -48,6 +49,13 @@ smoothing_enabled = true
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="DashSoundPlayer" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource( 6 )
+attenuation = 0.2
+bus = "Gameplay Sounds"
 
 [node name="DashTimer" type="Timer" parent="."]
 one_shot = true
