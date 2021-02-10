@@ -9,6 +9,7 @@ var paused := false
 var level : Node2D
 
 func _ready() -> void:
+	get_tree().get_root().set_disable_input(false)
 	paused = false
 
 
@@ -25,10 +26,11 @@ func get_active_level() -> Node2D:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_pause"):
+		print("YEEE")
 		paused = not paused
 		get_tree().paused = paused
-		pause_menu.visible = paused
-		pause_menu.focus()
+		pause_menu.set_active(paused)
+
 
 
 func _on_Player_player_died() -> void:
