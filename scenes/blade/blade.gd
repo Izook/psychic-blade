@@ -31,7 +31,7 @@ const PARTICLE_COLOR_GRADIENT_PATHS := {
 	BladeState.RETURNING: "res://scenes/blade/particle_gradients/returning_particles.tres"
 }
 
-const impact_effect_scene = preload("res://scenes/blade/impact_effect/impact_effect.tscn")
+const IMPACT_EFFECT_SCENE = preload("res://scenes/blade/impact_effect/impact_effect.tscn")
 
 onready var blade_target := $BladeTarget as Sprite
 onready var blade_node := $Blade as KinematicBody2D
@@ -201,7 +201,7 @@ func _handle_enemy_collisions() -> void:
 		
 		var enemy := collision.collider as Enemy
 		if enemy:
-			var impact_effect := impact_effect_scene.instance() as Node2D
+			var impact_effect := IMPACT_EFFECT_SCENE.instance() as Node2D
 			impact_effect.global_position = enemy.global_position
 			current_level.add_child(impact_effect)
 			enemy.die()
