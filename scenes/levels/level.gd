@@ -6,7 +6,6 @@ onready var music_player := $MusicPlayer as AudioStreamPlayer
 
 
 func _ready() -> void:
-	print(music_player)
 	var _conn_error := music_player.connect("finished", self, "_on_MusicPlayer_finished")
 
 

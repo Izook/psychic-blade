@@ -27,7 +27,7 @@ onready var quit_sound_player := $Audio/QuitSoundPlayer as AudioStreamPlayer
 onready var main := preload("res://scenes/main/main.tscn").instance() as Main
 
 var menu_open := false
-var focus_grabbed = false
+var grabbed_focus = false
 
 
 func _ready() -> void:
@@ -39,17 +39,24 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("ui_up") or event.is_action_pressed("ui_down")  or event.is_action_pressed("ui_left")  or event.is_action_pressed("ui_right"):
-		if not focus_grabbed:
-			focus_grabbed = true
+		if not grabbed_focus:
 			start_button.grab_focus()
+			grabbed_focus = true
 	
 	if event.is_action_pressed('ui_cancel'):
 		if menu_open:
-			menu_open = false
-			levels_container.visible = false
-			controls_container.visible = false
-			start_button.grab_focus()
-			cancel_sound_player.play()
+			_exit_menu()
+
+
+func _exit_menu() -> void:
+	menu_open = false
+	levels_container.visible = false
+	controls_container.visible = false
+	cancel_sound_player.play()
+	select_sound_player.set_volume_db(-80.0)
+	start_button.grab_focus()
+	yield(cancel_sound_player, "finished")
+	select_sound_player.set_volume_db(0.0)
 
 
 func _load_version() -> void:
@@ -60,20 +67,11 @@ func _load_version() -> void:
 
 
 func _on_ExitControlsButton_pressed() -> void:
-	menu_open = false
-	controls_container.visible = false
-	controls_button.grab_focus()
-	cancel_sound_player.play()
+	_exit_menu()
 
 
 func _on_ExitLevelsButton_pressed() -> void:
-	menu_open = false
-	levels_container.visible = false
-	start_button.grab_focus()
-	cancel_sound_player.play()
-	select_sound_player.set_volume_db(-80.0)
-	yield(cancel_sound_player, "finished")
-	select_sound_player.set_volume_db(0.0)
+	_exit_menu()
 
 
 func _on_LevelButton_pressed(level: String) -> void:

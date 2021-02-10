@@ -11,7 +11,7 @@ onready var resume_sound_player := $Audio/ResumeSoundPlayer as AudioStreamPlayer
 onready var select_sound_player := $Audio/SelectSoundPlayer as AudioStreamPlayer
 onready var confirm_sound_player := $Audio/ConfirmSoundPlayer as AudioStreamPlayer
 
-var focus_grabbed := false
+var grabbed_focus := true
 
 
 func _ready() -> void:
@@ -19,18 +19,16 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-
 	if event.is_action_pressed("ui_up") or event.is_action_pressed("ui_down")  or event.is_action_pressed("ui_left")  or event.is_action_pressed("ui_right"):
-		print("UI ACTION DETECTED BY PAUSE")
-		if not focus_grabbed:
-			focus_grabbed = true
+		if not grabbed_focus:
 			main_menu_button.grab_focus()
+			grabbed_focus = true
 
 
 func set_active(active: bool) -> void:
 	visible = active
 	if active:
-		focus_grabbed = false
+		grabbed_focus = false
 		pause_sound_player.play()
 	else:
 		resume_sound_player.play()
@@ -38,12 +36,12 @@ func set_active(active: bool) -> void:
 
 func _on_MainMenuButton_pressed() -> void:
 	confirm_sound_player.play()
+	yield(confirm_sound_player, "finished")
 	get_tree().get_root().set_disable_input(true)
 	var _error = get_tree().change_scene(Utils.START_SCENE_PATH)
 
 
 func _on_UnPauseButton_pressed() -> void:
-	resume_sound_player.play()
 	emit_signal("unpaused")
 
 
