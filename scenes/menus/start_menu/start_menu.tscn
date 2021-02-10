@@ -545,7 +545,6 @@ bus = "UI Sounds"
 stream = ExtResource( 11 )
 bus = "UI Sounds"
 [connection signal="focus_entered" from="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer/StartButton" to="." method="_on_Button_focus_entered"]
-[connection signal="focus_exited" from="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer/StartButton" to="." method="_on_StartButton_focus_exited"]
 [connection signal="pressed" from="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="focus_entered" from="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer/ControlsButton" to="." method="_on_Button_focus_entered"]
 [connection signal="pressed" from="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer/ControlsButton" to="." method="_on_ControlsButton_pressed"]

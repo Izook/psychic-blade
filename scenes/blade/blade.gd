@@ -39,6 +39,8 @@ onready var blade_particles := $Blade/Particles2D as Particles2D
 onready var blade_particles_material := blade_particles.get_process_material() as ParticlesMaterial
 onready var blade_realease_timer := $BladeReleaseTimer as Timer
 
+onready var wall_hit_sound_player := $Audio/WallHitSoundPlayer as AudioStreamPlayer2D
+
 onready var current_level := get_node(Utils.ACTIVE_LEVEL_PATH)
 
 var angular_pos := 0.0
@@ -171,6 +173,7 @@ func _move_released_blade() -> void:
 		
 		var tile_map := collision.collider as TileMap
 		if tile_map:
+			wall_hit_sound_player.play()
 			new_blade_velocity = blade_veclocity.bounce(collision.normal)
 			
 		var enemy := collision.collider as Enemy

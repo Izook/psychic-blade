@@ -112,7 +112,3 @@ func _on_MusicPlayer_finished() -> void:
 
 func _on_Button_focus_entered() -> void:
 	select_sound_player.play()
-
-
-func _on_StartButton_focus_exited() -> void:
-	print("RELEASE")

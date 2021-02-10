@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/blade/blades.png" type="Texture" id=1]
 [ext_resource path="res://scenes/blade/blade.gd" type="Script" id=2]
 [ext_resource path="res://scenes/blade/blade_target.png" type="Texture" id=3]
 [ext_resource path="res://scenes/blade/blade_hitbox.gd" type="Script" id=4]
 [ext_resource path="res://scenes/blade/blade_particles.tres" type="Material" id=5]
+[ext_resource path="res://scenes/blade/audio/blade_hit_wall.wav" type="AudioStream" id=7]
 
 [node name="Center" type="Node2D"]
 script = ExtResource( 2 )
@@ -43,6 +44,13 @@ region_rect = Rect2( 0, 96, 32, 32 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="WallHitSoundPlayer" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource( 7 )
+attenuation = 0.2
+bus = "Gameplay Sounds"
 
 [node name="BladeReleaseTimer" type="Timer" parent="."]
 one_shot = true

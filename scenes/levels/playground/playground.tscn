@@ -58,3 +58,4 @@ __meta__ = {
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 autoplay = true
+bus = "Music"
