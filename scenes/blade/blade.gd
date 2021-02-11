@@ -2,10 +2,14 @@ extends Node2D
 
 class_name Blade
 
-const MAX_RADIUS := 300
-const MIN_RADIUS := 150
+const MAX_RADIUS := 175
+const MIN_RADIUS := 50
+const RADIAL_SPEED := 600.0
 
-const MAX_ANGULAR_SPEED := 4 * PI
+const MAX_ANGULAR_SPEED := 2.5 * PI
+const ANGULAR_SPEED_INDEX_POS_DELTA := 0.001
+const ANGULAR_SPEED_INDEX_NEG_DELTA := 0.008
+const ANGULAR_SPEED_INDEX_DAMP := 0.001
 
 const BLADE_SPEED_FACTOR := 40 
 const BLADE_ROTATIONAL_SPEED := PI/10
@@ -21,27 +25,27 @@ enum BladeState {HELD, RELEASED, RETURNING}
 const RETURNING_BLADE_COLOR := Color(1, 0, 0)
 const RELEASED_BLADE_COLOR := Color(0, 1, 0)
 const HELD_BLADE_COLOR := Color(1, 0, 1)
-const BLADE_STATE_COLORS := {
-	BladeState.HELD: HELD_BLADE_COLOR,
-	BladeState.RELEASED: RELEASED_BLADE_COLOR,
-	BladeState.RETURNING: RETURNING_BLADE_COLOR
+const PARTICLE_COLOR_GRADIENT_PATHS := {
+	BladeState.HELD: "res://scenes/blade/particle_gradients/held_particles.tres",
+	BladeState.RELEASED: "res://scenes/blade/particle_gradients/released_particles.tres",
+	BladeState.RETURNING: "res://scenes/blade/particle_gradients/returning_particles.tres"
 }
 
-export (int) var radius := 200
-export (int) var radial_speed := 600.0
-
-export (float) var angular_pos := 0.0
-export (float) var angular_speed_index := 0.0
-export (float) var angular_speed_index_speed := 0.001
-export (float) var angular_speed_index_turning_speed := 0.008
-export (float) var angular_speed_index_damp := 0.001
+const IMPACT_EFFECT_SCENE = preload("res://scenes/blade/impact_effect/impact_effect.tscn")
 
 onready var blade_target := $BladeTarget as Sprite
 onready var blade_node := $Blade as KinematicBody2D
 onready var blade_particles := $Blade/Particles2D as Particles2D
 onready var blade_particles_material := blade_particles.get_process_material() as ParticlesMaterial
-onready var blade_realease_timer = $BladeReleaseTimer as Timer
+onready var blade_realease_timer := $BladeReleaseTimer as Timer
 
+onready var wall_hit_sound_player := $Audio/WallHitSoundPlayer as AudioStreamPlayer2D
+
+onready var current_level := get_node(Utils.ACTIVE_LEVEL_PATH)
+
+var angular_pos := 0.0
+var angular_speed_index := 0.0
+var radius := 100.0
 var target_pos := polar2cartesian(radius, angular_pos) as Vector2
 var blade_angle := 0.0
 
@@ -53,21 +57,21 @@ var blade_veclocity := Vector2(0,0)
 func _get_input(delta: float) -> void:
 	if Input.is_action_pressed('rotate_left'):
 		if angular_speed_index > 0:
-			angular_speed_index += angular_speed_index_speed
+			angular_speed_index += ANGULAR_SPEED_INDEX_POS_DELTA
 		else:
-			angular_speed_index += angular_speed_index_turning_speed
+			angular_speed_index += ANGULAR_SPEED_INDEX_NEG_DELTA
 	elif Input.is_action_pressed('rotate_right'):
 		if angular_speed_index < 0:
-			angular_speed_index -= angular_speed_index_speed
+			angular_speed_index -= ANGULAR_SPEED_INDEX_POS_DELTA
 		else:
-			angular_speed_index -= angular_speed_index_turning_speed
+			angular_speed_index -= ANGULAR_SPEED_INDEX_NEG_DELTA
 	else:
 		if abs(angular_speed_index) < 0.001:
 			angular_speed_index = 0.0
 		elif angular_speed_index > 0:
-			angular_speed_index -= angular_speed_index_damp
+			angular_speed_index -= ANGULAR_SPEED_INDEX_DAMP
 		else:
-			angular_speed_index += angular_speed_index_damp
+			angular_speed_index += ANGULAR_SPEED_INDEX_DAMP
 	
 	angular_speed_index = _limit_speed_index(angular_speed_index)
 	var angular_speed := _get_angular_speed(abs(angular_speed_index))
@@ -76,9 +80,9 @@ func _get_input(delta: float) -> void:
 	angular_pos += angular_speed * delta
 	
 	if Input.is_action_pressed('push_out'):
-		radius += radial_speed * delta
+		radius += RADIAL_SPEED * delta
 	if Input.is_action_pressed('pull_in'):
-		radius -= radial_speed * delta
+		radius -= RADIAL_SPEED * delta
 	
 	radius = _limit_radius(radius)
 	
@@ -97,19 +101,22 @@ func _physics_process(delta: float) -> void:
 	_update_blade_appearance()
 	
 	var new_blade_angle := _move_blade()
+	_handle_enemy_collisions()
+	
 	_rotate_blade(new_blade_angle)
 	
 	update()
 
 
 func _draw() -> void:
-	draw_arc(Vector2(0,0), MIN_RADIUS, 0, 2 * PI, 100, Color(1,1,1,0.5), 1, false)
-	draw_arc(Vector2(0,0), radius, 0, 2 * PI, 100, Color(1,1,1), 2, false)
-	draw_arc(Vector2(0,0), MAX_RADIUS, 0, 2 * PI, 100, Color(1,1,1,0.5), 1, false)
+	var line_width = 1
+	if radius == MIN_RADIUS or radius == MAX_RADIUS:
+		line_width = 3
+	draw_arc(Vector2(0,0), radius, 0, 2 * PI, 100, Color(1,1,1, 0.5), line_width, false)
 
 
-func _limit_radius(r: int) -> int:
-	return max(min(MAX_RADIUS, r), MIN_RADIUS) as int
+func _limit_radius(r: float) -> float:
+	return max(min(MAX_RADIUS, r), MIN_RADIUS)
 
 
 func _limit_speed_index(i : float) -> float:
@@ -119,8 +126,6 @@ func _limit_speed_index(i : float) -> float:
 # Returns the angular speed of the blade based on a position on the easeOutQuart
 # curve. Curve gotten from https://easings.net/#easeOutQuart
 func _get_angular_speed(i: float) -> float:
-	if (1.0 - i < 0.1):
-		print("SPEED: " + str(blade_veclocity.length()))
 	var angular_speed = (1 - pow(1 - i, 4)) * MAX_ANGULAR_SPEED
 	if blade_state != BladeState.RETURNING:
 		return angular_speed
@@ -143,7 +148,7 @@ func _move_blade() -> float:
 				
 			_move_held_blade()
 		
-		BladeState.RELEASED:			
+		BladeState.RELEASED:
 			new_blade_angle = blade_veclocity.angle()
 			
 			_move_released_blade()
@@ -165,8 +170,15 @@ func _move_released_blade() -> void:
 	
 	for i in blade_node.get_slide_count():
 		var collision := blade_node.get_slide_collision(i)
-		if collision.collider.name == "TileMap":
+		
+		var tile_map := collision.collider as TileMap
+		if tile_map:
+			wall_hit_sound_player.play()
 			new_blade_velocity = blade_veclocity.bounce(collision.normal)
+			
+		var enemy := collision.collider as Enemy
+		if enemy:
+			new_blade_velocity = blade_veclocity
 	
 	blade_veclocity = new_blade_velocity * RELEASED_BLADE_DAMP
 
@@ -174,12 +186,25 @@ func _move_released_blade() -> void:
 func _move_returning_blade() -> void:
 	var global_target_pos := (get_global_position() + target_pos)
 	var angle_to_target := global_target_pos.angle_to_point(blade_node.get_global_position())
-	var new_blade_velocity := Vector2(cos(angle_to_target), sin(angle_to_target)) * 1000
+	var new_blade_velocity := Vector2(cos(angle_to_target), sin(angle_to_target))
+	new_blade_velocity = new_blade_velocity * get_max_speed() / 2
 	
 	blade_veclocity = blade_node.move_and_slide(new_blade_velocity)
 	
 	if ((blade_node.position - global_target_pos).length() < 15):
 		set_blade_state(BladeState.HELD)
+
+
+func _handle_enemy_collisions() -> void:
+	for i in blade_node.get_slide_count():
+		var collision := blade_node.get_slide_collision(i)
+		
+		var enemy := collision.collider as Enemy
+		if enemy:
+			var impact_effect := IMPACT_EFFECT_SCENE.instance() as Node2D
+			impact_effect.global_position = enemy.global_position
+			current_level.add_child(impact_effect)
+			enemy.die()
 
 
 func _rotate_blade(new_angle: float) -> void:
@@ -196,16 +221,20 @@ func _rotate_blade(new_angle: float) -> void:
 	angular_pos = fposmod(angular_pos, 2 * PI)
 	blade_angle = fposmod(blade_angle, 2 * PI)
 	
-	blade_node.set_global_rotation(blade_angle)
+	blade_node.set_global_rotation(blade_angle + ((3 * PI) / 4))
 
 
 func _update_blade_target() -> void:
 	target_pos = polar2cartesian(radius, angular_pos)
 	blade_target.set_position(target_pos)
+	
+	blade_target.visible = true
+	if (blade_target.global_position - blade_node.global_position).length() < 20:
+		blade_target.visible = false 
 
 
 func _update_blade_appearance() -> void:
-	blade_particles_material.set_color(BLADE_STATE_COLORS[blade_state])
+	blade_particles_material.set_color_ramp(load(PARTICLE_COLOR_GRADIENT_PATHS[blade_state]))
 
 
 func set_blade_state(new_state: int) -> void:

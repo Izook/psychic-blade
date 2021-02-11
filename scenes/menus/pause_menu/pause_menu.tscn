@@ -1,6 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://shared_assets/pirata_one.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scenes/menus/pause_menu/pause_menu.gd" type="Script" id=2]
+[ext_resource path="res://scenes/menus/menu_theme.tres" type="Theme" id=3]
+[ext_resource path="res://scenes/menus/ui_sound_effects/game_resume___souptonic.wav" type="AudioStream" id=4]
+[ext_resource path="res://scenes/menus/ui_sound_effects/game_pause___souptonic.wav" type="AudioStream" id=5]
+[ext_resource path="res://scenes/menus/ui_sound_effects/menu_select___souptonic.wav" type="AudioStream" id=6]
+[ext_resource path="res://scenes/menus/ui_sound_effects/menu_confirm___souptonic.wav" type="AudioStream" id=7]
+[ext_resource path="res://scenes/menus/custom_button.gd" type="Script" id=8]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 1, 0.478431 )
@@ -9,9 +16,17 @@ bg_color = Color( 0, 0, 1, 0.478431 )
 size = 72
 font_data = ExtResource( 1 )
 
+[sub_resource type="DynamicFont" id=3]
+size = 36
+font_data = ExtResource( 1 )
+
 [node name="PauseMenu" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 margin_right = 1024.0
@@ -38,24 +53,71 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
 margin_left = 5.0
-margin_top = 5.0
+margin_top = 201.0
 margin_right = 1019.0
-margin_bottom = 595.0
+margin_bottom = 399.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 4
 
 [node name="CenterContainer" type="CenterContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 margin_right = 1014.0
-margin_bottom = 590.0
+margin_bottom = 94.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer"]
 margin_left = 415.0
-margin_top = 248.0
 margin_right = 598.0
-margin_bottom = 342.0
+margin_bottom = 94.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 custom_fonts/font = SubResource( 2 )
 text = "paused"
+
+[node name="MainMenuButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+margin_left = 439.0
+margin_top = 98.0
+margin_right = 575.0
+margin_bottom = 146.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource( 3 )
+custom_fonts/font = SubResource( 3 )
+text = "main menu"
+script = ExtResource( 8 )
+
+[node name="UnPauseButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+margin_left = 454.0
+margin_top = 150.0
+margin_right = 559.0
+margin_bottom = 198.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource( 3 )
+custom_fonts/font = SubResource( 3 )
+text = "unpause"
+script = ExtResource( 8 )
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="PauseSoundPlayer" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 5 )
+bus = "UI Sounds"
+
+[node name="ResumeSoundPlayer" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 4 )
+bus = "UI Sounds"
+
+[node name="SelectSoundPlayer" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 6 )
+bus = "UI Sounds"
+
+[node name="ConfirmSoundPlayer" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 7 )
+bus = "UI Sounds"
+[connection signal="focus_entered" from="PanelContainer/MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_Button_focus_entered"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
+[connection signal="focus_entered" from="PanelContainer/MarginContainer/VBoxContainer/UnPauseButton" to="." method="_on_Button_focus_entered"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/UnPauseButton" to="." method="_on_UnPauseButton_pressed"]
