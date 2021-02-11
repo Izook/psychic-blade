@@ -45,14 +45,15 @@ func _attack(delta: float) -> void:
 
 
 func die() -> void:
-	slime_state = SlimeState.DEAD
-	hitbox.set_disabled(true)
-	death_sound_player.play()
-	animation_player.play("death")
-	
-	remove_from_group("enemies")
-	hitbox.set_disabled(true)
-	death_timer.start()
+	if slime_state != SlimeState.DEAD:
+		slime_state = SlimeState.DEAD
+		hitbox.set_disabled(true)
+		death_sound_player.play()
+		animation_player.play("death")
+		
+		call_deferred("remove_from_group", "enemies")
+		hitbox.set_disabled(true)
+		death_timer.start()
 
 
 func _move_slime(velocity: Vector2, delta: float) -> void:

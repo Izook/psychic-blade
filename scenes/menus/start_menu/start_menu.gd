@@ -26,6 +26,7 @@ onready var quit_sound_player := $Audio/QuitSoundPlayer as AudioStreamPlayer
 onready var main := preload("res://scenes/main/main.tscn").instance() as Main
 
 var menu_open := false
+
 var grabbed_focus = false
 
 
