@@ -12,6 +12,8 @@ bg_color = Color( 1, 0, 0, 0.478431 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 72
+outline_size = 6
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
@@ -75,9 +77,9 @@ custom_fonts/font = SubResource( 2 )
 text = "Game Over"
 
 [node name="MainMenuButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
-margin_left = 439.0
+margin_left = 429.0
 margin_top = 419.0
-margin_right = 575.0
+margin_right = 585.0
 margin_bottom = 467.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4

@@ -10,11 +10,11 @@ const LEVELS_MAP = {
 
 onready var version_label := $Version as Label
 
-onready var start_button := $TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer/StartButton as Button
-onready var controls_button := $TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer/ControlsButton as Button
+onready var start_button := $TitleContainer/VBoxContainer/VBoxContainer/StartButton as Button
 onready var first_level_button := $LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer/SlimesLevel as Button
 onready var exit_controls_button := $ControlsContainer/Panel/MarginContainer/ExitControlsButton as TextureButton
 
+onready var title_container := $TitleContainer as MarginContainer
 onready var controls_container := $ControlsContainer as MarginContainer
 onready var levels_container := $LevelsContainer as MarginContainer
 
@@ -27,6 +27,7 @@ onready var quit_sound_player := $Audio/QuitSoundPlayer as AudioStreamPlayer
 onready var main := preload("res://scenes/main/main.tscn").instance() as Main
 
 var menu_open := false
+
 var grabbed_focus = false
 
 
@@ -51,6 +52,7 @@ func _input(event: InputEvent) -> void:
 
 func _exit_menu() -> void:
 	menu_open = false
+	title_container.visible = true
 	levels_container.visible = false
 	controls_container.visible = false
 	cancel_sound_player.play()
@@ -89,6 +91,7 @@ func _on_LevelButton_pressed(level: String) -> void:
 
 func _on_ControlsButton_pressed() -> void:
 	menu_open = true
+	title_container.visible = false
 	controls_container.visible = true
 	exit_controls_button.grab_focus()
 	confirm_sound_player.play()
@@ -96,6 +99,7 @@ func _on_ControlsButton_pressed() -> void:
 
 func _on_StartButton_pressed() -> void:
 	menu_open = true
+	title_container.visible = false
 	levels_container.visible = true
 	first_level_button.grab_focus()
 	confirm_sound_player.play()

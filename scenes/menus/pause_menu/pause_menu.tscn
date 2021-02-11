@@ -14,6 +14,8 @@ bg_color = Color( 0, 0, 1, 0.478431 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 72
+outline_size = 6
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
@@ -53,17 +55,18 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
 margin_left = 5.0
-margin_top = 201.0
+margin_top = 5.0
 margin_right = 1019.0
-margin_bottom = 399.0
+margin_bottom = 595.0
 size_flags_horizontal = 3
-size_flags_vertical = 4
+size_flags_vertical = 5
 
 [node name="CenterContainer" type="CenterContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+margin_top = 199.0
 margin_right = 1014.0
-margin_bottom = 94.0
+margin_bottom = 293.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 14
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer"]
 margin_left = 415.0
@@ -74,11 +77,17 @@ size_flags_vertical = 6
 custom_fonts/font = SubResource( 2 )
 text = "paused"
 
-[node name="MainMenuButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
-margin_left = 439.0
-margin_top = 98.0
-margin_right = 575.0
-margin_bottom = 146.0
+[node name="CenterContainer2" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+margin_top = 393.0
+margin_right = 1014.0
+margin_bottom = 493.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+
+[node name="MainMenuButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer2"]
+margin_left = 429.0
+margin_right = 585.0
+margin_bottom = 48.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
@@ -87,11 +96,11 @@ custom_fonts/font = SubResource( 3 )
 text = "main menu"
 script = ExtResource( 8 )
 
-[node name="UnPauseButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
-margin_left = 454.0
-margin_top = 150.0
-margin_right = 559.0
-margin_bottom = 198.0
+[node name="UnPauseButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer2"]
+margin_left = 444.0
+margin_top = 52.0
+margin_right = 569.0
+margin_bottom = 100.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
@@ -117,7 +126,7 @@ bus = "UI Sounds"
 [node name="ConfirmSoundPlayer" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 7 )
 bus = "UI Sounds"
-[connection signal="focus_entered" from="PanelContainer/MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_Button_focus_entered"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
-[connection signal="focus_entered" from="PanelContainer/MarginContainer/VBoxContainer/UnPauseButton" to="." method="_on_Button_focus_entered"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/UnPauseButton" to="." method="_on_UnPauseButton_pressed"]
+[connection signal="focus_entered" from="PanelContainer/MarginContainer/VBoxContainer/CenterContainer2/MainMenuButton" to="." method="_on_Button_focus_entered"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/CenterContainer2/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
+[connection signal="focus_entered" from="PanelContainer/MarginContainer/VBoxContainer/CenterContainer2/UnPauseButton" to="." method="_on_Button_focus_entered"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/CenterContainer2/UnPauseButton" to="." method="_on_UnPauseButton_pressed"]

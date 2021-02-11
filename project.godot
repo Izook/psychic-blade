@@ -130,7 +130,7 @@ _global_script_class_icons={
 
 config/name="psychic-blade"
 run/main_scene="res://scenes/menus/start_menu/start_menu.tscn"
-boot_splash/bg_color=Color( 0.690196, 0.690196, 0.690196, 1 )
+boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://shared_assets/icon.png"
 
 [autoload]
@@ -145,6 +145,11 @@ gdscript/warnings/unused_class_variable=true
 gdscript/warnings/unsafe_method_access=true
 gdscript/warnings/unsafe_cast=true
 gdscript/warnings/unsafe_call_argument=true
+
+[display]
+
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
 
 [importer_defaults]
 
@@ -271,5 +276,4 @@ file_logging/log_path="res://logs/log.txt"
 
 [rendering]
 
-environment/default_clear_color=Color( 0.690196, 0.690196, 0.690196, 1 )
 environment/default_environment="res://default_env.tres"

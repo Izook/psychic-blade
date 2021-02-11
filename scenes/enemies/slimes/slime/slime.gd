@@ -39,20 +39,21 @@ func _wander(delta: float) -> void:
 
 
 func _attack(delta: float) -> void:
-	var player_direction = global_position.direction_to(player.global_position)
+	var player_direction := global_position.direction_to(player.global_position)
 	var velocity := (player_direction * _get_slime_speed(delta)) as Vector2
 	_move_slime(velocity, delta)
 
 
 func die() -> void:
-	slime_state = SlimeState.DEAD
-	hitbox.set_disabled(true)
-	death_sound_player.play()
-	animation_player.play("death")
-	
-	remove_from_group("enemies")
-	hitbox.set_disabled(true)
-	death_timer.start()
+	if slime_state != SlimeState.DEAD:
+		slime_state = SlimeState.DEAD
+		hitbox.set_disabled(true)
+		death_sound_player.play()
+		animation_player.play("death")
+		
+		remove_from_group("enemies")
+		hitbox.set_disabled(true)
+		death_timer.start()
 
 
 func _move_slime(velocity: Vector2, delta: float) -> void:
