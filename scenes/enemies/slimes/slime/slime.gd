@@ -51,7 +51,7 @@ func die() -> void:
 		death_sound_player.play()
 		animation_player.play("death")
 		
-		call_deferred("remove_from_group", "enemies")
+		remove_from_group("enemies")
 		hitbox.set_disabled(true)
 		death_timer.start()
 
