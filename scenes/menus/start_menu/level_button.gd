@@ -1,4 +1,4 @@
-extends Button
+extends CustomButton
 
 class_name LevelButton
 

@@ -31,13 +31,15 @@ const PARTICLE_COLOR_GRADIENT_PATHS := {
 	BladeState.RETURNING: "res://scenes/blade/particle_gradients/returning_particles.tres"
 }
 
-const impact_effect_scene = preload("res://scenes/blade/impact_effect/impact_effect.tscn")
+const IMPACT_EFFECT_SCENE = preload("res://scenes/blade/impact_effect/impact_effect.tscn")
 
 onready var blade_target := $BladeTarget as Sprite
 onready var blade_node := $Blade as KinematicBody2D
 onready var blade_particles := $Blade/Particles2D as Particles2D
 onready var blade_particles_material := blade_particles.get_process_material() as ParticlesMaterial
 onready var blade_realease_timer := $BladeReleaseTimer as Timer
+
+onready var wall_hit_sound_player := $Audio/WallHitSoundPlayer as AudioStreamPlayer2D
 
 onready var current_level := get_node(Utils.ACTIVE_LEVEL_PATH)
 
@@ -171,6 +173,7 @@ func _move_released_blade() -> void:
 		
 		var tile_map := collision.collider as TileMap
 		if tile_map:
+			wall_hit_sound_player.play()
 			new_blade_velocity = blade_veclocity.bounce(collision.normal)
 			
 		var enemy := collision.collider as Enemy
@@ -198,7 +201,7 @@ func _handle_enemy_collisions() -> void:
 		
 		var enemy := collision.collider as Enemy
 		if enemy:
-			var impact_effect := impact_effect_scene.instance() as Node2D
+			var impact_effect := IMPACT_EFFECT_SCENE.instance() as Node2D
 			impact_effect.global_position = enemy.global_position
 			current_level.add_child(impact_effect)
 			enemy.die()

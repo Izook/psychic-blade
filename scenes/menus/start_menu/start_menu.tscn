@@ -1,11 +1,19 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://shared_assets/pirata_one.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/menus/start_menu/start_menu.gd" type="Script" id=2]
 [ext_resource path="res://scenes/menus/start_menu/escape.png" type="Texture" id=3]
 [ext_resource path="res://scenes/menus/start_menu/level_button.gd" type="Script" id=4]
 [ext_resource path="res://scenes/menus/menu_theme.tres" type="Theme" id=5]
+[ext_resource path="res://scenes/menus/start_menu/to_them___snabisch.wav" type="AudioStream" id=6]
 [ext_resource path="res://scenes/menus/start_menu/escape_hover.png" type="Texture" id=7]
+[ext_resource path="res://scenes/menus/ui_sound_effects/menu_select___souptonic.wav" type="AudioStream" id=8]
+[ext_resource path="res://scenes/menus/ui_sound_effects/menu_confirm___souptonic.wav" type="AudioStream" id=9]
+[ext_resource path="res://scenes/menus/ui_sound_effects/menu_cancel___souptonic.wav" type="AudioStream" id=10]
+[ext_resource path="res://scenes/menus/ui_sound_effects/game_exit___souptonic.wav" type="AudioStream" id=11]
+[ext_resource path="res://scenes/menus/custom_button.gd" type="Script" id=12]
+[ext_resource path="res://scenes/menus/custom_texture_button.gd" type="Script" id=13]
+[ext_resource path="res://shared_scripts/music_player.gd" type="Script" id=14]
 
 [sub_resource type="DynamicFont" id=1]
 size = 128
@@ -74,9 +82,9 @@ __meta__ = {
 }
 
 [node name="CenterContainer" type="CenterContainer" parent="TitleContainer/VBoxContainer"]
-margin_top = 140.0
+margin_top = 107.0
 margin_right = 1004.0
-margin_bottom = 305.0
+margin_bottom = 272.0
 
 [node name="Title" type="Label" parent="TitleContainer/VBoxContainer/CenterContainer"]
 margin_left = 194.0
@@ -90,17 +98,17 @@ __meta__ = {
 }
 
 [node name="CenterContainer2" type="CenterContainer" parent="TitleContainer/VBoxContainer"]
-margin_top = 309.0
+margin_top = 276.0
 margin_right = 1004.0
-margin_bottom = 439.0
+margin_bottom = 473.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TitleContainer/VBoxContainer/CenterContainer2"]
-margin_left = 431.0
-margin_right = 572.0
-margin_bottom = 130.0
+margin_left = 403.0
+margin_right = 601.0
+margin_bottom = 197.0
 
 [node name="StartButton" type="Button" parent="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
-margin_right = 141.0
+margin_right = 198.0
 margin_bottom = 63.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath(".")
@@ -115,10 +123,11 @@ theme = ExtResource( 5 )
 custom_fonts/font = SubResource( 2 )
 group = SubResource( 3 )
 text = "Start"
+script = ExtResource( 12 )
 
 [node name="ControlsButton" type="Button" parent="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
 margin_top = 67.0
-margin_right = 141.0
+margin_right = 198.0
 margin_bottom = 130.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath("../StartButton")
@@ -132,6 +141,7 @@ size_flags_vertical = 0
 theme = ExtResource( 5 )
 custom_fonts/font = SubResource( 4 )
 text = "Controls"
+script = ExtResource( 12 )
 
 [node name="QuitPlayingButton" type="Button" parent="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
 margin_top = 134.0
@@ -149,6 +159,7 @@ size_flags_vertical = 0
 theme = ExtResource( 5 )
 custom_fonts/font = SubResource( 4 )
 text = "Quit Playing"
+script = ExtResource( 12 )
 
 [node name="Version" type="Label" parent="."]
 margin_left = 10.0
@@ -326,6 +337,7 @@ size_flags_horizontal = 4
 theme = ExtResource( 5 )
 custom_fonts/font = SubResource( 8 )
 text = "OK"
+script = ExtResource( 12 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -348,6 +360,7 @@ theme = ExtResource( 5 )
 shortcut_in_tooltip = false
 texture_normal = ExtResource( 3 )
 texture_hover = ExtResource( 7 )
+script = ExtResource( 13 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -505,12 +518,46 @@ size_flags_horizontal = 8
 size_flags_vertical = 0
 texture_normal = ExtResource( 3 )
 texture_hover = ExtResource( 7 )
+script = ExtResource( 13 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 6 )
+autoplay = true
+bus = "Music"
+script = ExtResource( 14 )
+
+[node name="SelectSoundPlayer" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 8 )
+bus = "UI Sounds"
+
+[node name="ConfirmSoundPlayer" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 9 )
+bus = "UI Sounds"
+
+[node name="CancelSoundPlayer" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 10 )
+bus = "UI Sounds"
+
+[node name="QuitSoundPlayer" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 11 )
+bus = "UI Sounds"
+[connection signal="focus_entered" from="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer/StartButton" to="." method="_on_Button_focus_entered"]
 [connection signal="pressed" from="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="focus_entered" from="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer/ControlsButton" to="." method="_on_Button_focus_entered"]
 [connection signal="pressed" from="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer/ControlsButton" to="." method="_on_ControlsButton_pressed"]
+[connection signal="focus_entered" from="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer/QuitPlayingButton" to="." method="_on_Button_focus_entered"]
 [connection signal="pressed" from="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer/QuitPlayingButton" to="." method="_on_QuitPlayingButton_pressed"]
+[connection signal="focus_entered" from="ControlsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/OKButton" to="." method="_on_Button_focus_entered"]
 [connection signal="pressed" from="ControlsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/OKButton" to="." method="_on_ExitControlsButton_pressed"]
+[connection signal="focus_entered" from="ControlsContainer/Panel/MarginContainer/ExitControlsButton" to="." method="_on_Button_focus_entered"]
 [connection signal="pressed" from="ControlsContainer/Panel/MarginContainer/ExitControlsButton" to="." method="_on_ExitControlsButton_pressed"]
+[connection signal="focus_entered" from="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer/SlimesLevel" to="." method="_on_Button_focus_entered"]
+[connection signal="focus_entered" from="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer/Playground" to="." method="_on_Button_focus_entered"]
+[connection signal="focus_entered" from="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer/SlimeSpawners" to="." method="_on_Button_focus_entered"]
+[connection signal="focus_entered" from="LevelsContainer/Panel/MarginContainer/ExitLevelsButton" to="." method="_on_Button_focus_entered"]
 [connection signal="pressed" from="LevelsContainer/Panel/MarginContainer/ExitLevelsButton" to="." method="_on_ExitLevelsButton_pressed"]

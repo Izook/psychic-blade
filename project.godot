@@ -19,6 +19,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/blade/blade_hitbox.gd"
 }, {
+"base": "Button",
+"class": "CustomButton",
+"language": "GDScript",
+"path": "res://scenes/menus/custom_button.gd"
+}, {
+"base": "BaseButton",
+"class": "CustomTextureButton",
+"language": "GDScript",
+"path": "res://scenes/menus/custom_texture_button.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Enemy",
 "language": "GDScript",
@@ -34,7 +44,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/hud/hud.gd"
 }, {
-"base": "Button",
+"base": "Node",
+"class": "Level",
+"language": "GDScript",
+"path": "res://scenes/levels/level.gd"
+}, {
+"base": "CustomButton",
 "class": "LevelButton",
 "language": "GDScript",
 "path": "res://scenes/menus/start_menu/level_button.gd"
@@ -43,6 +58,11 @@ _global_script_classes=[ {
 "class": "Main",
 "language": "GDScript",
 "path": "res://scenes/main/main.gd"
+}, {
+"base": "AudioStreamPlayer",
+"class": "MusicPlayer",
+"language": "GDScript",
+"path": "res://shared_scripts/music_player.gd"
 }, {
 "base": "MarginContainer",
 "class": "PauseMenu",
@@ -58,11 +78,6 @@ _global_script_classes=[ {
 "class": "PlayerSprite",
 "language": "GDScript",
 "path": "res://scenes/player/player_sprite.gd"
-}, {
-"base": "Node2D",
-"class": "Playground",
-"language": "GDScript",
-"path": "res://scenes/levels/playground/playground.gd"
 }, {
 "base": "Enemy",
 "class": "Slime",
@@ -92,15 +107,18 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Blade": "",
 "BladeHitbox": "",
+"CustomButton": "",
+"CustomTextureButton": "",
 "Enemy": "",
 "GameOverMenu": "",
 "Hud": "",
+"Level": "",
 "LevelButton": "",
 "Main": "",
+"MusicPlayer": "",
 "PauseMenu": "",
 "Player": "",
 "PlayerSprite": "",
-"Playground": "",
 "Slime": "",
 "SlimeSpawner": "",
 "Spawner": "",
@@ -118,6 +136,7 @@ config/icon="res://shared_assets/icon.png"
 [autoload]
 
 Utils="*res://shared_scripts/utilities.gd"
+AudioUtilities="*res://shared_scripts/audio_utilities.gd"
 
 [debug]
 

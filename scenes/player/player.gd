@@ -19,6 +19,7 @@ onready var dash_particles := $DashParticles as Particles2D
 onready var dash_timer := $DashTimer as Timer
 onready var dash_reset_timer := $DashResetTimer as Timer
 onready var player_sprite := $PlayerSprite as PlayerSprite
+onready var dash_sound_player := $Audio/DashSoundPlayer as AudioStreamPlayer2D
 
 var velocity := Vector2()
 var camera_zoom := 0.5
@@ -54,7 +55,8 @@ func _get_input(delta: float) -> void:
 	
 	velocity = velocity.normalized() * SPEED
 	
-	if dash_requested && !player_dashing && dash_ready && velocity.length() > 0:
+	if dash_requested and not player_dashing and dash_ready and velocity.length() > 0:
+		dash_sound_player.play()
 		dash_particles.restart()
 		dash_particles.set_emitting(true)
 		player_dashing = true
