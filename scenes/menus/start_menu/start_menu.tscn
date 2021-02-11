@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://shared_assets/pirata_one.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/menus/start_menu/start_menu.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://scenes/menus/ui_sound_effects/game_exit___souptonic.wav" type="AudioStream" id=11]
 [ext_resource path="res://scenes/menus/custom_button.gd" type="Script" id=12]
 [ext_resource path="res://scenes/menus/custom_texture_button.gd" type="Script" id=13]
+[ext_resource path="res://shared_scripts/music_player.gd" type="Script" id=14]
 
 [sub_resource type="DynamicFont" id=1]
 size = 128
@@ -528,6 +529,7 @@ __meta__ = {
 stream = ExtResource( 6 )
 autoplay = true
 bus = "Music"
+script = ExtResource( 14 )
 
 [node name="SelectSoundPlayer" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 8 )
@@ -559,4 +561,3 @@ bus = "UI Sounds"
 [connection signal="focus_entered" from="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer/SlimeSpawners" to="." method="_on_Button_focus_entered"]
 [connection signal="focus_entered" from="LevelsContainer/Panel/MarginContainer/ExitLevelsButton" to="." method="_on_Button_focus_entered"]
 [connection signal="pressed" from="LevelsContainer/Panel/MarginContainer/ExitLevelsButton" to="." method="_on_ExitLevelsButton_pressed"]
-[connection signal="finished" from="Audio/MusicPlayer" to="." method="_on_MusicPlayer_finished"]

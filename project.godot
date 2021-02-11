@@ -59,6 +59,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/main/main.gd"
 }, {
+"base": "AudioStreamPlayer",
+"class": "MusicPlayer",
+"language": "GDScript",
+"path": "res://shared_scripts/music_player.gd"
+}, {
 "base": "MarginContainer",
 "class": "PauseMenu",
 "language": "GDScript",
@@ -110,6 +115,7 @@ _global_script_class_icons={
 "Level": "",
 "LevelButton": "",
 "Main": "",
+"MusicPlayer": "",
 "PauseMenu": "",
 "Player": "",
 "PlayerSprite": "",
