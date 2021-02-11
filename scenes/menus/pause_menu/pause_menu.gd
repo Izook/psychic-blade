@@ -4,7 +4,7 @@ class_name PauseMenu
 
 signal unpaused
 
-onready var main_menu_button := $PanelContainer/MarginContainer/VBoxContainer/MainMenuButton as Button
+onready var main_menu_button := $PanelContainer/MarginContainer/VBoxContainer/CenterContainer2/MainMenuButton as Button
 
 onready var pause_sound_player := $Audio/PauseSoundPlayer as AudioStreamPlayer
 onready var resume_sound_player := $Audio/ResumeSoundPlayer as AudioStreamPlayer

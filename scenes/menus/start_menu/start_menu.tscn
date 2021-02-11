@@ -17,6 +17,8 @@
 
 [sub_resource type="DynamicFont" id=1]
 size = 128
+outline_size = 6
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=2]
@@ -42,6 +44,8 @@ corner_radius_bottom_left = 20
 
 [sub_resource type="DynamicFont" id=7]
 size = 84
+outline_size = 6
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=8]
@@ -91,24 +95,20 @@ margin_left = 194.0
 margin_right = 809.0
 margin_bottom = 165.0
 custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0, 0.32549, 1, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Psychic Blade"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterContainer2" type="CenterContainer" parent="TitleContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TitleContainer/VBoxContainer"]
 margin_top = 276.0
 margin_right = 1004.0
 margin_bottom = 473.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TitleContainer/VBoxContainer/CenterContainer2"]
-margin_left = 403.0
-margin_right = 601.0
-margin_bottom = 197.0
-
-[node name="StartButton" type="Button" parent="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
-margin_right = 198.0
+[node name="StartButton" type="Button" parent="TitleContainer/VBoxContainer/VBoxContainer"]
+margin_left = 452.0
+margin_right = 552.0
 margin_bottom = 63.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath(".")
@@ -117,7 +117,7 @@ focus_neighbour_bottom = NodePath("../ControlsButton")
 focus_next = NodePath("../ControlsButton")
 focus_previous = NodePath(".")
 mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 4
 size_flags_vertical = 0
 theme = ExtResource( 5 )
 custom_fonts/font = SubResource( 2 )
@@ -125,9 +125,10 @@ group = SubResource( 3 )
 text = "Start"
 script = ExtResource( 12 )
 
-[node name="ControlsButton" type="Button" parent="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
+[node name="ControlsButton" type="Button" parent="TitleContainer/VBoxContainer/VBoxContainer"]
+margin_left = 421.0
 margin_top = 67.0
-margin_right = 198.0
+margin_right = 582.0
 margin_bottom = 130.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath("../StartButton")
@@ -136,16 +137,17 @@ focus_neighbour_bottom = NodePath("../QuitPlayingButton")
 focus_next = NodePath("../QuitPlayingButton")
 focus_previous = NodePath("../StartButton")
 mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 4
 size_flags_vertical = 0
 theme = ExtResource( 5 )
 custom_fonts/font = SubResource( 4 )
 text = "Controls"
 script = ExtResource( 12 )
 
-[node name="QuitPlayingButton" type="Button" parent="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
+[node name="QuitPlayingButton" type="Button" parent="TitleContainer/VBoxContainer/VBoxContainer"]
+margin_left = 393.0
 margin_top = 134.0
-margin_right = 198.0
+margin_right = 611.0
 margin_bottom = 197.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath("../ControlsButton")
@@ -154,7 +156,7 @@ focus_neighbour_bottom = NodePath(".")
 focus_next = NodePath(".")
 focus_previous = NodePath("../ControlsButton")
 mouse_default_cursor_shape = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 4
 size_flags_vertical = 0
 theme = ExtResource( 5 )
 custom_fonts/font = SubResource( 4 )
@@ -233,7 +235,7 @@ margin_left = 370.0
 margin_right = 614.0
 margin_bottom = 109.0
 custom_fonts/font = SubResource( 7 )
-custom_colors/font_color = Color( 0.0784314, 1, 0.588235, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Controls"
 __meta__ = {
 "_edit_lock_": true,
@@ -423,7 +425,7 @@ margin_left = 316.0
 margin_right = 667.0
 margin_bottom = 109.0
 custom_fonts/font = SubResource( 7 )
-custom_colors/font_color = Color( 0, 1, 0.552941, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Select Level"
 __meta__ = {
 "_edit_lock_": true,
@@ -439,8 +441,8 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2"]
-margin_left = 390.0
-margin_right = 593.0
+margin_left = 380.0
+margin_right = 603.0
 margin_bottom = 152.0
 __meta__ = {
 "_edit_lock_": true
@@ -546,12 +548,12 @@ bus = "UI Sounds"
 [node name="QuitSoundPlayer" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 11 )
 bus = "UI Sounds"
-[connection signal="focus_entered" from="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer/StartButton" to="." method="_on_Button_focus_entered"]
-[connection signal="pressed" from="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
-[connection signal="focus_entered" from="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer/ControlsButton" to="." method="_on_Button_focus_entered"]
-[connection signal="pressed" from="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer/ControlsButton" to="." method="_on_ControlsButton_pressed"]
-[connection signal="focus_entered" from="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer/QuitPlayingButton" to="." method="_on_Button_focus_entered"]
-[connection signal="pressed" from="TitleContainer/VBoxContainer/CenterContainer2/VBoxContainer/QuitPlayingButton" to="." method="_on_QuitPlayingButton_pressed"]
+[connection signal="focus_entered" from="TitleContainer/VBoxContainer/VBoxContainer/StartButton" to="." method="_on_Button_focus_entered"]
+[connection signal="pressed" from="TitleContainer/VBoxContainer/VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="focus_entered" from="TitleContainer/VBoxContainer/VBoxContainer/ControlsButton" to="." method="_on_Button_focus_entered"]
+[connection signal="pressed" from="TitleContainer/VBoxContainer/VBoxContainer/ControlsButton" to="." method="_on_ControlsButton_pressed"]
+[connection signal="focus_entered" from="TitleContainer/VBoxContainer/VBoxContainer/QuitPlayingButton" to="." method="_on_Button_focus_entered"]
+[connection signal="pressed" from="TitleContainer/VBoxContainer/VBoxContainer/QuitPlayingButton" to="." method="_on_QuitPlayingButton_pressed"]
 [connection signal="focus_entered" from="ControlsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/OKButton" to="." method="_on_Button_focus_entered"]
 [connection signal="pressed" from="ControlsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/OKButton" to="." method="_on_ExitControlsButton_pressed"]
 [connection signal="focus_entered" from="ControlsContainer/Panel/MarginContainer/ExitControlsButton" to="." method="_on_Button_focus_entered"]
