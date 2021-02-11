@@ -39,7 +39,7 @@ func _wander(delta: float) -> void:
 
 
 func _attack(delta: float) -> void:
-	var player_direction = global_position.direction_to(player.global_position)
+	var player_direction := global_position.direction_to(player.global_position)
 	var velocity := (player_direction * _get_slime_speed(delta)) as Vector2
 	_move_slime(velocity, delta)
 

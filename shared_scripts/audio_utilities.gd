@@ -14,6 +14,7 @@ func set_distort_music(active: bool) -> void:
 		AudioServer.add_bus_effect(music_bus, pitch_shift_effect)
 		AudioServer.add_bus_effect(music_bus, notch_filter_effect)
 	else:
-		AudioServer.remove_bus_effect(music_bus, 0)
-		AudioServer.remove_bus_effect(music_bus, 0)
+		while AudioServer.get_bus_effect_count(music_bus):
+			AudioServer.remove_bus_effect(music_bus, 0)
+
 
