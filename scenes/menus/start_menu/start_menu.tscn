@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://shared_assets/pirata_one.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/menus/start_menu/start_menu.gd" type="Script" id=2]
@@ -14,6 +14,29 @@
 [ext_resource path="res://scenes/menus/custom_button.gd" type="Script" id=12]
 [ext_resource path="res://scenes/menus/custom_texture_button.gd" type="Script" id=13]
 [ext_resource path="res://shared_scripts/music_player.gd" type="Script" id=14]
+[ext_resource path="res://scenes/levels/main_menu_background/main_menu_background.tscn" type="PackedScene" id=15]
+
+[sub_resource type="Gradient" id=11]
+offsets = PoolRealArray( 0.00571429, 1 )
+colors = PoolColorArray( 0, 1, 0.871094, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=12]
+gradient = SubResource( 11 )
+
+[sub_resource type="ParticlesMaterial" id=10]
+emission_shape = 2
+emission_box_extents = Vector3( 512, 1, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 200.0
+angular_velocity = 45.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 2.0
+color_ramp = SubResource( 12 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 128
@@ -36,7 +59,7 @@ size = 24
 font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxFlat" id=6]
-bg_color = Color( 0.117647, 0.109804, 0.109804, 1 )
+bg_color = Color( 0, 0, 0, 0.784314 )
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -65,6 +88,31 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Backdrop" type="MarginContainer" parent="."]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 1014.0
+margin_bottom = 590.0
+custom_constants/margin_right = -10
+custom_constants/margin_top = -10
+custom_constants/margin_left = -10
+custom_constants/margin_bottom = -10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Playground" parent="Backdrop" instance=ExtResource( 15 )]
+position = Vector2( 502, 294 )
+
+[node name="Particles2D" type="Particles2D" parent="Backdrop"]
+position = Vector2( 502, -10 )
+amount = 800
+lifetime = 3.5
+process_material = SubResource( 10 )
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="TitleContainer" type="MarginContainer" parent="."]
 margin_left = 10.0
 margin_top = 10.0
@@ -82,6 +130,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -89,6 +138,9 @@ __meta__ = {
 margin_top = 107.0
 margin_right = 1004.0
 margin_bottom = 272.0
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Title" type="Label" parent="TitleContainer/VBoxContainer/CenterContainer"]
 margin_left = 194.0
@@ -98,6 +150,7 @@ custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Psychic Blade"
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -105,6 +158,9 @@ __meta__ = {
 margin_top = 276.0
 margin_right = 1004.0
 margin_bottom = 473.0
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="StartButton" type="Button" parent="TitleContainer/VBoxContainer/VBoxContainer"]
 margin_left = 452.0
@@ -124,6 +180,9 @@ custom_fonts/font = SubResource( 2 )
 group = SubResource( 3 )
 text = "Start"
 script = ExtResource( 12 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="ControlsButton" type="Button" parent="TitleContainer/VBoxContainer/VBoxContainer"]
 margin_left = 421.0
@@ -143,6 +202,9 @@ theme = ExtResource( 5 )
 custom_fonts/font = SubResource( 4 )
 text = "Controls"
 script = ExtResource( 12 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="QuitPlayingButton" type="Button" parent="TitleContainer/VBoxContainer/VBoxContainer"]
 margin_left = 393.0
@@ -162,6 +224,9 @@ theme = ExtResource( 5 )
 custom_fonts/font = SubResource( 4 )
 text = "Quit Playing"
 script = ExtResource( 12 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Version" type="Label" parent="."]
 margin_left = 10.0
