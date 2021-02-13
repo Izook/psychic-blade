@@ -25,4 +25,4 @@ func _main_ready() -> void:
 func _process(_delta: float) -> void:
 	if blade_node:
 		blade_dash_node.set_current_speed(blade_node.get_current_speed())
-		blade_dash_node.set_current_angular_speed(blade_node.get_current_angular_speed())
+		blade_dash_node.set_current_angular_speed(abs(blade_node.get_current_angular_speed()))
