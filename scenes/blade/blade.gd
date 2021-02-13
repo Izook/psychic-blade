@@ -74,7 +74,7 @@ func _get_input(delta: float) -> void:
 			angular_speed_index += ANGULAR_SPEED_INDEX_DAMP
 	
 	angular_speed_index = _limit_speed_index(angular_speed_index)
-	var angular_speed := _get_angular_speed(abs(angular_speed_index))
+	var angular_speed := _get_angular_speed(angular_speed_index)
 	if angular_speed_index < 0.0:
 		angular_speed *= -1
 	angular_pos += angular_speed * delta
@@ -126,7 +126,7 @@ func _limit_speed_index(i : float) -> float:
 # Returns the angular speed of the blade based on a position on the easeOutQuart
 # curve. Curve gotten from https://easings.net/#easeOutQuart
 func _get_angular_speed(i: float) -> float:
-	var angular_speed = (1 - pow(1 - i, 4)) * MAX_ANGULAR_SPEED
+	var angular_speed := (1 - pow(1 - abs(i), 4)) * MAX_ANGULAR_SPEED
 	if blade_state != BladeState.RETURNING:
 		return angular_speed
 	else:
@@ -263,3 +263,11 @@ func get_max_speed() -> float:
 
 func get_current_speed() -> float:
 	return blade_veclocity.length()
+
+
+func get_max_angular_speed() -> float: 
+	return MAX_ANGULAR_SPEED
+
+
+func get_current_angular_speed() -> float:
+	return abs(_get_angular_speed(angular_speed_index))

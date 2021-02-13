@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/hud/hud.gd" type="Script" id=1]
-[ext_resource path="res://scenes/hud/spedometer/spedometer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/hud/blade_dash/blade_dash.tscn" type="PackedScene" id=2]
 
 [node name="HUD" type="MarginContainer"]
 anchor_top = 1.0
@@ -13,15 +13,15 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-margin_left = 512.0
-margin_right = 512.0
+margin_left = 1024.0
+margin_right = 1024.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 12
 size_flags_vertical = 0
 alignment = 1
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Spedometer" parent="HBoxContainer" instance=ExtResource( 2 )]
+[node name="BladeDash" parent="HBoxContainer" instance=ExtResource( 2 )]

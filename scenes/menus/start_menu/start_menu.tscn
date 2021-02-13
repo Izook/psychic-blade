@@ -16,14 +16,14 @@
 [ext_resource path="res://shared_scripts/music_player.gd" type="Script" id=14]
 [ext_resource path="res://scenes/levels/main_menu_background/main_menu_background.tscn" type="PackedScene" id=15]
 
-[sub_resource type="Gradient" id=11]
+[sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0.00571429, 1 )
 colors = PoolColorArray( 0, 1, 0.871094, 1, 1, 1, 1, 1 )
 
-[sub_resource type="GradientTexture" id=12]
-gradient = SubResource( 11 )
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
 
-[sub_resource type="ParticlesMaterial" id=10]
+[sub_resource type="ParticlesMaterial" id=3]
 emission_shape = 2
 emission_box_extents = Vector3( 512, 1, 1 )
 flag_disable_z = true
@@ -36,42 +36,42 @@ angular_velocity_random = 1.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 2.0
-color_ramp = SubResource( 12 )
+color_ramp = SubResource( 2 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=4]
 size = 128
 outline_size = 6
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=2]
-size = 48
-font_data = ExtResource( 1 )
-
-[sub_resource type="ButtonGroup" id=3]
-
-[sub_resource type="DynamicFont" id=4]
-size = 48
-font_data = ExtResource( 1 )
-
 [sub_resource type="DynamicFont" id=5]
+size = 48
+font_data = ExtResource( 1 )
+
+[sub_resource type="ButtonGroup" id=6]
+
+[sub_resource type="DynamicFont" id=7]
+size = 48
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=8]
 size = 24
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StyleBoxFlat" id=9]
 bg_color = Color( 0, 0, 0, 0.784314 )
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=10]
 size = 84
 outline_size = 6
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=11]
 size = 36
 font_data = ExtResource( 1 )
 
@@ -108,7 +108,7 @@ position = Vector2( 502, 294 )
 position = Vector2( 502, -10 )
 amount = 800
 lifetime = 3.5
-process_material = SubResource( 10 )
+process_material = SubResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -146,7 +146,7 @@ __meta__ = {
 margin_left = 194.0
 margin_right = 809.0
 margin_bottom = 165.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Psychic Blade"
 __meta__ = {
@@ -176,8 +176,8 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme = ExtResource( 5 )
-custom_fonts/font = SubResource( 2 )
-group = SubResource( 3 )
+custom_fonts/font = SubResource( 5 )
+group = SubResource( 6 )
 text = "Start"
 script = ExtResource( 12 )
 __meta__ = {
@@ -199,7 +199,7 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme = ExtResource( 5 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 7 )
 text = "Controls"
 script = ExtResource( 12 )
 __meta__ = {
@@ -221,7 +221,7 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme = ExtResource( 5 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 7 )
 text = "Quit Playing"
 script = ExtResource( 12 )
 __meta__ = {
@@ -235,7 +235,7 @@ margin_right = 55.0
 margin_bottom = 590.0
 size_flags_horizontal = 0
 size_flags_vertical = 8
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 8 )
 text = "alpha"
 __meta__ = {
 "_edit_lock_": true,
@@ -257,7 +257,7 @@ __meta__ = {
 margin_right = 1004.0
 margin_bottom = 580.0
 mouse_filter = 2
-custom_styles/panel = SubResource( 6 )
+custom_styles/panel = SubResource( 9 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -299,7 +299,7 @@ __meta__ = {
 margin_left = 370.0
 margin_right = 614.0
 margin_bottom = 109.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Controls"
 __meta__ = {
@@ -326,7 +326,7 @@ __meta__ = {
 [node name="Move" type="Label" parent="ControlsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer"]
 margin_right = 396.0
 margin_bottom = 48.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 11 )
 text = "Move : Arrow Keys"
 align = 1
 __meta__ = {
@@ -337,7 +337,7 @@ __meta__ = {
 margin_top = 52.0
 margin_right = 396.0
 margin_bottom = 100.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 11 )
 text = "Spin Blade: \"A\" and \"D\""
 align = 1
 __meta__ = {
@@ -348,7 +348,7 @@ __meta__ = {
 margin_top = 104.0
 margin_right = 396.0
 margin_bottom = 152.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 11 )
 text = "Push and Pull Blade: \"W\" and \"S\""
 align = 1
 __meta__ = {
@@ -359,7 +359,7 @@ __meta__ = {
 margin_top = 156.0
 margin_right = 396.0
 margin_bottom = 204.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 11 )
 text = "Release and Return Blade: Shift"
 align = 1
 __meta__ = {
@@ -370,7 +370,7 @@ __meta__ = {
 margin_top = 208.0
 margin_right = 396.0
 margin_bottom = 256.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 11 )
 text = "Zoom: Q and E"
 align = 1
 __meta__ = {
@@ -381,7 +381,7 @@ __meta__ = {
 margin_top = 260.0
 margin_right = 396.0
 margin_bottom = 308.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 11 )
 text = "Pause: P"
 align = 1
 __meta__ = {
@@ -402,7 +402,7 @@ focus_previous = NodePath("../../../../ExitControlsButton")
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 theme = ExtResource( 5 )
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 11 )
 text = "OK"
 script = ExtResource( 12 )
 __meta__ = {
@@ -447,7 +447,7 @@ __meta__ = {
 margin_right = 1004.0
 margin_bottom = 580.0
 mouse_filter = 2
-custom_styles/panel = SubResource( 6 )
+custom_styles/panel = SubResource( 9 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -489,7 +489,7 @@ __meta__ = {
 margin_left = 316.0
 margin_right = 667.0
 margin_bottom = 109.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Select Level"
 __meta__ = {
@@ -524,7 +524,7 @@ focus_next = NodePath("../Playground")
 focus_previous = NodePath("../../../../ExitLevelsButton")
 mouse_default_cursor_shape = 2
 theme = ExtResource( 5 )
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 11 )
 text = "The Slimes"
 script = ExtResource( 4 )
 __meta__ = {
@@ -543,7 +543,7 @@ focus_next = NodePath("../SlimeSpawners")
 focus_previous = NodePath("../SlimesLevel")
 mouse_default_cursor_shape = 2
 theme = ExtResource( 5 )
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 11 )
 text = "Playground"
 script = ExtResource( 4 )
 __meta__ = {
@@ -562,7 +562,7 @@ focus_next = NodePath(".")
 focus_previous = NodePath("../Playground")
 mouse_default_cursor_shape = 2
 theme = ExtResource( 5 )
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 11 )
 text = "Slime Spawners"
 script = ExtResource( 4 )
 __meta__ = {
