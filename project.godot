@@ -142,6 +142,7 @@ AudioUtilities="*res://shared_scripts/audio_utilities.gd"
 
 gdscript/warnings/shadowed_variable=false
 gdscript/warnings/unused_class_variable=true
+gdscript/warnings/integer_division=false
 gdscript/warnings/unsafe_method_access=true
 gdscript/warnings/unsafe_cast=true
 gdscript/warnings/unsafe_call_argument=true
