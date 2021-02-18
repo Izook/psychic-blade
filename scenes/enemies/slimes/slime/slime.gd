@@ -9,7 +9,7 @@ const CAST_LENGTH := 150
 
 onready var player := get_node(Utils.PLAYER_PATH) as Player
 onready var sprite := $Sprite as AnimatedSprite
-onready var hitbox := $CollisionPolygon as CollisionShape2D
+onready var collision_box := $CollisionPolygon as CollisionShape2D
 onready var animation_player := $AnimationPlayer as AnimationPlayer
 onready var raycast := $RayCast2D as RayCast2D
 onready var death_sound_player := $Audio/DeathSoundPlayer as AudioStreamPlayer2D
@@ -47,12 +47,15 @@ func _attack(delta: float) -> void:
 func die() -> void:
 	if slime_state != SlimeState.DEAD:
 		slime_state = SlimeState.DEAD
-		hitbox.set_disabled(true)
+		
+		collision_box.call_deferred("set_disabled", true)
+		hitbox.call_deferred("set_monitorable", false)
+		hitbox.call_deferred("set_monitoring", false)
+		
 		death_sound_player.play()
 		animation_player.play("death")
 		
 		remove_from_group("enemies")
-		hitbox.set_disabled(true)
 		death_timer.start()
 
 

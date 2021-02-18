@@ -270,6 +270,11 @@ toggle_pause={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Entities"
+2d_physics/layer_2="Blade"
+
 [logging]
 
 file_logging/enable_file_logging=true

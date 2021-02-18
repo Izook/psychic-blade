@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://scenes/enemies/slimes/slime/slime.gd" type="Script" id=1]
 [ext_resource path="res://scenes/enemies/slimes/slime/slime_spritesheet.png" type="Texture" id=2]
@@ -43,55 +43,55 @@ region = Rect2( 96, 0, 32, 25 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 2 )
-region = Rect2( 128, 25, 32, 25 )
+region = Rect2( 0, 25, 32, 25 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 2 )
-region = Rect2( 160, 25, 32, 25 )
+region = Rect2( 32, 25, 32, 25 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 2 )
-region = Rect2( 192, 25, 32, 25 )
+region = Rect2( 64, 25, 32, 25 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 2 )
-region = Rect2( 224, 25, 32, 25 )
+region = Rect2( 96, 25, 32, 25 )
 
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 50, 32, 25 )
+region = Rect2( 128, 25, 32, 25 )
 
 [sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 2 )
-region = Rect2( 32, 50, 32, 25 )
+region = Rect2( 160, 25, 32, 25 )
 
 [sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 2 )
-region = Rect2( 64, 50, 32, 25 )
+region = Rect2( 192, 25, 32, 25 )
 
 [sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 2 )
-region = Rect2( 96, 50, 32, 25 )
+region = Rect2( 224, 25, 32, 25 )
 
 [sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 2 )
-region = Rect2( 128, 50, 32, 25 )
+region = Rect2( 0, 50, 32, 25 )
 
 [sub_resource type="AtlasTexture" id=18]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 25, 32, 25 )
+region = Rect2( 32, 50, 32, 25 )
 
 [sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 2 )
-region = Rect2( 32, 25, 32, 25 )
+region = Rect2( 64, 50, 32, 25 )
 
 [sub_resource type="AtlasTexture" id=20]
 atlas = ExtResource( 2 )
-region = Rect2( 64, 25, 32, 25 )
+region = Rect2( 96, 50, 32, 25 )
 
 [sub_resource type="AtlasTexture" id=21]
 atlas = ExtResource( 2 )
-region = Rect2( 96, 25, 32, 25 )
+region = Rect2( 128, 50, 32, 25 )
 
 [sub_resource type="SpriteFrames" id=22]
 animations = [ {
@@ -105,24 +105,27 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
-"loop": true,
-"name": "death",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
 "loop": true,
 "name": "attack",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
+"loop": true,
+"name": "death",
 "speed": 5.0
 } ]
 
 [sub_resource type="CircleShape2D" id=23]
-radius = 6.23036
+radius = 10.6696
 
 [sub_resource type="CircleShape2D" id=24]
+radius = 11.3517
+
+[sub_resource type="CircleShape2D" id=25]
 radius = 259.055
 
-[sub_resource type="Animation" id=25]
+[sub_resource type="Animation" id=26]
 length = 1.7
 tracks/0/type = "value"
 tracks/0/path = NodePath("Gibs/Gibs1:emitting")
@@ -209,7 +212,7 @@ tracks/6/keys = {
 "values": [ 0, 8 ]
 }
 
-[sub_resource type="Animation" id=26]
+[sub_resource type="Animation" id=27]
 length = 1.5
 loop = true
 tracks/0/type = "value"
@@ -249,7 +252,7 @@ tracks/2/keys = {
 "values": [ "idle" ]
 }
 
-[sub_resource type="Animation" id=27]
+[sub_resource type="Animation" id=28]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:playing")
@@ -293,19 +296,27 @@ script = ExtResource( 1 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 22 )
-animation = "idle"
+animation = "death"
 
 [node name="CollisionPolygon" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 5 )
 scale = Vector2( 1.04953, 1 )
 shape = SubResource( 23 )
 
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2( 0.420921, 5.61231 )
+shape = SubResource( 24 )
+
 [node name="DetectionArea" type="Area2D" parent="."]
 gravity_vec = Vector2( 0, 0 )
 gravity = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
-shape = SubResource( 24 )
+shape = SubResource( 25 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 enabled = true
@@ -357,9 +368,9 @@ attenuation = 0.2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
-anims/death = SubResource( 25 )
-anims/idle = SubResource( 26 )
-anims/slide = SubResource( 27 )
+anims/death = SubResource( 26 )
+anims/idle = SubResource( 27 )
+anims/slide = SubResource( 28 )
 
 [node name="WanderingTimer" type="Timer" parent="."]
 wait_time = 5.0

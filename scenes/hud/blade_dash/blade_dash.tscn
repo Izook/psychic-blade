@@ -33,6 +33,7 @@ __meta__ = {
 
 [node name="FlameParticles" type="Particles2D" parent="Spedometer"]
 position = Vector2( -160, -120 )
+emitting = false
 amount = 200
 process_material = ExtResource( 6 )
 __meta__ = {

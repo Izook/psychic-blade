@@ -102,7 +102,6 @@ func _physics_process(delta: float) -> void:
 	_update_blade_appearance()
 	
 	var new_blade_angle := _move_blade()
-	_handle_enemy_collisions()
 	
 	_rotate_blade(new_blade_angle)
 	
@@ -178,10 +177,6 @@ func _move_released_blade() -> void:
 		if tile_map:
 			wall_hit_sound_player.play()
 			new_blade_velocity = blade_veclocity.bounce(collision.normal)
-			
-		var enemy := collision.collider as Enemy
-		if enemy:
-			new_blade_velocity = blade_veclocity
 	
 	blade_veclocity = new_blade_velocity * RELEASED_BLADE_DAMP
 
@@ -198,16 +193,10 @@ func _move_returning_blade() -> void:
 		set_blade_state(BladeState.HELD)
 
 
-func _handle_enemy_collisions() -> void:
-	for i in blade_node.get_slide_count():
-		var collision := blade_node.get_slide_collision(i)
-		
-		var enemy := collision.collider as Enemy
-		if enemy:
-			var impact_effect := IMPACT_EFFECT_SCENE.instance() as Node2D
-			impact_effect.global_position = enemy.global_position
-			current_level.add_child(impact_effect)
-			enemy.die()
+func impact_entity(entity: Node2D) -> void:
+	var impact_effect := IMPACT_EFFECT_SCENE.instance() as Node2D
+	impact_effect.global_position = entity.global_position
+	current_level.add_child(impact_effect)
 
 
 func _rotate_blade(new_angle: float) -> void:
