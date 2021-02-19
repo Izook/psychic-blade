@@ -29,7 +29,6 @@ emitting = false
 amount = 50
 lifetime = 0.25
 one_shot = true
-explosiveness = 0.75
 visibility_rect = Rect2( -25, -25, 50, 50 )
 local_coords = false
 process_material = ExtResource( 5 )
@@ -60,7 +59,7 @@ bus = "Gameplay Sounds"
 [node name="DashTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="DashResetTimer" type="Timer" parent="."]
+[node name="DashCooldownTimer" type="Timer" parent="."]
 one_shot = true
 [connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]
-[connection signal="timeout" from="DashResetTimer" to="." method="_on_DashResetTimer_timeout"]
+[connection signal="timeout" from="DashCooldownTimer" to="." method="_on_DashCooldownTimer_timeout"]
