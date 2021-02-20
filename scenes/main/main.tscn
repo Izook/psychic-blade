@@ -1,9 +1,25 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/hud/hud.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/menus/pause_menu/pause_menu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/menus/gameover_menu/gameover_menu.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/main/main.gd" type="Script" id=6]
+
+[sub_resource type="Animation" id=1]
+resource_name = "ScreenShake"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("GameLayer:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 10, 0 ), Vector2( -10, 0 ), Vector2( 10, 0 ), Vector2( 0, 0 ) ]
+}
 
 [node name="Main" type="Node"]
 pause_mode = 2
@@ -23,3 +39,6 @@ visible = false
 
 [node name="PauseMenu" parent="UILayer" instance=ExtResource( 4 )]
 visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/ScreenShake = SubResource( 1 )

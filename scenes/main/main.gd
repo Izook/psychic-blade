@@ -5,8 +5,15 @@ class_name Main
 onready var pause_menu := $UILayer/PauseMenu as PauseMenu
 onready var gameover_menu := $UILayer/GameOverMenu as GameOverMenu
 
+onready var animation_player := $AnimationPlayer
+
 var paused := false
 var level : Node2D
+
+
+func screenshake() -> void:
+	animation_player.play("ScreenShake")
+
 
 func _ready() -> void:
 	get_tree().get_root().set_disable_input(false)
@@ -29,7 +36,6 @@ func _input(event: InputEvent) -> void:
 		paused = not paused
 		get_tree().paused = paused
 		pause_menu.set_active(paused)
-
 
 
 func _on_Player_player_died() -> void:

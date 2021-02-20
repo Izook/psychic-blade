@@ -126,14 +126,15 @@ func _handle_hit(collision: KinematicCollision2D) -> void:
 	if player_state != PlayerState.HITSTUNNED and player_state != PlayerState.INVULNERABLE:
 		health = health - 1
 		
+		if health == 0:
+			_die()
+		
 		player_state = PlayerState.HITSTUNNED
+		get_node(Utils.MAIN_PATH).screenshake()
 		player_hit_sound_player.play()
 		hit_stun_velocity = collision.normal.normalized() * HIT_STUN_SPEED
 		dash_timer.stop()
 		hit_stun_timer.start(HIT_STUN_DURATION)
-		
-		if health == 0:
-			_die()
 
 
 func _die() -> void:
