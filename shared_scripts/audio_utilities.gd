@@ -1,3 +1,7 @@
+# Audio Utilities 
+# Global Singleton
+# Contains miscellaneous helper functions for playing/adjusting audio.
+
 extends Node
 
 onready var pitch_shift_effect := AudioEffectPitchShift.new()

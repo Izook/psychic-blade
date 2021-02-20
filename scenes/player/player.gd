@@ -102,7 +102,7 @@ func _set_player_state(new_state: int) -> void:
 			if dash_cooldown_timer.is_stopped():
 				dash_cooldown_timer.start(DASH_COOLDOWN_DURATION)
 		PlayerState.HITSTUNNED:
-			get_node(Utils.MAIN_PATH).screenshake()
+			CanvasAnimationPlayer.screen_shake()
 			player_hit_sound_player.play()
 			player_sprite.hit_stun()
 			player_sprite.set_modulate(HIT_STUNNED_MODULATE)
@@ -146,14 +146,14 @@ func _handle_hit(collision: KinematicCollision2D) -> void:
 	if player_state != PlayerState.HITSTUNNED and player_state != PlayerState.INVULNERABLE:
 		health = health - 1
 		
-		if health == 0:
+		if health <= 0:
 			_die()
-		
-		_set_player_state(PlayerState.HITSTUNNED)
-		
-		hit_stun_velocity = collision.normal.normalized() * HIT_STUN_SPEED
-		dash_timer.stop()
-		hit_stun_timer.start(HIT_STUN_DURATION)
+		else:
+			_set_player_state(PlayerState.HITSTUNNED)
+			
+			hit_stun_velocity = collision.normal.normalized() * HIT_STUN_SPEED
+			dash_timer.stop()
+			hit_stun_timer.start(HIT_STUN_DURATION)
 
 
 func _die() -> void:

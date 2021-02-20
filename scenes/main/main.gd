@@ -11,11 +11,8 @@ var paused := false
 var level : Node2D
 
 
-func screenshake() -> void:
-	animation_player.play("ScreenShake")
-
-
 func _ready() -> void:
+	CanvasAnimationPlayer.init()
 	get_tree().get_root().set_disable_input(false)
 	paused = false
 
