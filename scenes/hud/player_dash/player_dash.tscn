@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/hud/player_dash/heart_icon/heart_icon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/hud/player_dash/dash_icon/dash_icon.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/hud/player_dash/player_dash.gd" type="Script" id=3]
+
+[node name="PlayerDash" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="LockUp" type="Node2D" parent="."]
+position = Vector2( 5, -5 )
+
+[node name="Hearts" type="Node2D" parent="LockUp"]
+position = Vector2( 0, -32 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="HeartIcon1" parent="LockUp/Hearts" instance=ExtResource( 1 )]
+position = Vector2( 16, 16 )
+
+[node name="HeartIcon2" parent="LockUp/Hearts" instance=ExtResource( 1 )]
+position = Vector2( 48, 16 )
+
+[node name="HeartIcon3" parent="LockUp/Hearts" instance=ExtResource( 1 )]
+position = Vector2( 80, 16 )
+
+[node name="HeartIcon4" parent="LockUp/Hearts" instance=ExtResource( 1 )]
+position = Vector2( 112, 16 )
+
+[node name="HeartIcon5" parent="LockUp/Hearts" instance=ExtResource( 1 )]
+position = Vector2( 144, 16 )
+
+[node name="DashStones" type="Node2D" parent="LockUp"]
+position = Vector2( 0, -60 )
+
+[node name="DashIcon1" parent="LockUp/DashStones" instance=ExtResource( 2 )]
+position = Vector2( 12, 12 )
+
+[node name="DashIcon2" parent="LockUp/DashStones" instance=ExtResource( 2 )]
+position = Vector2( 36, 12 )
+
+[node name="DashIcon3" parent="LockUp/DashStones" instance=ExtResource( 2 )]
+position = Vector2( 60, 12 )

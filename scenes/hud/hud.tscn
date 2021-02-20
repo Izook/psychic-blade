@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/hud/hud.gd" type="Script" id=1]
 [ext_resource path="res://scenes/hud/blade_dash/blade_dash.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/hud/player_dash/player_dash.tscn" type="PackedScene" id=3]
 
 [node name="HUD" type="MarginContainer"]
 anchor_top = 1.0
@@ -25,3 +26,15 @@ __meta__ = {
 }
 
 [node name="BladeDash" parent="HBoxContainer" instance=ExtResource( 2 )]
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+alignment = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PlayerDash" parent="HBoxContainer2" instance=ExtResource( 3 )]
