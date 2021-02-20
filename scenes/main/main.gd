@@ -5,8 +5,6 @@ class_name Main
 onready var pause_menu := $UILayer/PauseMenu as PauseMenu
 onready var gameover_menu := $UILayer/GameOverMenu as GameOverMenu
 
-onready var animation_player := $AnimationPlayer
-
 var paused := false
 var level : Node2D
 
