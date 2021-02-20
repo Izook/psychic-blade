@@ -10,6 +10,8 @@ const ZOOM_SPEED := 0.6
 
 const SPEED := 150
 
+const DEFAULT_MODULATE := Color("ffffff")
+
 const DASH_SPEED := 750
 const DASH_DURATION := 0.1
 const DASH_COOLDOWN_DURATION := 1.0
@@ -17,7 +19,10 @@ const MAX_DASHES := 2
 
 const HIT_STUN_SPEED := 100
 const HIT_STUN_DURATION := 1.0
+const HIT_STUNNED_MODULATE := Color("ff7e7e")
+
 const INVULNERABILITY_DURATION := 0.5
+const INVULNERABILITY_MODULATE := Color("7effffff")
 
 enum PlayerState {DEFAULT, HITSTUNNED, INVULNERABLE, DASHING}
 
@@ -88,7 +93,7 @@ func _set_player_state(new_state: int) -> void:
 	
 	match new_state:
 		PlayerState.DEFAULT:
-			player_sprite.scale = Vector2(1, 1)
+			player_sprite.set_modulate(DEFAULT_MODULATE)
 		PlayerState.DASHING:
 			dashes = dashes - 1
 			dash_particles.emitting = true
@@ -99,9 +104,11 @@ func _set_player_state(new_state: int) -> void:
 		PlayerState.HITSTUNNED:
 			get_node(Utils.MAIN_PATH).screenshake()
 			player_hit_sound_player.play()
+			player_sprite.hit_stun()
+			player_sprite.set_modulate(HIT_STUNNED_MODULATE)
 		PlayerState.INVULNERABLE:
 			invulnerability_timer.start(INVULNERABILITY_DURATION)
-			player_sprite.scale = Vector2(0.5, 0.5)
+			player_sprite.set_modulate(INVULNERABILITY_MODULATE)
 	
 	player_state = new_state
 
@@ -124,7 +131,6 @@ func _move_player() -> void:
 			player_sprite.move_towards(dash_velocity)
 		PlayerState.HITSTUNNED:
 			var _new_velocity := move_and_slide(hit_stun_velocity)
-			player_sprite.hitstun()
 
 
 func _handle_collisions() -> void:
