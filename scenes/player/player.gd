@@ -78,18 +78,32 @@ func _get_input(delta: float) -> void:
 
 
 func _handle_dash_request() -> void:
-	var input_velocity = velocity.normalized()
+	var input_velocity := velocity.normalized()
 	if player_state == PlayerState.DEFAULT and dashes > 0 and input_velocity.length() > 0:
-		player_state = PlayerState.DASHING
+		_set_player_state(PlayerState.DASHING)
 		dash_velocity = input_velocity *  DASH_SPEED
-		dashes = dashes - 1
-		
-		dash_particles.emitting = true
-		dash_sound_player.play()
-		
-		dash_timer.start(DASH_DURATION)
-		if dash_cooldown_timer.is_stopped():
-			dash_cooldown_timer.start(DASH_COOLDOWN_DURATION)
+
+
+func _set_player_state(new_state: int) -> void:
+	
+	match new_state:
+		PlayerState.DEFAULT:
+			player_sprite.scale = Vector2(1, 1)
+		PlayerState.DASHING:
+			dashes = dashes - 1
+			dash_particles.emitting = true
+			dash_sound_player.play()		
+			dash_timer.start(DASH_DURATION)
+			if dash_cooldown_timer.is_stopped():
+				dash_cooldown_timer.start(DASH_COOLDOWN_DURATION)
+		PlayerState.HITSTUNNED:
+			get_node(Utils.MAIN_PATH).screenshake()
+			player_hit_sound_player.play()
+		PlayerState.INVULNERABLE:
+			invulnerability_timer.start(INVULNERABILITY_DURATION)
+			player_sprite.scale = Vector2(0.5, 0.5)
+	
+	player_state = new_state
 
 
 func _physics_process(delta: float) -> void:
@@ -129,9 +143,8 @@ func _handle_hit(collision: KinematicCollision2D) -> void:
 		if health == 0:
 			_die()
 		
-		player_state = PlayerState.HITSTUNNED
-		get_node(Utils.MAIN_PATH).screenshake()
-		player_hit_sound_player.play()
+		_set_player_state(PlayerState.HITSTUNNED)
+		
 		hit_stun_velocity = collision.normal.normalized() * HIT_STUN_SPEED
 		dash_timer.stop()
 		hit_stun_timer.start(HIT_STUN_DURATION)
@@ -155,7 +168,7 @@ func _limit_zoom(z: float) -> float:
 
 
 func _on_DashTimer_timeout() -> void:
-	player_state = PlayerState.DEFAULT
+	_set_player_state(PlayerState.DEFAULT)
 
 
 func _on_DashCooldownTimer_timeout() -> void:
@@ -169,11 +182,8 @@ func get_blade_node() -> Blade:
 
 
 func _on_HitStunTimer_timeout() -> void:
-	player_state = PlayerState.INVULNERABLE
-	invulnerability_timer.start(INVULNERABILITY_DURATION)
-	player_sprite.scale = Vector2(0.5, 0.5)
+	_set_player_state(PlayerState.INVULNERABLE)
 
 
 func _on_InvulnerabilityTimer_timeout() -> void:
-	player_sprite.scale = Vector2(1, 1)
-	player_state = PlayerState.DEFAULT
+	_set_player_state(PlayerState.DEFAULT)
