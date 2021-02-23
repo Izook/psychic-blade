@@ -44,11 +44,7 @@ func _on_Player_health_changed(new_health: int):
 
 func _on_Player_dashes_changed(new_dashes: int):
 	for i in dashes.size():
-		print(i)
 		if i <= new_dashes - 1:
 			dashes[i].refill()
 		else:
 			dashes[i].empty()
-
-
-

@@ -98,8 +98,6 @@ func _set_player_state(new_state: int) -> void:
 	match new_state:
 		PlayerState.DEFAULT:
 			player_sprite.set_modulate(DEFAULT_MODULATE)
-			if player_state == PlayerState.DASHING:
-				emit_signal("dash_refreshed")
 		PlayerState.DASHING:
 			dashes = dashes - 1
 			emit_signal("dashes_changed", dashes)
