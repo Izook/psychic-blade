@@ -1,6 +1,6 @@
 extends Node2D
 
-class_name PlayerDash
+class_name PlayerDisplay
 
 onready var hearts := [
 	$LockUp/Hearts/HeartIcon1,

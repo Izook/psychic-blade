@@ -1,6 +1,6 @@
 extends Node2D
 
-class_name BladeDash
+class_name BladeDisplay
 
 onready var spedometer_needle := $Spedometer/Guage/Needle as Sprite
 onready var spedometer_flame_particles := $Spedometer/FlameParticles as Particles2D

@@ -15,9 +15,9 @@ _global_script_classes=[ {
 "path": "res://scenes/blade/blade.gd"
 }, {
 "base": "Node2D",
-"class": "BladeDash",
+"class": "BladeDisplay",
 "language": "GDScript",
-"path": "res://scenes/hud/blade_dash/blade_dash.gd"
+"path": "res://scenes/hud/blade_display/blade_display.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "BladeHitbox",
@@ -37,7 +37,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "DashIcon",
 "language": "GDScript",
-"path": "res://scenes/hud/player_dash/dash_icon/dash_icon.gd"
+"path": "res://scenes/hud/player_display/dash_icon/dash_icon.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Enemy",
@@ -52,7 +52,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "HeartIcon",
 "language": "GDScript",
-"path": "res://scenes/hud/player_dash/heart_icon/heart_icon.gd"
+"path": "res://scenes/hud/player_display/heart_icon/heart_icon.gd"
 }, {
 "base": "Control",
 "class": "Hud",
@@ -90,9 +90,9 @@ _global_script_classes=[ {
 "path": "res://scenes/player/player.gd"
 }, {
 "base": "Node2D",
-"class": "PlayerDash",
+"class": "PlayerDisplay",
 "language": "GDScript",
-"path": "res://scenes/hud/player_dash/player_dash.gd"
+"path": "res://scenes/hud/player_display/player_display.gd"
 }, {
 "base": "AnimatedSprite",
 "class": "PlayerSprite",
@@ -121,7 +121,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Blade": "",
-"BladeDash": "",
+"BladeDisplay": "",
 "BladeHitbox": "",
 "CustomButton": "",
 "CustomTextureButton": "",
@@ -136,7 +136,7 @@ _global_script_class_icons={
 "MusicPlayer": "",
 "PauseMenu": "",
 "Player": "",
-"PlayerDash": "",
+"PlayerDisplay": "",
 "PlayerSprite": "",
 "Slime": "",
 "SlimeSpawner": "",
