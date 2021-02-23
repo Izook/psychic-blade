@@ -13,7 +13,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="BladeDashContainer" type="HBoxContainer" parent="."]
 margin_left = 1024.0
 margin_right = 1024.0
 grow_horizontal = 2
@@ -25,9 +25,9 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="BladeDash" parent="HBoxContainer" instance=ExtResource( 2 )]
+[node name="BladeDash" parent="BladeDashContainer" instance=ExtResource( 2 )]
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+[node name="PlayerDashContainer" type="HBoxContainer" parent="."]
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
@@ -37,4 +37,4 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlayerDash" parent="HBoxContainer2" instance=ExtResource( 3 )]
+[node name="PlayerDash" parent="PlayerDashContainer" instance=ExtResource( 3 )]

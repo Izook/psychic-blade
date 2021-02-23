@@ -31,14 +31,17 @@ position = Vector2( 112, 16 )
 [node name="HeartIcon5" parent="LockUp/Hearts" instance=ExtResource( 1 )]
 position = Vector2( 144, 16 )
 
-[node name="DashStones" type="Node2D" parent="LockUp"]
+[node name="Dashes" type="Node2D" parent="LockUp"]
 position = Vector2( 0, -60 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="DashIcon1" parent="LockUp/DashStones" instance=ExtResource( 2 )]
+[node name="DashIcon1" parent="LockUp/Dashes" instance=ExtResource( 2 )]
 position = Vector2( 12, 12 )
 
-[node name="DashIcon2" parent="LockUp/DashStones" instance=ExtResource( 2 )]
+[node name="DashIcon2" parent="LockUp/Dashes" instance=ExtResource( 2 )]
 position = Vector2( 36, 12 )
 
-[node name="DashIcon3" parent="LockUp/DashStones" instance=ExtResource( 2 )]
+[node name="DashIcon3" parent="LockUp/Dashes" instance=ExtResource( 2 )]
 position = Vector2( 60, 12 )

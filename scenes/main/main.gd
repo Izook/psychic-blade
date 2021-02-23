@@ -33,7 +33,7 @@ func _input(event: InputEvent) -> void:
 		pause_menu.set_active(paused)
 
 
-func _on_Player_player_died() -> void:
+func _on_Player_died() -> void:
 	get_tree().paused = true
 	gameover_menu.set_active(true)
 

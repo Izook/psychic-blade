@@ -2,13 +2,17 @@ extends KinematicBody2D
 
 class_name Player
 
-signal player_died
+signal died
+signal health_changed(new_health)
+signal dashes_changed(new_dashes)
 
 const MIN_ZOOM := 0.25
 const MAX_ZOOM := 1.25
 const ZOOM_SPEED := 0.6
 
 const SPEED := 150
+
+const MAX_HEALTH := 3
 
 const DEFAULT_MODULATE := Color("ffffff")
 
@@ -52,7 +56,7 @@ var hit_stun_velocity := Vector2()
 
 func _ready() -> void:
 	camera.make_current()
-	var _error := connect("player_died", get_node(Utils.MAIN_PATH), "_on_Player_player_died")
+	var _error := connect("died", get_node(Utils.MAIN_PATH), "_on_Player_died")
 
 
 func _input(event: InputEvent) -> void:
@@ -94,8 +98,11 @@ func _set_player_state(new_state: int) -> void:
 	match new_state:
 		PlayerState.DEFAULT:
 			player_sprite.set_modulate(DEFAULT_MODULATE)
+			if player_state == PlayerState.DASHING:
+				emit_signal("dash_refreshed")
 		PlayerState.DASHING:
 			dashes = dashes - 1
+			emit_signal("dashes_changed", dashes)
 			dash_particles.emitting = true
 			dash_sound_player.play()		
 			dash_timer.start(DASH_DURATION)
@@ -145,6 +152,7 @@ func _handle_collisions() -> void:
 func _handle_hit(collision: KinematicCollision2D) -> void:
 	if player_state != PlayerState.HITSTUNNED and player_state != PlayerState.INVULNERABLE:
 		health = health - 1
+		emit_signal("health_changed", health)
 		
 		if health <= 0:
 			_die()
@@ -158,7 +166,7 @@ func _handle_hit(collision: KinematicCollision2D) -> void:
 
 func _die() -> void:
 	player_sprite.visible = false
-	emit_signal("player_died")
+	emit_signal("died")
 
 
 func _update_zoom() -> void:
@@ -179,12 +187,21 @@ func _on_DashTimer_timeout() -> void:
 
 func _on_DashCooldownTimer_timeout() -> void:
 	dashes = dashes + 1
+	emit_signal("dashes_changed", dashes)
 	if dashes < MAX_DASHES:
 		dash_cooldown_timer.start(DASH_COOLDOWN_DURATION)
 
 
 func get_blade_node() -> Blade:
 	return blade
+
+
+func get_max_health() -> int:
+	return MAX_HEALTH
+
+
+func get_max_dashes() -> int:
+	return MAX_DASHES
 
 
 func _on_HitStunTimer_timeout() -> void:

@@ -2,11 +2,12 @@ extends Control
 
 class_name Hud
 
-onready var blade_dash_node := $HBoxContainer/BladeDash as BladeDash
-
+onready var blade_dash_node := $BladeDashContainer/BladeDash as BladeDash
+onready var player_dash_node := $PlayerDashContainer/PlayerDash as PlayerDash
 
 var player_node : Player
 var blade_node : Blade
+
 
 func _ready() -> void:
 	yield(get_node("/root/Main"), "ready")
@@ -19,6 +20,12 @@ func _main_ready() -> void:
 	
 	blade_dash_node.set_max_speed(blade_node.get_max_speed())
 	blade_dash_node.set_max_angular_speed(blade_node.get_max_angular_speed())
+	
+	player_dash_node.set_max_dashes(player_node.get_max_dashes())
+	player_dash_node.set_max_health(player_node.get_max_health())
+	var _error := player_node.connect("health_changed", player_dash_node, "_on_Player_health_changed")
+	_error = player_node.connect("dashes_changed", player_dash_node, "_on_Player_dashes_changed")
+	
 	
 
 
