@@ -5,6 +5,7 @@ class_name Hud
 onready var blade_display_node := $BladeDisplayContainer/BladeDash as BladeDisplay
 onready var player_display_node := $PlayerDisplayContainer/PlayerDash as PlayerDisplay
 onready var level_display_node := $LevelDisplayContainer/LevelDisplay as LevelDisplay
+onready var combo_display_node := $ComboDisplayContainer/ComboDisplay as ComboDisplay
 
 var player_node : Player
 var blade_node : Blade
@@ -36,3 +37,4 @@ func _process(_delta: float) -> void:
 
 func _on_Enemy_died() -> void:
 	level_display_node.add_kill()
+	combo_display_node.add_to_combo()

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/hud/hud.gd" type="Script" id=1]
 [ext_resource path="res://scenes/hud/blade_display/blade_display.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/hud/player_display/player_display.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/hud/level_display/level_display.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/hud/combo_display/combo_display.tscn" type="PackedScene" id=5]
 
 [node name="HUD" type="MarginContainer"]
 anchor_right = 1.0
@@ -27,6 +28,19 @@ __meta__ = {
 }
 
 [node name="LevelDisplay" parent="LevelDisplayContainer" instance=ExtResource( 4 )]
+
+[node name="ComboDisplayContainer" type="HBoxContainer" parent="."]
+margin_left = 1024.0
+margin_right = 1024.0
+margin_bottom = 600.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ComboDisplay" parent="ComboDisplayContainer" instance=ExtResource( 5 )]
 
 [node name="BladeDisplayContainer" type="HBoxContainer" parent="."]
 margin_left = 1024.0
