@@ -11,6 +11,7 @@ const START_SCENE_PATH := "res://scenes/menus/start_menu/start_menu.tscn"
 
 # Constant Scene Paths
 const MAIN_PATH := "/root/Main"
+const HUD_PATH := "/root/Main/UILayer/HUD"
 const ACTIVE_LEVEL_PATH := "/root/Main/GameLayer/Level"
 const PLAYER_PATH := "/root/Main/GameLayer/Level/Player"
 const START_PATH := "/root/StartMenu"

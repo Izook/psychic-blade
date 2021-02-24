@@ -4,6 +4,7 @@ class_name Hud
 
 onready var blade_display_node := $BladeDisplayContainer/BladeDash as BladeDisplay
 onready var player_display_node := $PlayerDisplayContainer/PlayerDash as PlayerDisplay
+onready var level_display_node := $LevelDisplayContainer/LevelDisplay as LevelDisplay
 
 var player_node : Player
 var blade_node : Blade
@@ -31,3 +32,7 @@ func _process(_delta: float) -> void:
 	if blade_node:
 		blade_display_node.set_current_speed(blade_node.get_current_speed())
 		blade_display_node.set_current_angular_speed(abs(blade_node.get_current_angular_speed()))
+
+
+func _on_Enemy_died() -> void:
+	level_display_node.add_kill()

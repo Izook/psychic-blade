@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/hud/level_display/level_display.gd" type="Script" id=1]
 [ext_resource path="res://scenes/hud/hud_theme.tres" type="Theme" id=2]
+[ext_resource path="res://scenes/hud/level_display/skull.png" type="Texture" id=3]
+[ext_resource path="res://scenes/hud/hud_sub_theme.tres" type="Theme" id=4]
 
 [node name="LevelDisplay" type="Node2D"]
 script = ExtResource( 1 )
@@ -16,5 +18,22 @@ theme = ExtResource( 2 )
 text = "00:00"
 __meta__ = {
 "_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="KillCounter" type="Node2D" parent="."]
+
+[node name="Skull" type="Sprite" parent="KillCounter"]
+position = Vector2( 24, 64 )
+texture = ExtResource( 3 )
+
+[node name="KillCount" type="Label" parent="KillCounter"]
+margin_left = 40.0
+margin_top = 48.0
+margin_right = 88.0
+margin_bottom = 80.0
+theme = ExtResource( 4 )
+text = "x 00"
+__meta__ = {
 "_edit_use_anchors_": false
 }

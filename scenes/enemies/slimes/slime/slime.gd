@@ -47,6 +47,7 @@ func _attack(delta: float) -> void:
 func die() -> void:
 	if slime_state != SlimeState.DEAD:
 		slime_state = SlimeState.DEAD
+		emit_signal("died")
 		
 		collision_box.call_deferred("set_disabled", true)
 		hitbox.call_deferred("set_monitorable", false)
