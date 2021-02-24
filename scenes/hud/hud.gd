@@ -12,6 +12,8 @@ var blade_node : Blade
 
 
 func _ready() -> void:
+	combo_display_node.connect("combo_updated", level_display_node, "_on_ComboDisplay_combo_updated")
+	
 	yield(get_node("/root/Main"), "ready")
 	_main_ready()
 

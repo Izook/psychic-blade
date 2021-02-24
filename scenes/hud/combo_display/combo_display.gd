@@ -2,6 +2,8 @@ extends Node2D
 
 class_name ComboDisplay
 
+signal combo_updated(new_combo)
+
 const MAX_COMBO_HIT_TIME := 2.0
 
 onready var current_combo_label := $LockUp/CurrentCombo as Label
@@ -9,10 +11,6 @@ onready var combo_timer_bar := $LockUp/ComboTimerBar as ProgressBar
 
 var current_combo := 0
 var combo_time := 0.0
-
-
-func _ready() -> void:
-	pass
 
 
 func _process(delta: float) -> void: 
@@ -31,4 +29,5 @@ func _process(delta: float) -> void:
 
 func add_to_combo() -> void:
 	current_combo = current_combo + 1
+	emit_signal("combo_updated", current_combo)
 	combo_time = MAX_COMBO_HIT_TIME

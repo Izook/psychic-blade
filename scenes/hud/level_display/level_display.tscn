@@ -22,18 +22,36 @@ __meta__ = {
 }
 
 [node name="KillCounter" type="Node2D" parent="."]
+position = Vector2( -4, 48 )
 
 [node name="Skull" type="Sprite" parent="KillCounter"]
-position = Vector2( 24, 64 )
+position = Vector2( 24, 16 )
 texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="KillCount" type="Label" parent="KillCounter"]
 margin_left = 40.0
-margin_top = 48.0
 margin_right = 88.0
-margin_bottom = 80.0
+margin_bottom = 32.0
 theme = ExtResource( 4 )
 text = "x 00"
 __meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="HighestCombo" type="Node2D" parent="."]
+position = Vector2( 2, 80 )
+
+[node name="Count" type="Label" parent="HighestCombo"]
+margin_left = 8.0
+margin_right = 190.0
+margin_bottom = 32.0
+theme = ExtResource( 4 )
+text = "Highest Combo: 00"
+__meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
