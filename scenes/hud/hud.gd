@@ -2,8 +2,8 @@ extends Control
 
 class_name Hud
 
-onready var blade_display_node := $BladeDashContainer/BladeDash as BladeDisplay
-onready var player_display_node := $PlayerDashContainer/PlayerDash as PlayerDisplay
+onready var blade_display_node := $BladeDisplayContainer/BladeDash as BladeDisplay
+onready var player_display_node := $PlayerDisplayContainer/PlayerDash as PlayerDisplay
 
 var player_node : Player
 var blade_node : Blade
@@ -25,8 +25,6 @@ func _main_ready() -> void:
 	player_display_node.set_max_health(player_node.get_max_health())
 	var _error := player_node.connect("health_changed", player_display_node, "_on_Player_health_changed")
 	_error = player_node.connect("dashes_changed", player_display_node, "_on_Player_dashes_changed")
-	
-	
 
 
 func _process(_delta: float) -> void:

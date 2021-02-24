@@ -69,6 +69,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/menus/start_menu/level_button.gd"
 }, {
+"base": "Node2D",
+"class": "LevelDisplay",
+"language": "GDScript",
+"path": "res://scenes/hud/level_display/level_display.gd"
+}, {
 "base": "Node",
 "class": "Main",
 "language": "GDScript",
@@ -132,6 +137,7 @@ _global_script_class_icons={
 "Hud": "",
 "Level": "",
 "LevelButton": "",
+"LevelDisplay": "",
 "Main": "",
 "MusicPlayer": "",
 "PauseMenu": "",

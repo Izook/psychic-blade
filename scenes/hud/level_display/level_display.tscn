@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/hud/level_display/level_display.gd" type="Script" id=1]
+[ext_resource path="res://scenes/hud/hud_theme.tres" type="Theme" id=2]
+
+[node name="LevelDisplay" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="StopWatch" type="Node2D" parent="."]
+position = Vector2( 10, 10 )
+
+[node name="Time" type="Label" parent="StopWatch"]
+margin_right = 63.0
+margin_bottom = 42.0
+theme = ExtResource( 2 )
+text = "00:00"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}

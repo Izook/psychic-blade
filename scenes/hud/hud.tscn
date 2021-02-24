@@ -1,40 +1,57 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/hud/hud.gd" type="Script" id=1]
 [ext_resource path="res://scenes/hud/blade_display/blade_display.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/hud/player_display/player_display.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/hud/level_display/level_display.tscn" type="PackedScene" id=4]
 
 [node name="HUD" type="MarginContainer"]
-anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 15
+size_flags_vertical = 15
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="BladeDashContainer" type="HBoxContainer" parent="."]
-margin_left = 1024.0
-margin_right = 1024.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 12
-size_flags_vertical = 0
-alignment = 1
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="BladeDash" parent="BladeDashContainer" instance=ExtResource( 2 )]
-
-[node name="PlayerDashContainer" type="HBoxContainer" parent="."]
+[node name="LevelDisplayContainer" type="HBoxContainer" parent="."]
+margin_bottom = 600.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
-size_flags_vertical = 0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LevelDisplay" parent="LevelDisplayContainer" instance=ExtResource( 4 )]
+
+[node name="BladeDisplayContainer" type="HBoxContainer" parent="."]
+margin_left = 1024.0
+margin_top = 600.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 12
+size_flags_vertical = 8
 alignment = 1
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlayerDash" parent="PlayerDashContainer" instance=ExtResource( 3 )]
+[node name="BladeDash" parent="BladeDisplayContainer" instance=ExtResource( 2 )]
+
+[node name="PlayerDisplayContainer" type="HBoxContainer" parent="."]
+margin_top = 600.0
+margin_bottom = 600.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+alignment = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PlayerDash" parent="PlayerDisplayContainer" instance=ExtResource( 3 )]
