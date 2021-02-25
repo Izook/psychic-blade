@@ -200,7 +200,7 @@ func impact_entity(entity: Node2D) -> void:
 
 
 func _rotate_blade(new_angle: float) -> void:
-	var angle_diff := Utils.get_angle_diff(new_angle, blade_angle)
+	var angle_diff := Utils.get_angle_diff(new_angle, blade_angle) as float
 	
 	if abs(angle_diff) < BLADE_ROTATIONAL_SPEED / 2:
 		blade_angle = new_angle

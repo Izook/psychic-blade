@@ -28,6 +28,18 @@ func add_kill() -> void:
 	kill_count_label.set_text(kill_count_string)
 
 
+func get_elapsed_time_string() -> String:
+	return stopwatch_label.get_text()
+
+
+func get_kill_count() -> int:
+	return kill_count
+
+
+func get_highest_combo() -> int:
+	return highest_combo
+
+
 func _on_ComboDisplay_combo_updated(new_combo: int) -> void:
 	if new_combo > highest_combo:
 		highest_combo = new_combo

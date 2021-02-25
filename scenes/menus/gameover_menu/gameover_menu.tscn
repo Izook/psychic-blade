@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://shared_assets/pirata_one.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/menus/gameover_menu/gameover_menu.gd" type="Script" id=2]
@@ -17,6 +17,10 @@ outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
+size = 36
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=4]
 size = 36
 font_data = ExtResource( 1 )
 
@@ -62,9 +66,9 @@ alignment = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 margin_left = 371.0
-margin_top = 199.0
+margin_top = 100.0
 margin_right = 642.0
-margin_bottom = 293.0
+margin_bottom = 194.0
 size_flags_horizontal = 4
 size_flags_vertical = 10
 
@@ -76,16 +80,54 @@ size_flags_vertical = 6
 custom_fonts/font = SubResource( 2 )
 text = "Game Over"
 
+[node name="Scores" type="CenterContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+margin_left = 382.0
+margin_top = 240.0
+margin_right = 631.0
+margin_bottom = 392.0
+size_flags_horizontal = 4
+size_flags_vertical = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Scores"]
+margin_right = 249.0
+margin_bottom = 152.0
+
+[node name="RunTime" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Scores/VBoxContainer"]
+margin_right = 249.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 3 )
+text = "Survived For: 00:00"
+
+[node name="EnemiesKilled" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Scores/VBoxContainer"]
+margin_top = 52.0
+margin_right = 249.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 3 )
+text = "Enemies Killed: 00"
+
+[node name="HighestCombo" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Scores/VBoxContainer"]
+margin_top = 104.0
+margin_right = 249.0
+margin_bottom = 152.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 3 )
+text = "Highest Combo: 00"
+
 [node name="MainMenuButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 margin_left = 429.0
-margin_top = 419.0
+margin_top = 469.0
 margin_right = 585.0
-margin_bottom = 467.0
+margin_bottom = 517.0
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 theme = ExtResource( 3 )
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "main menu"
 script = ExtResource( 6 )
 

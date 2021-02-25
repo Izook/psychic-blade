@@ -12,7 +12,7 @@ var blade_node : Blade
 
 
 func _ready() -> void:
-	combo_display_node.connect("combo_updated", level_display_node, "_on_ComboDisplay_combo_updated")
+	var _error := combo_display_node.connect("combo_updated", level_display_node, "_on_ComboDisplay_combo_updated")
 	
 	yield(get_node("/root/Main"), "ready")
 	_main_ready()
@@ -35,6 +35,18 @@ func _process(_delta: float) -> void:
 	if blade_node:
 		blade_display_node.set_current_speed(blade_node.get_current_speed())
 		blade_display_node.set_current_angular_speed(abs(blade_node.get_current_angular_speed()))
+
+
+func get_kill_count() -> int:
+	return level_display_node.get_kill_count()
+
+
+func get_highest_combo() -> int:
+	return level_display_node.get_highest_combo()
+
+
+func get_elapsed_time_string() -> String:
+	return level_display_node.get_elapsed_time_string()
 
 
 func _on_Enemy_died() -> void:
