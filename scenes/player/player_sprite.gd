@@ -43,6 +43,11 @@ func stop_moving():
 			play("side_idle")
 
 
+func hit_stun():
+	is_moving = false
+	play("hitstun")
+
+
 func move_up():
 	direction_facing = Directions.UP
 	set_flip_h(false)

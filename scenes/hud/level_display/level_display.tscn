@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/hud/level_display/level_display.gd" type="Script" id=1]
+[ext_resource path="res://scenes/hud/hud_theme.tres" type="Theme" id=2]
+[ext_resource path="res://scenes/hud/level_display/skull.png" type="Texture" id=3]
+[ext_resource path="res://scenes/hud/hud_sub_theme.tres" type="Theme" id=4]
+
+[node name="LevelDisplay" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="StopWatch" type="Node2D" parent="."]
+position = Vector2( 10, 10 )
+
+[node name="Time" type="Label" parent="StopWatch"]
+margin_right = 63.0
+margin_bottom = 42.0
+theme = ExtResource( 2 )
+text = "00:00"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="KillCounter" type="Node2D" parent="."]
+position = Vector2( -4, 48 )
+
+[node name="Skull" type="Sprite" parent="KillCounter"]
+position = Vector2( 24, 16 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="KillCount" type="Label" parent="KillCounter"]
+margin_left = 40.0
+margin_right = 88.0
+margin_bottom = 32.0
+theme = ExtResource( 4 )
+text = "x 00"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="HighestCombo" type="Node2D" parent="."]
+position = Vector2( 2, 80 )
+
+[node name="Count" type="Label" parent="HighestCombo"]
+margin_left = 8.0
+margin_right = 190.0
+margin_bottom = 32.0
+theme = ExtResource( 4 )
+text = "Highest Combo: 00"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}

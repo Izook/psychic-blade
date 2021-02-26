@@ -74,9 +74,10 @@ func _get_input(delta: float) -> void:
 			angular_speed_index += ANGULAR_SPEED_INDEX_DAMP
 	
 	angular_speed_index = _limit_speed_index(angular_speed_index)
-	var angular_speed := _get_angular_speed(abs(angular_speed_index))
-	if angular_speed_index < 0.0:
-		angular_speed *= -1
+	var angular_speed := _get_angular_speed(angular_speed_index)
+	if blade_state == BladeState.RETURNING:
+		angular_speed = angular_speed / 4
+
 	angular_pos += angular_speed * delta
 	
 	if Input.is_action_pressed('push_out'):
@@ -101,7 +102,6 @@ func _physics_process(delta: float) -> void:
 	_update_blade_appearance()
 	
 	var new_blade_angle := _move_blade()
-	_handle_enemy_collisions()
 	
 	_rotate_blade(new_blade_angle)
 	
@@ -126,11 +126,13 @@ func _limit_speed_index(i : float) -> float:
 # Returns the angular speed of the blade based on a position on the easeOutQuart
 # curve. Curve gotten from https://easings.net/#easeOutQuart
 func _get_angular_speed(i: float) -> float:
-	var angular_speed = (1 - pow(1 - i, 4)) * MAX_ANGULAR_SPEED
-	if blade_state != BladeState.RETURNING:
-		return angular_speed
-	else:
-		return angular_speed / 4
+	var angular_speed := (1 - pow(1 - abs(i), 4)) * MAX_ANGULAR_SPEED
+	
+	if angular_speed_index < 0.0:
+		angular_speed *= -1
+	
+	return angular_speed
+
 
 
 func _move_blade() -> float:
@@ -175,10 +177,6 @@ func _move_released_blade() -> void:
 		if tile_map:
 			wall_hit_sound_player.play()
 			new_blade_velocity = blade_veclocity.bounce(collision.normal)
-			
-		var enemy := collision.collider as Enemy
-		if enemy:
-			new_blade_velocity = blade_veclocity
 	
 	blade_veclocity = new_blade_velocity * RELEASED_BLADE_DAMP
 
@@ -195,20 +193,14 @@ func _move_returning_blade() -> void:
 		set_blade_state(BladeState.HELD)
 
 
-func _handle_enemy_collisions() -> void:
-	for i in blade_node.get_slide_count():
-		var collision := blade_node.get_slide_collision(i)
-		
-		var enemy := collision.collider as Enemy
-		if enemy:
-			var impact_effect := IMPACT_EFFECT_SCENE.instance() as Node2D
-			impact_effect.global_position = enemy.global_position
-			current_level.add_child(impact_effect)
-			enemy.die()
+func impact_entity(entity: Node2D) -> void:
+	var impact_effect := IMPACT_EFFECT_SCENE.instance() as Node2D
+	impact_effect.global_position = entity.global_position
+	current_level.add_child(impact_effect)
 
 
 func _rotate_blade(new_angle: float) -> void:
-	var angle_diff := Utils.get_angle_diff(new_angle, blade_angle)
+	var angle_diff := Utils.get_angle_diff(new_angle, blade_angle) as float
 	
 	if abs(angle_diff) < BLADE_ROTATIONAL_SPEED / 2:
 		blade_angle = new_angle
@@ -263,3 +255,11 @@ func get_max_speed() -> float:
 
 func get_current_speed() -> float:
 	return blade_veclocity.length()
+
+
+func get_max_angular_speed() -> float: 
+	return MAX_ANGULAR_SPEED
+
+
+func get_current_angular_speed() -> float:
+	return _get_angular_speed(angular_speed_index)

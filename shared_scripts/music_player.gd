@@ -1,3 +1,6 @@
+# Music Player 
+# Class attached to AudioStream players to automatically loop music.
+
 extends AudioStreamPlayer
 
 class_name MusicPlayer

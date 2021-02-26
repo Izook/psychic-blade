@@ -14,10 +14,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/blade/blade.gd"
 }, {
+"base": "Node2D",
+"class": "BladeDisplay",
+"language": "GDScript",
+"path": "res://scenes/hud/blade_display/blade_display.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "BladeHitbox",
 "language": "GDScript",
 "path": "res://scenes/blade/blade_hitbox.gd"
+}, {
+"base": "Node2D",
+"class": "ComboDisplay",
+"language": "GDScript",
+"path": "res://scenes/hud/combo_display/combo_display.gd"
 }, {
 "base": "Button",
 "class": "CustomButton",
@@ -29,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/menus/custom_texture_button.gd"
 }, {
+"base": "Node2D",
+"class": "DashIcon",
+"language": "GDScript",
+"path": "res://scenes/hud/player_display/dash_icon/dash_icon.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Enemy",
 "language": "GDScript",
@@ -38,6 +53,11 @@ _global_script_classes=[ {
 "class": "GameOverMenu",
 "language": "GDScript",
 "path": "res://scenes/menus/gameover_menu/gameover_menu.gd"
+}, {
+"base": "Node2D",
+"class": "HeartIcon",
+"language": "GDScript",
+"path": "res://scenes/hud/player_display/heart_icon/heart_icon.gd"
 }, {
 "base": "Control",
 "class": "Hud",
@@ -53,6 +73,11 @@ _global_script_classes=[ {
 "class": "LevelButton",
 "language": "GDScript",
 "path": "res://scenes/menus/start_menu/level_button.gd"
+}, {
+"base": "Node2D",
+"class": "LevelDisplay",
+"language": "GDScript",
+"path": "res://scenes/hud/level_display/level_display.gd"
 }, {
 "base": "Node",
 "class": "Main",
@@ -74,6 +99,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/player/player.gd"
 }, {
+"base": "Node2D",
+"class": "PlayerDisplay",
+"language": "GDScript",
+"path": "res://scenes/hud/player_display/player_display.gd"
+}, {
 "base": "AnimatedSprite",
 "class": "PlayerSprite",
 "language": "GDScript",
@@ -94,11 +124,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/enemies/spawner/spawner.gd"
 }, {
-"base": "Node2D",
-"class": "Spedometer",
-"language": "GDScript",
-"path": "res://scenes/hud/spedometer/spedometer.gd"
-}, {
 "base": "MarginContainer",
 "class": "StartMenu",
 "language": "GDScript",
@@ -106,23 +131,28 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Blade": "",
+"BladeDisplay": "",
 "BladeHitbox": "",
+"ComboDisplay": "",
 "CustomButton": "",
 "CustomTextureButton": "",
+"DashIcon": "",
 "Enemy": "",
 "GameOverMenu": "",
+"HeartIcon": "",
 "Hud": "",
 "Level": "",
 "LevelButton": "",
+"LevelDisplay": "",
 "Main": "",
 "MusicPlayer": "",
 "PauseMenu": "",
 "Player": "",
+"PlayerDisplay": "",
 "PlayerSprite": "",
 "Slime": "",
 "SlimeSpawner": "",
 "Spawner": "",
-"Spedometer": "",
 "StartMenu": ""
 }
 
@@ -135,13 +165,15 @@ config/icon="res://shared_assets/icon.png"
 
 [autoload]
 
-Utils="*res://shared_scripts/utilities.gd"
+CanvasAnimationPlayer="*res://shared_scripts/canvas_animation_player.gd"
 AudioUtilities="*res://shared_scripts/audio_utilities.gd"
+Utils="*res://shared_scripts/utilities.gd"
 
 [debug]
 
 gdscript/warnings/shadowed_variable=false
 gdscript/warnings/unused_class_variable=true
+gdscript/warnings/integer_division=false
 gdscript/warnings/unsafe_method_access=true
 gdscript/warnings/unsafe_cast=true
 gdscript/warnings/unsafe_call_argument=true
@@ -268,6 +300,11 @@ toggle_pause={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":11,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="Entities"
+2d_physics/layer_2="Blade"
 
 [logging]
 

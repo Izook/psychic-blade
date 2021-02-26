@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/player/player_spriteframes.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/player/player_sprite.gd" type="Script" id=4]
 [ext_resource path="res://scenes/player/player_dash_particles.tres" type="Material" id=5]
 [ext_resource path="res://scenes/player/audio/player_dash.wav" type="AudioStream" id=6]
+[ext_resource path="res://scenes/player/audio/player_hit.wav" type="AudioStream" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 16 )
@@ -29,15 +30,13 @@ emitting = false
 amount = 50
 lifetime = 0.25
 one_shot = true
-explosiveness = 0.75
 visibility_rect = Rect2( -25, -25, 50, 50 )
 local_coords = false
 process_material = ExtResource( 5 )
 
 [node name="PlayerSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
-animation = "down_idle"
-frame = 4
+animation = "hitstun"
 script = ExtResource( 4 )
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
@@ -57,10 +56,23 @@ stream = ExtResource( 6 )
 attenuation = 0.2
 bus = "Gameplay Sounds"
 
+[node name="PlayerHitSoundPlayer" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource( 7 )
+attenuation = 0.2
+bus = "Gameplay Sounds"
+
 [node name="DashTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="DashResetTimer" type="Timer" parent="."]
+[node name="DashCooldownTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="HitStunTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="InvulnerabilityTimer" type="Timer" parent="."]
 one_shot = true
 [connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]
-[connection signal="timeout" from="DashResetTimer" to="." method="_on_DashResetTimer_timeout"]
+[connection signal="timeout" from="DashCooldownTimer" to="." method="_on_DashCooldownTimer_timeout"]
+[connection signal="timeout" from="HitStunTimer" to="." method="_on_HitStunTimer_timeout"]
+[connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_InvulnerabilityTimer_timeout"]

@@ -8,7 +8,9 @@ onready var gameover_menu := $UILayer/GameOverMenu as GameOverMenu
 var paused := false
 var level : Node2D
 
+
 func _ready() -> void:
+	CanvasAnimationPlayer.init()
 	get_tree().get_root().set_disable_input(false)
 	paused = false
 
@@ -31,8 +33,7 @@ func _input(event: InputEvent) -> void:
 		pause_menu.set_active(paused)
 
 
-
-func _on_Player_player_died() -> void:
+func _on_Player_died() -> void:
 	get_tree().paused = true
 	gameover_menu.set_active(true)
 

@@ -1,0 +1,106 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scenes/hud/blade_display/guage_flame_particles_gradient.tres" type="Gradient" id=1]
+[ext_resource path="res://scenes/hud/blade_display/tachometer_guage.png" type="Texture" id=2]
+[ext_resource path="res://scenes/hud/blade_display/velocity_needle.png" type="Texture" id=3]
+[ext_resource path="res://scenes/hud/blade_display/velocity_guage.png" type="Texture" id=4]
+[ext_resource path="res://scenes/hud/blade_display/tachometer_needle.png" type="Texture" id=5]
+[ext_resource path="res://scenes/hud/blade_display/blade_display.gd" type="Script" id=6]
+[ext_resource path="res://scenes/hud/blade_display/guague_flame_particlesmaterial.tres" type="Material" id=7]
+[ext_resource path="res://scenes/hud/blade_display/tachometer_guage_flame_particlesmaterial.tres" type="Material" id=8]
+
+[sub_resource type="GradientTexture" id=1]
+gradient = ExtResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=2]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 75.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 200.0
+scale = 2.0
+color_ramp = SubResource( 1 )
+
+[node name="BladeDash" type="Node2D"]
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Spedometer" type="Node2D" parent="."]
+
+[node name="FlameParticles" type="Particles2D" parent="Spedometer"]
+position = Vector2( -160, -120 )
+emitting = false
+amount = 200
+process_material = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="IgniteParticles" type="Particles2D" parent="Spedometer"]
+position = Vector2( -96, -56 )
+emitting = false
+amount = 200
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Guage" type="Sprite" parent="Spedometer"]
+position = Vector2( -96, -56 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Needle" type="Sprite" parent="Spedometer/Guage"]
+position = Vector2( -4.76837e-07, -0.124998 )
+texture = ExtResource( 3 )
+offset = Vector2( -0.124969, -32 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Tachometer" type="Node2D" parent="."]
+
+[node name="FlameParticles" type="Particles2D" parent="Tachometer"]
+position = Vector2( -72, -160 )
+emitting = false
+amount = 100
+process_material = ExtResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="IgniteParticles" type="Particles2D" parent="Tachometer"]
+position = Vector2( -40, -128 )
+emitting = false
+amount = 100
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Guage" type="Sprite" parent="Tachometer"]
+position = Vector2( -40, -128 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Needle" type="Sprite" parent="Tachometer/Guage"]
+position = Vector2( -4.76837e-07, 1.90735e-06 )
+texture = ExtResource( 5 )
+offset = Vector2( -0.124969, -8 )
+__meta__ = {
+"_edit_lock_": true
+}
