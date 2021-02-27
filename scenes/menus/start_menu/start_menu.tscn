@@ -16,8 +16,6 @@
 [ext_resource path="res://shared_scripts/music_player.gd" type="Script" id=14]
 [ext_resource path="res://scenes/level_scenes/levels/main_menu_background/main_menu_background.tscn" type="PackedScene" id=15]
 
-
-
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0.00571429, 1 )
 colors = PoolColorArray( 0, 1, 0.871094, 1, 1, 1, 1, 1 )
