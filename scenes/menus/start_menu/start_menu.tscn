@@ -14,7 +14,9 @@
 [ext_resource path="res://scenes/menus/custom_button.gd" type="Script" id=12]
 [ext_resource path="res://scenes/menus/custom_texture_button.gd" type="Script" id=13]
 [ext_resource path="res://shared_scripts/music_player.gd" type="Script" id=14]
-[ext_resource path="res://scenes/levels/main_menu_background/main_menu_background.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scenes/level_scenes/levels/main_menu_background/main_menu_background.tscn" type="PackedScene" id=15]
+
+
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0.00571429, 1 )

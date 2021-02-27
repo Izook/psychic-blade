@@ -67,7 +67,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "Level",
 "language": "GDScript",
-"path": "res://scenes/levels/level.gd"
+"path": "res://scenes/level_scenes/level.gd"
 }, {
 "base": "CustomButton",
 "class": "LevelButton",

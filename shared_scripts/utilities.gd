@@ -6,7 +6,7 @@ extends Node
 
 # Constant File/Directory Paths
 const VERSION_PATH := "res://VERSION"
-const LEVELS_DIR_PATH := "res://scenes/levels/"
+const LEVELS_DIR_PATH := "res://scenes/level_scenes/levels/"
 const START_SCENE_PATH := "res://scenes/menus/start_menu/start_menu.tscn"
 
 # Constant Scene Paths
