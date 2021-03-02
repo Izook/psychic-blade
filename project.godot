@@ -133,6 +133,11 @@ _global_script_classes=[ {
 "class": "StartMenu",
 "language": "GDScript",
 "path": "res://scenes/menus/start_menu/start_menu.gd"
+}, {
+"base": "Level",
+"class": "Tutorial",
+"language": "GDScript",
+"path": "res://scenes/level_scenes/levels/tutorial/tutorial.gd"
 } ]
 _global_script_class_icons={
 "Blade": "",
@@ -159,7 +164,8 @@ _global_script_class_icons={
 "Slime": "",
 "SlimeSpawner": "",
 "Spawner": "",
-"StartMenu": ""
+"StartMenu": "",
+"Tutorial": ""
 }
 
 [application]
