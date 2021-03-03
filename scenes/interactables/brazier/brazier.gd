@@ -26,6 +26,8 @@ func set_state(new_state: int) -> void:
 		BrazierState.FLAME_LIT:
 			emit_signal("relit")
 			flame_particles.emitting = true
+	
+	brazier_state = new_state
 
 
 func _on_Brazier_body_entered(body: Node) -> void:

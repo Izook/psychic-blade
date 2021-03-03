@@ -3,14 +3,14 @@
 [ext_resource path="res://scenes/interactables/brazier/brazier.gd" type="Script" id=1]
 [ext_resource path="res://scenes/interactables/brazier/brazier_sprite.png" type="Texture" id=2]
 
-[sub_resource type="Gradient" id=2]
+[sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.400722, 0.783394, 1 )
 colors = PoolColorArray( 0.46875, 0.892609, 1, 1, 0.0273438, 0.803379, 1, 1, 0, 0.633789, 1, 1, 0, 0.12549, 0.658824, 0 )
 
-[sub_resource type="GradientTexture" id=3]
-gradient = SubResource( 2 )
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
 
-[sub_resource type="ParticlesMaterial" id=1]
+[sub_resource type="ParticlesMaterial" id=3]
 emission_shape = 1
 emission_sphere_radius = 3.0
 flag_disable_z = true
@@ -18,7 +18,7 @@ gravity = Vector3( 0, -75, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 1.5
-color_ramp = SubResource( 3 )
+color_ramp = SubResource( 2 )
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 16.4924
@@ -42,7 +42,7 @@ position = Vector2( 0, -12 )
 z_index = 100
 amount = 75
 lifetime = 0.5
-process_material = SubResource( 1 )
+process_material = SubResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
