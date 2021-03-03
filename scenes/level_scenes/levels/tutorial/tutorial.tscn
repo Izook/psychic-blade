@@ -304,7 +304,6 @@ __meta__ = {
 position = Vector2( -96, -472 )
 frames = ExtResource( 5 )
 animation = "press_space"
-frame = 2
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -384,8 +383,6 @@ __meta__ = {
 position = Vector2( 112, 88 )
 frames = ExtResource( 5 )
 animation = "hold_d"
-frame = 8
-playing = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -402,7 +399,6 @@ __meta__ = {
 position = Vector2( 80, 88 )
 frames = ExtResource( 5 )
 animation = "hold_a"
-playing = true
 __meta__ = {
 "_edit_lock_": true
 }
