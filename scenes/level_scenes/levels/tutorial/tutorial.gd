@@ -19,7 +19,6 @@ func _ready() -> void:
 	
 	for brazier in blade_spinning_braziers:
 		brazier.connect("put_out", self, "_on_BladeSpinningBrazier_put_out")
-		brazier.connect("relit", self, "_on_BladeSpinningBrazier_relit")
 
 
 func _on_BladeSpinningBrazier_put_out() -> void:
@@ -37,8 +36,3 @@ func _on_BladeSpinningBrazier_put_out() -> void:
 			blade_spinning_door.set_collision_layer_bit(Utils.BLADE_COLLISION_LAYER, false)
 			blade_spinning_door.set_collision_mask_bit(Utils.BLADE_COLLISION_LAYER, false)
 			cleared_blade_spinning_room = true
-
-
-func _on_BladeSpinningBrazier_relit() -> void:
-	print("RELIT")
-
