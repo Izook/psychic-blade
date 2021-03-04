@@ -11,6 +11,7 @@ enum BrazierState {
 }
 
 onready var flame_particles := $FlameParticles as Particles2D
+onready var sparks_particles := $SparkParticles as Particles2D
 onready var flame_reset_timer := $FlameResetTimer as Timer
 
 var brazier_state = BrazierState.FLAME_LIT
@@ -22,6 +23,10 @@ func get_is_lit() -> bool:
 
 
 func set_state(new_state: int) -> void:
+	
+	if brazier_state != new_state:
+		sparks_particles.emitting = true
+	
 	match new_state:
 		BrazierState.FLAME_OUT:
 			emit_signal("put_out")
