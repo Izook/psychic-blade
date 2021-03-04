@@ -14,7 +14,11 @@ onready var flame_particles := $FlameParticles as Particles2D
 onready var flame_reset_timer := $FlameResetTimer as Timer
 
 var brazier_state = BrazierState.FLAME_LIT
-var flame_reset_time = 2
+var flame_reset_time := 2
+
+
+func get_is_lit() -> bool:
+	return brazier_state == BrazierState.FLAME_LIT
 
 
 func set_state(new_state: int) -> void:

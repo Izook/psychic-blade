@@ -21,7 +21,7 @@ scale = 1.5
 color_ramp = SubResource( 2 )
 
 [sub_resource type="CircleShape2D" id=4]
-radius = 16.4924
+radius = 10.8411
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 10.8948, 8.76092 )

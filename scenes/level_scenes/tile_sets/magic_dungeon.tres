@@ -3,6 +3,8 @@
 [ext_resource path="res://scenes/level_scenes/tile_assets/magic_dungeon.png" type="Texture" id=1]
 
 
+
+
 [resource]
 0/name = "walls"
 0/texture = ExtResource( 1 )

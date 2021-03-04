@@ -16,6 +16,10 @@ const ACTIVE_LEVEL_PATH := "/root/Main/GameLayer/Level"
 const PLAYER_PATH := "/root/Main/GameLayer/Level/Player"
 const START_PATH := "/root/StartMenu"
 
+# Collision Layer Bits
+const ENTITIES_COLLISION_LAYER := 0
+const BLADE_COLLISION_LAYER := 1
+
 
 # Returns the shortest angle difference to get from b to a in 
 # radians. 

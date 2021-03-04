@@ -4,6 +4,8 @@
 [ext_resource path="res://scenes/level_scenes/input_assets/space_key.png" type="Texture" id=2]
 [ext_resource path="res://scenes/level_scenes/input_assets/shift_key.png" type="Texture" id=3]
 
+
+
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
 region = Rect2( 176, 80, 16, 16 )

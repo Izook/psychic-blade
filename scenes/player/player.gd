@@ -45,7 +45,7 @@ onready var invulnerability_timer := $InvulnerabilityTimer as Timer
 
 var player_state = PlayerState.DEFAULT
 var velocity := Vector2()
-var camera_zoom := 0.5
+var camera_zoom := 0.75
 
 var health := 3
 
