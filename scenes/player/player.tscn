@@ -9,7 +9,7 @@
 [ext_resource path="res://scenes/player/audio/player_hit.wav" type="AudioStream" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 16 )
+extents = Vector2( 8, 17.8425 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -20,10 +20,8 @@ __meta__ = {
 [node name="Blade" parent="." instance=ExtResource( 3 )]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.198425, 0.0189028 )
 shape = SubResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="DashParticles" type="Particles2D" parent="."]
 emitting = false
@@ -33,11 +31,17 @@ one_shot = true
 visibility_rect = Rect2( -25, -25, 50, 50 )
 local_coords = false
 process_material = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="PlayerSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "hitstun"
 script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 current = true
@@ -50,16 +54,25 @@ __meta__ = {
 }
 
 [node name="Audio" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="DashSoundPlayer" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource( 6 )
 attenuation = 0.2
 bus = "Gameplay Sounds"
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="PlayerHitSoundPlayer" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource( 7 )
 attenuation = 0.2
 bus = "Gameplay Sounds"
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="DashTimer" type="Timer" parent="."]
 one_shot = true
