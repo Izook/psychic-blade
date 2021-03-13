@@ -21,6 +21,14 @@ onready var blade_throwing_brazier := $BladeThrowingRoom/Braziers/Brazier1 as Br
 onready var blade_throwing_door := $BladeThrowingRoom/Doors as TileMap
 onready var blade_throwing_sprites := $BladeThrowingRoom/DoorSprites as TileMap
 
+onready var obscacles_room_fire_traps := [
+	$ObsctaclesRoom/FireTraps/FireTrap1,
+	$ObsctaclesRoom/FireTraps/FireTrap2,
+	$ObsctaclesRoom/FireTraps/FireTrap3,
+	$ObsctaclesRoom/FireTraps/FireTrap4,
+	$ObsctaclesRoom/FireTraps/FireTrap5,
+] as Array
+
 var cleared_blade_spinning_room := false
 var cleared_radius_changing_room := false
 var cleared_blade_throwing_room := false
@@ -74,3 +82,5 @@ func _on_BladeThrowingBrazier_put_out() -> void:
 		blade_throwing_door.set_collision_layer_bit(Utils.BLADE_COLLISION_LAYER, false)
 		blade_throwing_door.set_collision_mask_bit(Utils.BLADE_COLLISION_LAYER, false)
 		cleared_blade_throwing_room = true
+		for fire_trap in obscacles_room_fire_traps:
+			fire_trap.set_active(true)

@@ -1,0 +1,94 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scenes/interactables/fire_trap/fire_trap.gd" type="Script" id=1]
+[ext_resource path="res://scenes/interactables/fire_trap/fire_trap_pit.png" type="Texture" id=2]
+[ext_resource path="res://scenes/interactables/fire_trap/fire_trap_grate.png" type="Texture" id=3]
+[ext_resource path="res://scenes/interactables/fire_trap/fire_trap_flame_gradient.tres" type="Texture" id=4]
+[ext_resource path="res://scenes/interactables/fire_trap/flame_ignite.wav" type="AudioStream" id=5]
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 2
+emission_box_extents = Vector3( 14, 14, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, -20, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color_ramp = ExtResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+emission_shape = 2
+emission_box_extents = Vector3( 14, 14, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, -100, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 2.0
+color_ramp = ExtResource( 4 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 16, 16 )
+
+[node name="FireTrap" type="StaticBody2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Pit" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PitFlameParticles" type="Particles2D" parent="."]
+emitting = false
+amount = 100
+lifetime = 0.5
+process_material = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Grate" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ActiveFlameParticles" type="Particles2D" parent="."]
+z_index = 1
+emitting = false
+amount = 250
+lifetime = 0.5
+process_material = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 5 )
+disabled = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="FlameIgnitePlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+volume_db = -10.0
+attenuation = 0.2
+bus = "Gameplay Sounds"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ActiveFlameTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="SparkingFlameTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="InactiveFlameTimer" type="Timer" parent="."]
+one_shot = true
+[connection signal="timeout" from="ActiveFlameTimer" to="." method="_on_ActiveFlameTimer_timeout"]
+[connection signal="timeout" from="SparkingFlameTimer" to="." method="_on_SparkingFlameTimer_timeout"]
+[connection signal="timeout" from="InactiveFlameTimer" to="." method="_on_InactiveFlameTimer_timeout"]
