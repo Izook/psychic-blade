@@ -455,7 +455,6 @@ __meta__ = {
 position = Vector2( -96, -472 )
 frames = ExtResource( 4 )
 animation = "press_space"
-frame = 5
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -509,7 +508,6 @@ __meta__ = {
 }
 
 [node name="Doors" type="TileMap" parent="BladeSpinningRoom"]
-visible = false
 tile_set = ExtResource( 5 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 32
@@ -523,7 +521,6 @@ __meta__ = {
 }
 
 [node name="DoorsSprites" type="TileMap" parent="BladeSpinningRoom"]
-visible = false
 z_index = 1
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 32, 32 )
