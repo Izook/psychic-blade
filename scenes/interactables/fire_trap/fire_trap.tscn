@@ -15,7 +15,7 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 color_ramp = ExtResource( 4 )
 
-[sub_resource type="ParticlesMaterial" id=4]
+[sub_resource type="ParticlesMaterial" id=2]
 emission_shape = 2
 emission_box_extents = Vector3( 14, 14, 1 )
 flag_disable_z = true
@@ -25,7 +25,7 @@ orbit_velocity_random = 0.0
 scale = 2.0
 color_ramp = ExtResource( 4 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 16, 16 )
 
 [node name="FireTrap" type="StaticBody2D"]
@@ -60,13 +60,13 @@ z_index = 1
 emitting = false
 amount = 250
 lifetime = 0.5
-process_material = SubResource( 4 )
+process_material = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 5 )
+shape = SubResource( 3 )
 disabled = true
 __meta__ = {
 "_edit_lock_": true
@@ -74,7 +74,7 @@ __meta__ = {
 
 [node name="FlameIgnitePlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
-volume_db = -10.0
+volume_db = -15.0
 attenuation = 2.0
 bus = "Gameplay Sounds"
 __meta__ = {
@@ -89,6 +89,10 @@ one_shot = true
 
 [node name="InactiveFlameTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="ResetTimer" type="Timer" parent="."]
+one_shot = true
 [connection signal="timeout" from="ActiveFlameTimer" to="." method="_on_ActiveFlameTimer_timeout"]
 [connection signal="timeout" from="SparkingFlameTimer" to="." method="_on_SparkingFlameTimer_timeout"]
 [connection signal="timeout" from="InactiveFlameTimer" to="." method="_on_InactiveFlameTimer_timeout"]
+[connection signal="timeout" from="ResetTimer" to="." method="_on_ResetTimer_timeout"]

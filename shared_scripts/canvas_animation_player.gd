@@ -17,4 +17,5 @@ func init() -> void:
 
 
 func screen_shake() -> void:
-	animation_player.play("screenshake")
+	if animation_player:
+		animation_player.play("screenshake")
