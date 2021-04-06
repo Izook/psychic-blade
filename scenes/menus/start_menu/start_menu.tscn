@@ -16,18 +16,16 @@
 [ext_resource path="res://shared_scripts/music_player.gd" type="Script" id=14]
 [ext_resource path="res://scenes/level_scenes/levels/main_menu_background/main_menu_background.tscn" type="PackedScene" id=15]
 
-
-
 [sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0.00571429, 1 )
-colors = PoolColorArray( 0, 1, 0.871094, 1, 1, 1, 1, 1 )
+offsets = PoolRealArray( 0.0883978, 0.458564, 0.80663 )
+colors = PoolColorArray( 0, 0.226563, 1, 1, 0, 1, 0.390625, 1, 1, 1, 1, 1 )
 
 [sub_resource type="GradientTexture" id=2]
 gradient = SubResource( 1 )
 
 [sub_resource type="ParticlesMaterial" id=3]
 emission_shape = 2
-emission_box_extents = Vector3( 512, 1, 1 )
+emission_box_extents = Vector3( 1000, 1, 1 )
 flag_disable_z = true
 direction = Vector3( 0, 1, 0 )
 spread = 0.0
@@ -100,16 +98,36 @@ custom_constants/margin_top = -10
 custom_constants/margin_left = -10
 custom_constants/margin_bottom = -10
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Playground" parent="Backdrop" instance=ExtResource( 15 )]
-position = Vector2( 502, 294 )
+[node name="CenterContainer" type="CenterContainer" parent="Backdrop"]
+margin_left = -10.0
+margin_top = -10.0
+margin_right = 1014.0
+margin_bottom = 590.0
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="Particles2D" type="Particles2D" parent="Backdrop"]
-position = Vector2( 502, -10 )
-amount = 800
-lifetime = 3.5
+[node name="MarginContainer" type="MarginContainer" parent="Backdrop/CenterContainer"]
+margin_left = 512.0
+margin_top = 300.0
+margin_right = 512.0
+margin_bottom = 300.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Playground" parent="Backdrop/CenterContainer/MarginContainer" instance=ExtResource( 15 )]
+position = Vector2( 0, 4 )
+
+[node name="Particles2D" type="Particles2D" parent="Backdrop/CenterContainer/MarginContainer"]
+position = Vector2( 0, -500 )
+amount = 1000
+lifetime = 5.0
+visibility_rect = Rect2( -500, -500, 1000, 1000 )
 process_material = SubResource( 3 )
 __meta__ = {
 "_edit_lock_": true
@@ -480,9 +498,9 @@ __meta__ = {
 }
 
 [node name="CenterContainer4" type="CenterContainer" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer"]
-margin_top = 147.0
+margin_top = 121.0
 margin_right = 984.0
-margin_bottom = 256.0
+margin_bottom = 230.0
 __meta__ = {
 "_edit_lock_": true
 }
@@ -500,9 +518,9 @@ __meta__ = {
 }
 
 [node name="CenterContainer2" type="CenterContainer" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer"]
-margin_top = 260.0
+margin_top = 234.0
 margin_right = 984.0
-margin_bottom = 412.0
+margin_bottom = 438.0
 __meta__ = {
 "_edit_lock_": true
 }
@@ -510,13 +528,13 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2"]
 margin_left = 380.0
 margin_right = 603.0
-margin_bottom = 152.0
+margin_bottom = 204.0
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="SlimesLevel" type="Button" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
-margin_right = 203.0
+margin_right = 223.0
 margin_bottom = 48.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath("../../../../ExitLevelsButton")
@@ -535,7 +553,7 @@ __meta__ = {
 
 [node name="Playground" type="Button" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
 margin_top = 52.0
-margin_right = 203.0
+margin_right = 223.0
 margin_bottom = 100.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath("../SlimesLevel")
@@ -554,18 +572,37 @@ __meta__ = {
 
 [node name="SlimeSpawners" type="Button" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
 margin_top = 104.0
-margin_right = 203.0
+margin_right = 223.0
 margin_bottom = 152.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath("../Playground")
 focus_neighbour_right = NodePath(".")
-focus_neighbour_bottom = NodePath(".")
-focus_next = NodePath(".")
+focus_neighbour_bottom = NodePath("../Tutorial")
+focus_next = NodePath("../Tutorial")
 focus_previous = NodePath("../Playground")
 mouse_default_cursor_shape = 2
 theme = ExtResource( 5 )
 custom_fonts/font = SubResource( 11 )
 text = "Slime Spawners"
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Tutorial" type="Button" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
+margin_top = 156.0
+margin_right = 223.0
+margin_bottom = 204.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../SlimeSpawners")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath("../SlimeSpawners")
+mouse_default_cursor_shape = 2
+theme = ExtResource( 5 )
+custom_fonts/font = SubResource( 11 )
+text = "Tutorial"
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
@@ -628,5 +665,6 @@ bus = "UI Sounds"
 [connection signal="focus_entered" from="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer/SlimesLevel" to="." method="_on_Button_focus_entered"]
 [connection signal="focus_entered" from="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer/Playground" to="." method="_on_Button_focus_entered"]
 [connection signal="focus_entered" from="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer/SlimeSpawners" to="." method="_on_Button_focus_entered"]
+[connection signal="focus_entered" from="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer/Tutorial" to="." method="_on_Button_focus_entered"]
 [connection signal="focus_entered" from="LevelsContainer/Panel/MarginContainer/ExitLevelsButton" to="." method="_on_Button_focus_entered"]
 [connection signal="pressed" from="LevelsContainer/Panel/MarginContainer/ExitLevelsButton" to="." method="_on_ExitLevelsButton_pressed"]

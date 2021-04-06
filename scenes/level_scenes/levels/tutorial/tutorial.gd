@@ -23,10 +23,17 @@ onready var obstacles_room_brazier_fire_traps := $ObsctaclesRoom/BrazierFireTrap
 onready var obstacles_door := $ObsctaclesRoom/Doors as TileMap
 onready var obstacles_door_sprites := $ObsctaclesRoom/DoorSprites as TileMap
 
+onready var challenge_room_spawners_container := $ChallengeRoom/SlimeSpawners as Node2D
+onready var challenge_room_spawners_count := challenge_room_spawners_container.get_children().size()
+onready var challenge_room_fire_traps_container := $ChallengeRoom/FireTraps as Node2D
+
+
 var cleared_blade_spinning_room := false
 var cleared_radius_changing_room := false
 var cleared_blade_throwing_room := false
 var cleared_obstacles_room := false
+var challenge_room_entered := false
+var challenge_room_spawners_cleared := 0
 
 
 func _ready() -> void:
@@ -43,6 +50,15 @@ func _ready() -> void:
 	
 	for fire_trap in obstacles_room_brazier_fire_traps:
 		fire_trap.make_everlasting()
+	
+	var challenge_room_fire_traps := challenge_room_fire_traps_container.get_children()
+	for i in challenge_room_fire_traps.size():
+		var fire_trap := challenge_room_fire_traps[i] as FireTrap
+		fire_trap.set_offset(i * fire_trap.ignite_interval / 8)
+	
+	for spawner in challenge_room_spawners_container.get_children():
+		spawner.spawn_limited_enemies(4)
+		spawner.connect("all_enemies_slayed", self, "_on_ChallengeRoomSpawner_all_enemies_slayed")
 
 
 func _on_BladeSpinningBrazier_put_out() -> void:
@@ -56,7 +72,7 @@ func _on_BladeSpinningBrazier_put_out() -> void:
 			success_sound_player.play()
 			blade_spinning_door.visible = false
 			blade_spinning_door_sprites.visible = false
-			_clear_tilemap_collision_bits(blade_spinning_door)
+			_set_tilemap_collision_bits(blade_spinning_door, false)
 			cleared_blade_spinning_room = true
 
 
@@ -65,7 +81,7 @@ func _on_RadiusChangingBrazier_put_out() -> void:
 			success_sound_player.play()
 			radius_changing_door.visible = false
 			radius_chaning_door_sprites.visible = false
-			_clear_tilemap_collision_bits(radius_changing_door)
+			_set_tilemap_collision_bits(radius_changing_door, false)
 			cleared_radius_changing_room = true
 
 
@@ -74,7 +90,7 @@ func _on_BladeThrowingBrazier_put_out() -> void:
 		success_sound_player.play()
 		blade_throwing_door.visible = false
 		blade_throwing_sprites.visible = false
-		_clear_tilemap_collision_bits(blade_throwing_door)
+		_set_tilemap_collision_bits(blade_throwing_door, false)
 		cleared_blade_throwing_room = true
 
 		for fire_trap in obstacles_room_single_row_fire_traps:
@@ -91,5 +107,38 @@ func _on_ObstaclesRoomBrazier_put_out() -> void:
 			success_sound_player.play()
 			obstacles_door.visible = false
 			obstacles_door_sprites.visible = false
-			_clear_tilemap_collision_bits(obstacles_door)
+			_set_tilemap_collision_bits(obstacles_door, false)
 			cleared_obstacles_room = true
+
+
+func _on_TripWire_body_exited(body: Node) -> void:
+	if not challenge_room_entered:
+		challenge_room_entered = true
+		
+		var player := body as Player
+		if player:
+			for fire_trap in obstacles_room_single_row_fire_traps:
+				fire_trap.make_inactive()
+			for fire_trap in obstacles_room_four_row_fire_traps:
+				fire_trap.make_inactive()
+			for square in obstacles_room_checkerboard_fire_traps_squares:
+				for fire_trap in square.get_children():
+					fire_trap.make_inactive()
+			
+			obstacles_door.visible = true
+			obstacles_door_sprites.visible = true
+			_set_tilemap_collision_bits(obstacles_door, true)
+			
+			challenge_room_fire_traps_container.visible = true
+			for fire_trap in challenge_room_fire_traps_container.get_children():
+				fire_trap.make_timed()
+			
+			challenge_room_spawners_container.visible = true
+			for spawner in challenge_room_spawners_container.get_children():
+				spawner.set_active(true)
+
+
+func _on_ChallengeRoomSpawner_all_enemies_slayed() -> void:
+	challenge_room_spawners_cleared += 1
+	if challenge_room_spawners_cleared == challenge_room_spawners_count:
+		print("HELL YEA!")
