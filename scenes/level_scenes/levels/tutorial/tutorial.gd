@@ -30,6 +30,7 @@ onready var challenge_room_spawners_container := $ChallengeRoom/SlimeSpawners as
 onready var challenge_room_spawners_count := challenge_room_spawners_container.get_children().size()
 onready var challenge_room_fire_traps_container := $ChallengeRoom/FireTraps as Node2D
 onready var challenge_room_cover := $ChallengeRoom/Cover as TileMap
+onready var challenge_room_exit_gate := $ChallengeRoom/ExitGate as ExitGate
 
 
 var cleared_blade_spinning_room := false
@@ -157,3 +158,5 @@ func _on_ChallengeRoomSpawner_all_enemies_slayed() -> void:
 	challenge_room_spawners_cleared += 1
 	if challenge_room_spawners_cleared == challenge_room_spawners_count:
 		print("HELL YEA!")
+		challenge_room_exit_gate.visible = true
+		challenge_room_exit_gate.set_active(true)
