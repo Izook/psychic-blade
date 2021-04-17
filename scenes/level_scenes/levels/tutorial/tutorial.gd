@@ -2,7 +2,12 @@ extends Level
 
 class_name Tutorial
 
+onready var background_music_player := $BackgroundMusicPlayer as AudioStreamPlayer
+onready var challenge_room_music_player := $ChallengeRoomMusicPlayer as AudioStreamPlayer
+
 onready var success_sound_player := $SuccessSoundPlayer as AudioStreamPlayer
+onready var challenge_start_sound_player := $ChallengeStartSoundPlayer as AudioStreamPlayer
+onready var challenge_success_sound_player := $ChallengeSuccessSoundPlayer as AudioStreamPlayer
 
 onready var blade_spinning_braziers := $BladeSpinningRoom/Braziers.get_children()
 onready var blade_spinning_door := $BladeSpinningRoom/Doors as TileMap
@@ -31,6 +36,7 @@ onready var challenge_room_spawners_count := challenge_room_spawners_container.g
 onready var challenge_room_fire_traps_container := $ChallengeRoom/FireTraps as Node2D
 onready var challenge_room_cover := $ChallengeRoom/Cover as TileMap
 onready var challenge_room_exit_gate := $ChallengeRoom/ExitGate as ExitGate
+
 
 
 var cleared_blade_spinning_room := false
@@ -127,37 +133,52 @@ func _on_ObstaclesRoomBrazier_put_out() -> void:
 
 
 func _on_TripWire_body_exited(body: Node) -> void:
-	if not challenge_room_entered:
+	var player := body as Player
+	
+	if not challenge_room_entered and player:
 		challenge_room_entered = true
 		
 		obstacles_cover.visible = true
 		
-		var player := body as Player
-		if player:
-			for fire_trap in obstacles_room_single_row_fire_traps:
+		obstacles_door.visible = true
+		obstacles_door_sprites.visible = true
+		_set_tilemap_collision_bits(obstacles_door, true)
+		
+		background_music_player.stop()
+		challenge_start_sound_player.play()
+		yield(challenge_start_sound_player, "finished")
+		challenge_room_music_player.play()
+		
+		for fire_trap in obstacles_room_single_row_fire_traps:
+			fire_trap.make_inactive()
+		for fire_trap in obstacles_room_four_row_fire_traps:
+			fire_trap.make_inactive()
+		for square in obstacles_room_checkerboard_fire_traps_squares:
+			for fire_trap in square.get_children():
 				fire_trap.make_inactive()
-			for fire_trap in obstacles_room_four_row_fire_traps:
-				fire_trap.make_inactive()
-			for square in obstacles_room_checkerboard_fire_traps_squares:
-				for fire_trap in square.get_children():
-					fire_trap.make_inactive()
-			
-			obstacles_door.visible = true
-			obstacles_door_sprites.visible = true
-			_set_tilemap_collision_bits(obstacles_door, true)
-			
-			challenge_room_fire_traps_container.visible = true
-			for fire_trap in challenge_room_fire_traps_container.get_children():
-				fire_trap.make_timed()
-			
-			challenge_room_spawners_container.visible = true
-			for spawner in challenge_room_spawners_container.get_children():
-				spawner.set_active(true)
+		
+		challenge_room_fire_traps_container.visible = true
+		for fire_trap in challenge_room_fire_traps_container.get_children():
+			fire_trap.make_timed()
+		
+		challenge_room_spawners_container.visible = true
+		for spawner in challenge_room_spawners_container.get_children():
+			spawner.set_active(true)
 
 
 func _on_ChallengeRoomSpawner_all_enemies_slayed() -> void:
 	challenge_room_spawners_cleared += 1
 	if challenge_room_spawners_cleared == challenge_room_spawners_count:
+		
+		challenge_room_music_player.stop()
+		challenge_success_sound_player.play()
+		yield(challenge_success_sound_player, "finished")
+		background_music_player.play()
+		
+		for fire_trap in challenge_room_fire_traps_container.get_children():
+			fire_trap.make_inactive()
+		
+		
 		challenge_room_exit_gate.visible = true
 		challenge_room_exit_gate.set_active(true)
 

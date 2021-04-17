@@ -9,6 +9,7 @@ onready var highest_combo_label := $PanelContainer/MarginContainer/VBoxContainer
 
 onready var select_sound_player := $Audio/SelectSoundPlayer as AudioStreamPlayer
 onready var confirm_sound_player := $Audio/ConfirmSoundPlayer as AudioStreamPlayer
+onready var level_complete_sound_player := $Audio/LevelCompleteSoundPlayer as AudioStreamPlayer
 
 var grabbed_focus := true
 
@@ -21,7 +22,7 @@ func _input(event: InputEvent) -> void:
 
 
 func set_active(active: bool) -> void:
-	AudioUtilities.set_distort_music(active)
+	AudioUtilities.set_music_mute(active)
 	visible = active
 	grabbed_focus = false
 	
@@ -29,12 +30,16 @@ func set_active(active: bool) -> void:
 	run_time_label.set_text("Completion Time: " + str(hud_node.get_elapsed_time_string()))
 	enemies_killed_label.set_text("Enemies Killed: %02d" % hud_node.get_kill_count())
 	highest_combo_label.set_text("Highest Combo: %02d" % hud_node.get_highest_combo())
+	
+	if active:
+		level_complete_sound_player.play()
 
 
 func _on_MainMenuButton_pressed() -> void:
 	get_tree().get_root().set_disable_input(true)
 	confirm_sound_player.play()
 	yield(confirm_sound_player, "finished")
+	AudioUtilities.set_music_mute(false)
 	var _error = get_tree().change_scene(Utils.START_SCENE_PATH)
 
 

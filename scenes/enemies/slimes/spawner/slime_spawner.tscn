@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/enemies/slimes/spawner/slime_spawner.gd" type="Script" id=1]
 [ext_resource path="res://scenes/enemies/slimes/spawner/slime_spawner.png" type="Texture" id=2]
+[ext_resource path="res://scenes/enemies/slimes/spawner/spawn_sound.wav" type="AudioStream" id=3]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.587459, 1 )
@@ -33,4 +34,8 @@ autostart = true
 [node name="Particles2D" type="Particles2D" parent="."]
 amount = 40
 process_material = SubResource( 3 )
+
+[node name="SlimeSpawnSoundPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+volume_db = -10.0
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]

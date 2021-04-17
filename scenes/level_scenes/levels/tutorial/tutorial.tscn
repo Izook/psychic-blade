@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/level_scenes/levels/tutorial/tutorial.gd" type="Script" id=2]
@@ -11,6 +11,10 @@
 [ext_resource path="res://scenes/interactables/fire_trap/fire_trap.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/enemies/slimes/spawner/slime_spawner.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/interactables/exit_gate/exit_gate.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/level_scenes/music_tracks/dance_of_the_trees___snabisch.wav" type="AudioStream" id=12]
+[ext_resource path="res://scenes/level_scenes/sounds/challenge_success.wav" type="AudioStream" id=13]
+[ext_resource path="res://scenes/level_scenes/sounds/challenge_start.wav" type="AudioStream" id=14]
+[ext_resource path="res://scenes/level_scenes/music_tracks/starfish___snabisch.wav" type="AudioStream" id=15]
 
 [sub_resource type="Animation" id=1]
 resource_name = "arrow_keys"
@@ -457,7 +461,7 @@ __meta__ = {
 position = Vector2( -96, -472 )
 frames = ExtResource( 4 )
 animation = "press_space"
-frame = 2
+frame = 3
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -1733,7 +1737,7 @@ __meta__ = {
 }
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ChallengeRoom/TripWire"]
-polygon = PoolVector2Array( -64, 48, -64, 16, 64, 16, 64, 48, 80, 48, 80, 0, -80, 0, -80, 48 )
+polygon = PoolVector2Array( -128, 48, -128, -184, 128, -184, 128, 48, 152, 48, 152, -208, -152, -208, -152, 48 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -1985,24 +1989,30 @@ position = Vector2( 0, -232 )
 
 [node name="BackgroundMusicPlayer" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
+stream = ExtResource( 12 )
 autoplay = true
 bus = "Music"
 script = ExtResource( 7 )
 
-[node name="ChallengeMusicPlayer" type="AudioStreamPlayer" parent="."]
+[node name="ChallengeRoomMusicPlayer" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
-autoplay = true
-bus = "Music"
-script = ExtResource( 7 )
-
-[node name="ChallengeSuccessMusicPlayer" type="AudioStreamPlayer" parent="."]
-pause_mode = 2
-autoplay = true
+stream = ExtResource( 15 )
 bus = "Music"
 script = ExtResource( 7 )
 
 [node name="SuccessSoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
+volume_db = -10.0
+bus = "Gameplay Sounds"
+
+[node name="ChallengeStartSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+volume_db = -15.0
+bus = "Gameplay Sounds"
+
+[node name="ChallengeSuccessSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+volume_db = -15.0
 bus = "Gameplay Sounds"
 [connection signal="put_out" from="ObsctaclesRoom/Braziers/Brazier" to="." method="_on_ObstaclesRoomBrazier_put_out"]
 [connection signal="body_exited" from="ChallengeRoom/TripWire" to="." method="_on_TripWire_body_exited"]

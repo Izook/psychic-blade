@@ -23,6 +23,7 @@ __meta__ = {
 [node name="Blade" type="KinematicBody2D" parent="."]
 position = Vector2( 100, 0 )
 rotation = 2.35619
+z_index = 10
 collision_layer = 2
 collision_mask = 2
 script = ExtResource( 4 )
