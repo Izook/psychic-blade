@@ -11,10 +11,12 @@ onready var blade_spinning_door_sprites := $BladeSpinningRoom/DoorsSprites as Ti
 onready var radius_changing_brazier := $RadiusChangingRoom/Braziers/Brazier1 as Brazier
 onready var radius_changing_door := $RadiusChangingRoom/Doors as TileMap
 onready var radius_chaning_door_sprites := $RadiusChangingRoom/DoorsSprites as TileMap
+onready var radius_changing_cover := $RadiusChangingRoom/Cover as TileMap
 
 onready var blade_throwing_brazier := $BladeThrowingRoom/Braziers/Brazier1 as Brazier
 onready var blade_throwing_door := $BladeThrowingRoom/Doors as TileMap
 onready var blade_throwing_sprites := $BladeThrowingRoom/DoorSprites as TileMap
+onready var blade_throwing_cover := $BladeThrowingRoom/Cover as TileMap
 
 onready var obstacles_room_single_row_fire_traps := $ObsctaclesRoom/SingleRowFireTraps.get_children()
 onready var obstacles_room_four_row_fire_traps := $ObsctaclesRoom/DoubleRowFireTraps.get_children()
@@ -22,10 +24,12 @@ onready var obstacles_room_checkerboard_fire_traps_squares := $ObsctaclesRoom/Ch
 onready var obstacles_room_brazier_fire_traps := $ObsctaclesRoom/BrazierFireTraps.get_children()
 onready var obstacles_door := $ObsctaclesRoom/Doors as TileMap
 onready var obstacles_door_sprites := $ObsctaclesRoom/DoorSprites as TileMap
+onready var obstacles_cover := $ObsctaclesRoom/Cover as TileMap
 
 onready var challenge_room_spawners_container := $ChallengeRoom/SlimeSpawners as Node2D
 onready var challenge_room_spawners_count := challenge_room_spawners_container.get_children().size()
 onready var challenge_room_fire_traps_container := $ChallengeRoom/FireTraps as Node2D
+onready var challenge_room_cover := $ChallengeRoom/Cover as TileMap
 
 
 var cleared_blade_spinning_room := false
@@ -43,6 +47,11 @@ func _ready() -> void:
 		
 	radius_changing_brazier.connect("put_out", self, "_on_RadiusChangingBrazier_put_out")
 	blade_throwing_brazier.connect("put_out", self, "_on_BladeThrowingBrazier_put_out")
+	
+	radius_changing_cover.visible = true
+	blade_throwing_cover.visible = true
+	obstacles_cover.visible = true
+	challenge_room_cover.visible = true
 	
 	for i in obstacles_room_checkerboard_fire_traps_squares.size():
 		for fire_trap in obstacles_room_checkerboard_fire_traps_squares[i].get_children():
@@ -74,6 +83,7 @@ func _on_BladeSpinningBrazier_put_out() -> void:
 			blade_spinning_door_sprites.visible = false
 			_set_tilemap_collision_bits(blade_spinning_door, false)
 			cleared_blade_spinning_room = true
+			radius_changing_cover.visible = false
 
 
 func _on_RadiusChangingBrazier_put_out() -> void:
@@ -83,6 +93,7 @@ func _on_RadiusChangingBrazier_put_out() -> void:
 			radius_chaning_door_sprites.visible = false
 			_set_tilemap_collision_bits(radius_changing_door, false)
 			cleared_radius_changing_room = true
+			blade_throwing_cover.visible = false
 
 
 func _on_BladeThrowingBrazier_put_out() -> void:
@@ -92,6 +103,7 @@ func _on_BladeThrowingBrazier_put_out() -> void:
 		blade_throwing_sprites.visible = false
 		_set_tilemap_collision_bits(blade_throwing_door, false)
 		cleared_blade_throwing_room = true
+		obstacles_cover.visible = false
 
 		for fire_trap in obstacles_room_single_row_fire_traps:
 			fire_trap.make_timed()
@@ -109,11 +121,14 @@ func _on_ObstaclesRoomBrazier_put_out() -> void:
 			obstacles_door_sprites.visible = false
 			_set_tilemap_collision_bits(obstacles_door, false)
 			cleared_obstacles_room = true
+			challenge_room_cover.visible = false
 
 
 func _on_TripWire_body_exited(body: Node) -> void:
 	if not challenge_room_entered:
 		challenge_room_entered = true
+		
+		obstacles_cover.visible = true
 		
 		var player := body as Player
 		if player:
