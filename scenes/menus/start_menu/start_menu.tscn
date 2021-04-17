@@ -533,6 +533,25 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Tutorial" type="Button" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
+margin_top = 156.0
+margin_right = 223.0
+margin_bottom = 204.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../SlimeSpawners")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath("../SlimeSpawners")
+mouse_default_cursor_shape = 2
+theme = ExtResource( 5 )
+custom_fonts/font = SubResource( 11 )
+text = "Tutorial"
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="SlimesLevel" type="Button" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
 margin_right = 223.0
 margin_bottom = 48.0
@@ -546,25 +565,6 @@ mouse_default_cursor_shape = 2
 theme = ExtResource( 5 )
 custom_fonts/font = SubResource( 11 )
 text = "The Slimes"
-script = ExtResource( 4 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Playground" type="Button" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
-margin_top = 52.0
-margin_right = 223.0
-margin_bottom = 100.0
-focus_neighbour_left = NodePath(".")
-focus_neighbour_top = NodePath("../SlimesLevel")
-focus_neighbour_right = NodePath(".")
-focus_neighbour_bottom = NodePath("../SlimeSpawners")
-focus_next = NodePath("../SlimeSpawners")
-focus_previous = NodePath("../SlimesLevel")
-mouse_default_cursor_shape = 2
-theme = ExtResource( 5 )
-custom_fonts/font = SubResource( 11 )
-text = "Playground"
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
@@ -589,20 +589,20 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Tutorial" type="Button" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
-margin_top = 156.0
+[node name="Playground" type="Button" parent="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer"]
+margin_top = 52.0
 margin_right = 223.0
-margin_bottom = 204.0
+margin_bottom = 100.0
 focus_neighbour_left = NodePath(".")
-focus_neighbour_top = NodePath("../SlimeSpawners")
+focus_neighbour_top = NodePath("../SlimesLevel")
 focus_neighbour_right = NodePath(".")
-focus_neighbour_bottom = NodePath(".")
-focus_next = NodePath(".")
-focus_previous = NodePath("../SlimeSpawners")
+focus_neighbour_bottom = NodePath("../SlimeSpawners")
+focus_next = NodePath("../SlimeSpawners")
+focus_previous = NodePath("../SlimesLevel")
 mouse_default_cursor_shape = 2
 theme = ExtResource( 5 )
 custom_fonts/font = SubResource( 11 )
-text = "Tutorial"
+text = "Playground"
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
@@ -662,9 +662,9 @@ bus = "UI Sounds"
 [connection signal="pressed" from="ControlsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/OKButton" to="." method="_on_ExitControlsButton_pressed"]
 [connection signal="focus_entered" from="ControlsContainer/Panel/MarginContainer/ExitControlsButton" to="." method="_on_Button_focus_entered"]
 [connection signal="pressed" from="ControlsContainer/Panel/MarginContainer/ExitControlsButton" to="." method="_on_ExitControlsButton_pressed"]
-[connection signal="focus_entered" from="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer/SlimesLevel" to="." method="_on_Button_focus_entered"]
-[connection signal="focus_entered" from="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer/Playground" to="." method="_on_Button_focus_entered"]
-[connection signal="focus_entered" from="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer/SlimeSpawners" to="." method="_on_Button_focus_entered"]
 [connection signal="focus_entered" from="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer/Tutorial" to="." method="_on_Button_focus_entered"]
+[connection signal="focus_entered" from="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer/SlimesLevel" to="." method="_on_Button_focus_entered"]
+[connection signal="focus_entered" from="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer/SlimeSpawners" to="." method="_on_Button_focus_entered"]
+[connection signal="focus_entered" from="LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer/Playground" to="." method="_on_Button_focus_entered"]
 [connection signal="focus_entered" from="LevelsContainer/Panel/MarginContainer/ExitLevelsButton" to="." method="_on_Button_focus_entered"]
 [connection signal="pressed" from="LevelsContainer/Panel/MarginContainer/ExitLevelsButton" to="." method="_on_ExitLevelsButton_pressed"]
