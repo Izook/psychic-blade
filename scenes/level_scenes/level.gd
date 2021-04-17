@@ -2,6 +2,17 @@ extends Node
 
 class_name Level
 
+onready var main_node := get_node(Utils.MAIN_PATH)
+
+signal completed
+
+func _ready() -> void:
+	var _error = connect("completed", main_node, "_on_Level_completed")
+
+
+func _complete_level() -> void:
+	emit_signal("completed")
+
 
 func _set_tilemap_collision_bits(tilemap: TileMap, bit_value: bool) -> void:
 	tilemap.set_collision_layer_bit(Utils.ENTITIES_COLLISION_LAYER, bit_value)

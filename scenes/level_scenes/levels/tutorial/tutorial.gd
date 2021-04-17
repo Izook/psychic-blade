@@ -48,6 +48,7 @@ func _ready() -> void:
 		
 	radius_changing_brazier.connect("put_out", self, "_on_RadiusChangingBrazier_put_out")
 	blade_throwing_brazier.connect("put_out", self, "_on_BladeThrowingBrazier_put_out")
+	challenge_room_exit_gate.connect("entered", self, "_on_ChallengeRoomExitGate_entered")
 	
 	radius_changing_cover.visible = true
 	blade_throwing_cover.visible = true
@@ -157,6 +158,9 @@ func _on_TripWire_body_exited(body: Node) -> void:
 func _on_ChallengeRoomSpawner_all_enemies_slayed() -> void:
 	challenge_room_spawners_cleared += 1
 	if challenge_room_spawners_cleared == challenge_room_spawners_count:
-		print("HELL YEA!")
 		challenge_room_exit_gate.visible = true
 		challenge_room_exit_gate.set_active(true)
+
+
+func _on_ChallengeRoomExitGate_entered() -> void:
+	_complete_level()

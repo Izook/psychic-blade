@@ -2,12 +2,11 @@ extends Area2D
 
 class_name ExitGate
 
+signal entered
 
 onready var hitbox := $HitBox as StaticBody2D
 
-
 var active := false
-
 
 func set_active(new_active: bool):
 	active = new_active
@@ -22,4 +21,4 @@ func set_active(new_active: bool):
 func _on_ExitGate_body_entered(body: Node) -> void:
 	var player = body as Player
 	if active and player: 
-		print("THE PLAYER IS EXITING!")
+		emit_signal("entered")

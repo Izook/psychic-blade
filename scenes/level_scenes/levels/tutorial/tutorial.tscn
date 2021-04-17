@@ -457,7 +457,7 @@ __meta__ = {
 position = Vector2( -96, -472 )
 frames = ExtResource( 4 )
 animation = "press_space"
-frame = 3
+frame = 2
 playing = true
 __meta__ = {
 "_edit_lock_": true
