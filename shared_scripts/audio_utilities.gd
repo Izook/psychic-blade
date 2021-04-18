@@ -22,3 +22,6 @@ func set_distort_music(active: bool) -> void:
 			AudioServer.remove_bus_effect(music_bus, 0)
 
 
+func set_music_mute(mute: bool) -> void:
+	AudioServer.set_bus_mute(music_bus, mute)
+

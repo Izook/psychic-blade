@@ -45,7 +45,7 @@ onready var invulnerability_timer := $InvulnerabilityTimer as Timer
 
 var player_state = PlayerState.DEFAULT
 var velocity := Vector2()
-var camera_zoom := 0.5
+var camera_zoom := 0.75
 
 var health := 3
 
@@ -143,7 +143,8 @@ func _handle_collisions() -> void:
 		var collision := get_slide_collision(i) as KinematicCollision2D
 		if collision:
 			var enemy := collision.collider as Enemy
-			if enemy:
+			var obstacle := collision.collider as Obstacle
+			if enemy or obstacle:
 				_handle_hit(collision)
 
 

@@ -5,13 +5,14 @@ class_name StartMenu
 const LEVELS_MAP = {
 	"The Slimes" : "three_slimes",
 	"Playground" : "playground",
-	"Slime Spawners": "slime_spawners"
+	"Slime Spawners": "slime_spawners",
+	"Tutorial": "tutorial"
 }
 
 onready var version_label := $Version as Label
 
 onready var start_button := $TitleContainer/VBoxContainer/VBoxContainer/StartButton as Button
-onready var first_level_button := $LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer/SlimesLevel as Button
+onready var first_level_button := $LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer.get_children()[0] as Button
 onready var exit_controls_button := $ControlsContainer/Panel/MarginContainer/ExitControlsButton as TextureButton
 
 onready var title_container := $TitleContainer as MarginContainer

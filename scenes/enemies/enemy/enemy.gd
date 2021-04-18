@@ -6,6 +6,7 @@ signal died
 
 onready var hitbox := $HitBox as Area2D
 
+
 func _ready() -> void:
 	add_to_group("enemies")
 	var _conn_error := hitbox.connect("body_entered", self, "_on_HitBox_body_entered")

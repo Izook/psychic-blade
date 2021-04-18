@@ -6,7 +6,7 @@ extends Node
 
 # Constant File/Directory Paths
 const VERSION_PATH := "res://VERSION"
-const LEVELS_DIR_PATH := "res://scenes/levels/"
+const LEVELS_DIR_PATH := "res://scenes/level_scenes/levels/"
 const START_SCENE_PATH := "res://scenes/menus/start_menu/start_menu.tscn"
 
 # Constant Scene Paths
@@ -15,6 +15,10 @@ const HUD_PATH := "/root/Main/UILayer/HUD"
 const ACTIVE_LEVEL_PATH := "/root/Main/GameLayer/Level"
 const PLAYER_PATH := "/root/Main/GameLayer/Level/Player"
 const START_PATH := "/root/StartMenu"
+
+# Collision Layer Bits
+const ENTITIES_COLLISION_LAYER := 0
+const BLADE_COLLISION_LAYER := 1
 
 
 # Returns the shortest angle difference to get from b to a in 

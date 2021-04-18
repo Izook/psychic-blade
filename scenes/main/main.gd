@@ -4,6 +4,7 @@ class_name Main
 
 onready var pause_menu := $UILayer/PauseMenu as PauseMenu
 onready var gameover_menu := $UILayer/GameOverMenu as GameOverMenu
+onready var level_complete_menu := $UILayer/LevelCompleteMenu as LevelCompleteMenu
 
 var paused := false
 var level : Node2D
@@ -36,6 +37,11 @@ func _input(event: InputEvent) -> void:
 func _on_Player_died() -> void:
 	get_tree().paused = true
 	gameover_menu.set_active(true)
+
+
+func _on_Level_completed() -> void:
+	get_tree().paused = true
+	level_complete_menu.set_active(true)
 
 
 func _on_PauseMenu_unpaused() -> void:
