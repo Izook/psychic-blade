@@ -28,8 +28,6 @@ onready var quit_sound_player := $Audio/QuitSoundPlayer as AudioStreamPlayer
 
 onready var main := preload("res://scenes/main/main.tscn").instance() as Main
 
-var menu_open := false
-
 var start_menu_open := false
 var controls_menu_open := false
 

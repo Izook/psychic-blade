@@ -33,7 +33,7 @@ func _on_SpawnTimer_timeout() -> void:
 		if not max_global_enemies_reached:
 			var new_enemy := enemy_scene.instance() as Node2D
 			new_enemy.position = position
-			new_enemy.connect("died", self, "_on_SpawnedEnemy_died")
+			var _error := new_enemy.connect("died", self, "_on_SpawnedEnemy_died")
 			get_parent().add_child(new_enemy)
 			enemies_spawned += 1
 		
