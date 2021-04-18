@@ -11,8 +11,7 @@ onready var resume_sound_player := $Audio/ResumeSoundPlayer as AudioStreamPlayer
 onready var select_sound_player := $Audio/SelectSoundPlayer as AudioStreamPlayer
 onready var confirm_sound_player := $Audio/ConfirmSoundPlayer as AudioStreamPlayer
 
-var grabbed_focus := true
-
+var active := false
 
 func _ready() -> void:
 	var _menu_conn_error = connect("unpaused", get_node(Utils.MAIN_PATH), "_on_PauseMenu_unpaused")
@@ -20,16 +19,15 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_up") or event.is_action_pressed("ui_down")  or event.is_action_pressed("ui_left")  or event.is_action_pressed("ui_right"):
-		if not grabbed_focus:
+		if active and not get_focus_owner():
 			main_menu_button.grab_focus()
-			grabbed_focus = true
 
 
-func set_active(active: bool) -> void:
+func set_active(new_active: bool) -> void:
+	active = new_active
 	AudioUtilities.set_distort_music(active)
 	visible = active
 	if active:
-		grabbed_focus = false
 		pause_sound_player.play()
 	else:
 		resume_sound_player.play()
