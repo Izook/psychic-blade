@@ -432,7 +432,7 @@ __meta__ = {
 position = Vector2( -96, -472 )
 frames = ExtResource( 4 )
 animation = "press_space"
-frame = 2
+frame = 5
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -904,6 +904,7 @@ __meta__ = {
 }
 
 [node name="Doors" type="TileMap" parent="ObsctaclesRoom"]
+visible = false
 tile_set = ExtResource( 5 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 32
@@ -911,7 +912,7 @@ collision_use_kinematic = true
 collision_layer = 3
 collision_mask = 3
 format = 1
-tile_data = PoolIntArray( -1835018, 1, 0, -1835017, 1, 0, -1835016, 1, 0, -1835015, 1, 0, -1769482, 1, 0, -1769481, 1, 0, -1769480, 1, 0, -1769479, 1, 0 )
+tile_data = PoolIntArray( -1900554, 1610612737, 0, -1900553, 1610612737, 0, -1900552, 1610612737, 0, -1900551, 1610612737, 0, -1835018, 1, 0, -1835017, 1, 0, -1835016, 1, 0, -1835015, 1, 0, -1769482, 1, 0, -1769481, 1, 0, -1769480, 1, 0, -1769479, 1, 0 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -1667,7 +1668,7 @@ __meta__ = {
 position = Vector2( -128, 192 )
 frames = ExtResource( 4 )
 animation = "press_space"
-frame = 1
+frame = 4
 playing = true
 __meta__ = {
 "_edit_lock_": true
