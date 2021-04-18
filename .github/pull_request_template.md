@@ -1,13 +1,9 @@
-## Type of Change
-
-<!-- (Major, Minor, Patch)? -->
-
-> **⚠️⚠️ DONT FORGET TO UPDATE VERSION FILE ⚠️⚠️**
-
-## Description
+## Overview
 
 <!-- What was added, fixed, updated? -->
 
 ## Screenshots
 
 <!-- optional screenshots -->
+
+> **⚠️⚠️ DONT FORGET TO UPDATE VERSION FILE ⚠️⚠️**
