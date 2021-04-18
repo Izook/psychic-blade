@@ -2,11 +2,10 @@ extends Node
 
 class_name Level
 
-onready var main_node := get_node(Utils.MAIN_PATH)
-
 signal completed
 
 func _ready() -> void:
+	var main_node := get_node(Utils.MAIN_PATH)
 	var _error = connect("completed", main_node, "_on_Level_completed")
 
 
