@@ -432,7 +432,7 @@ __meta__ = {
 position = Vector2( -96, -472 )
 frames = ExtResource( 4 )
 animation = "press_space"
-frame = 1
+frame = 2
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -1663,6 +1663,16 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="SpaceKey" type="AnimatedSprite" parent="ObsctaclesRoom"]
+position = Vector2( -128, 192 )
+frames = ExtResource( 4 )
+animation = "press_space"
+frame = 1
+playing = true
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="ChallengeRoom" type="Node2D" parent="."]
 position = Vector2( 1216, -3328 )
 __meta__ = {
@@ -1942,7 +1952,6 @@ position = Vector2( -192, -288 )
 position = Vector2( -192, 96 )
 
 [node name="Cover" type="TileMap" parent="ChallengeRoom"]
-visible = false
 z_index = 100
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 32, 32 )
