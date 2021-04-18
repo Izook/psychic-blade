@@ -23,6 +23,6 @@ func stop() -> void:
 	.stop()
 
 
-func start() -> void:
+func play(from_position := 0.0) -> void:
 	active = true
-	.start()
+	.play(from_position)

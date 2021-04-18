@@ -11,6 +11,7 @@ var level : Node2D
 
 
 func _ready() -> void:
+	print("MAIN READY")
 	CanvasAnimationPlayer.init()
 	get_tree().get_root().set_disable_input(false)
 	paused = false
