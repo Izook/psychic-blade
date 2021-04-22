@@ -194,10 +194,14 @@ _global_script_class_icons={
 
 [application]
 
-config/name="psychic-blade"
+config/name="Psychic Blade"
+config/description="Psychic Blade is a top down dungeon crawler demo where you play a psychic adventurer who rotates a blade around their body to slay enemies and solve puzzles they encounter in their journey."
 run/main_scene="res://scenes/menus/start_menu/start_menu.tscn"
+boot_splash/image="res://shared_assets/logo.png"
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
-config/icon="res://shared_assets/icon.png"
+config/icon="res://shared_assets/logo.png"
+config/macos_native_icon="res://shared_assets/logo.icns"
+config/windows_native_icon="res://shared_assets/logo.ico"
 
 [autoload]
 
@@ -341,11 +345,6 @@ toggle_pause={
 
 2d_physics/layer_1="Entities"
 2d_physics/layer_2="Blade"
-
-[logging]
-
-file_logging/enable_file_logging=true
-file_logging/log_path="res://logs/log.txt"
 
 [rendering]
 
