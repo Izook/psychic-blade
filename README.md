@@ -1,4 +1,4 @@
-[![Deploy Psychic Blade](https://github.com/Izook/psychic-blade/actions/workflows/deploy.yml/badge.svg)](https://github.com/Izook/psychic-blade/actions/workflows/deploy.yml)[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Deploy Psychic Blade](https://github.com/Izook/psychic-blade/actions/workflows/deploy.yml/badge.svg)](https://github.com/Izook/psychic-blade/actions/workflows/deploy.yml)[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/Izook/psychic-blade/blob/main/LICENCE)[![GitHub release](https://img.shields.io/github/release/izook/psychic-blade.svg)](https://GitHub.com/izook/psychic-blade/releases/)
 
 <p align="center">
   <img src="./docs/images/logo.png">
