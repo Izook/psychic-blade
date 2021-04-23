@@ -1,4 +1,4 @@
-[![Deploy Psychic Blade](https://github.com/Izook/psychic-blade/actions/workflows/deploy.yml/badge.svg)](https://github.com/Izook/psychic-blade/actions/workflows/deploy.yml)[![GitHub release](https://img.shields.io/github/release/izook/psychic-blade.svg)](https://GitHub.com/izook/psychic-blade/releases/)[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/Izook/psychic-blade/blob/main/LICENCE)
+[![Made with Godot](https://img.shields.io/badge/Made%20with-Godot-blue?style=for-the-badge)](https://godotengine.org/)[![Deploy Psychic Blade](https://github.com/Izook/psychic-blade/actions/workflows/deploy.yml/badge.svg)](https://github.com/Izook/psychic-blade/actions/workflows/deploy.yml)[![GitHub release](https://img.shields.io/github/release/izook/psychic-blade.svg)](https://GitHub.com/izook/psychic-blade/releases/)[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/Izook/psychic-blade/blob/main/LICENCE)
 
 <p align="center">
   <img src="./docs/images/logo.png">
