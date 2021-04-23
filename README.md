@@ -33,6 +33,7 @@ You can download and play Psychic Blade for free on either the [itch.io](https:/
 - [SGB Games](https://sfbgames.com/) for providing [ChipTone](https://sfbgames.itch.io/chiptone) which was used to create a lot of the sound effects
 - [TheWiseHedgehog](https://twitter.com/thewisehedgehog) for providing the assets for the [blade](https://thewisehedgehog.itch.io/hs2020)
 - [Hyohnoo](https://twitter.com/Hyohnoo) for providing the [keyboard animations](https://hyohnoo.itch.io/keyboard-controller-keys) in the tutorial
+- [Google Fonts](https://fonts.google.com/) for providing the [Pirata One](https://fonts.google.com/specimen/Pirata+One#glyphs) font
 
 ## Built Using
 
