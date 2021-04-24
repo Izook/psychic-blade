@@ -11,7 +11,6 @@ on:
 env:
   BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  IS_MAIN: ${{contains(github.ref, 'main')}}
   DISCORD_WEBHOOK: ${{secrets.DISCORD_WEBHOOK}}
   PROJECT_NAME: "PsychicBlade"
   ITCH_PROJECT_NAME: "psychic-blade"
@@ -141,7 +140,7 @@ jobs:
             --header 'Content-Type: application/json' \
             --data-raw "{\"content\": \"$PROJECT_NAME has successfully released and deployed!\"}"
       - name: Send Discord Failure Message
-        if: ${{ contains(github.ref, 'main')s && env.DID_PREV_JOBS_SUCCEED != 'true' }}
+        if: ${{ contains(github.ref, 'main') && env.DID_PREV_JOBS_SUCCEED != 'true' }}
         run: |
           curl --location --request POST $DISCORD_WEBHOOK \
             --header 'Content-Type: application/json' \
