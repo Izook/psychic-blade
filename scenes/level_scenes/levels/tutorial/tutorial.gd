@@ -52,9 +52,9 @@ func _ready() -> void:
 	for brazier in blade_spinning_braziers:
 		brazier.connect("put_out", self, "_on_BladeSpinningBrazier_put_out")
 		
-	radius_changing_brazier.connect("put_out", self, "_on_RadiusChangingBrazier_put_out")
-	blade_throwing_brazier.connect("put_out", self, "_on_BladeThrowingBrazier_put_out")
-	challenge_room_exit_gate.connect("entered", self, "_on_ChallengeRoomExitGate_entered")
+	var _error := radius_changing_brazier.connect("put_out", self, "_on_RadiusChangingBrazier_put_out")
+	_error = blade_throwing_brazier.connect("put_out", self, "_on_BladeThrowingBrazier_put_out")
+	_error = challenge_room_exit_gate.connect("entered", self, "_on_ChallengeRoomExitGate_entered")
 	
 	radius_changing_cover.visible = true
 	blade_throwing_cover.visible = true

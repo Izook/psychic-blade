@@ -13,6 +13,7 @@ onready var version_label := $Version as Label
 
 onready var start_button := $TitleContainer/VBoxContainer/VBoxContainer/StartButton as Button
 onready var first_level_button := $LevelsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer2/VBoxContainer.get_children()[0] as Button
+onready var ok_controls_button := $ControlsContainer/Panel/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer/OKButton as Button
 onready var exit_controls_button := $ControlsContainer/Panel/MarginContainer/ExitControlsButton as TextureButton
 
 onready var title_container := $TitleContainer as MarginContainer
@@ -27,9 +28,8 @@ onready var quit_sound_player := $Audio/QuitSoundPlayer as AudioStreamPlayer
 
 onready var main := preload("res://scenes/main/main.tscn").instance() as Main
 
-var menu_open := false
-
-var grabbed_focus = false
+var start_menu_open := false
+var controls_menu_open := false
 
 
 func _ready() -> void:
@@ -42,17 +42,23 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("ui_up") or event.is_action_pressed("ui_down")  or event.is_action_pressed("ui_left")  or event.is_action_pressed("ui_right"):
-		if not grabbed_focus:
-			start_button.grab_focus()
-			grabbed_focus = true
+		if not get_focus_owner():
+			
+			if start_menu_open:
+				first_level_button.grab_focus()
+			elif controls_menu_open:
+				ok_controls_button.grab_focus()
+			else:
+				start_button.grab_focus()
 	
 	if event.is_action_pressed('ui_cancel'):
-		if menu_open:
+		if start_menu_open or controls_menu_open:
 			_exit_menu()
 
 
 func _exit_menu() -> void:
-	menu_open = false
+	start_menu_open = false
+	controls_menu_open = false
 	title_container.visible = true
 	levels_container.visible = false
 	controls_container.visible = false
@@ -91,7 +97,7 @@ func _on_LevelButton_pressed(level: String) -> void:
 
 
 func _on_ControlsButton_pressed() -> void:
-	menu_open = true
+	controls_menu_open = true
 	title_container.visible = false
 	controls_container.visible = true
 	exit_controls_button.grab_focus()
@@ -99,7 +105,7 @@ func _on_ControlsButton_pressed() -> void:
 
 
 func _on_StartButton_pressed() -> void:
-	menu_open = true
+	start_menu_open = true
 	title_container.visible = false
 	levels_container.visible = true
 	first_level_button.grab_focus()
